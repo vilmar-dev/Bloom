@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Bloom Haven | Your Peaceful Escape</title>
+
+  <style>
+    :root {
+      --bg: #fffaf6;
+      --panel: #ffffff;
+      --primary: #9b5d3c;
+      --primary-dark: #6d3e29;
+      --accent: #f6d7c9;
+      --text: #2a211d;
+      --muted: #6d5d58;
+      --line: #f0e1d9;
+      --shadow: 0 18px 40px rgba(89, 52, 39, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 82px;
+      z-index: 1000;
+
+      background: rgba(255, 250, 246, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+
+      border-bottom: 1px solid rgba(240, 225, 217, 0.8);
+    }
+
+    .nav-container {
+      width: min(1180px, 92%);
+      height: 100%;
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+    }
+
+    .logo {
+      justify-self: start;
+
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: -0.5px;
+      color: var(--primary-dark);
+    }
+
+    .logo span {
+      color: var(--primary);
+    }
+
+    .nav-home {
+      justify-self: center;
+
+      position: relative;
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--text);
+    }
+
+    .nav-home::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -8px;
+
+      width: 0;
+      height: 2px;
+
+      background: var(--primary);
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+
+    .nav-home:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      justify-self: end;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 12px 22px;
+
+      background: var(--primary);
+      color: white;
+
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: bold;
+
+      box-shadow: 0 8px 20px rgba(155, 93, 60, 0.22);
+
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(109, 62, 41, 0.25);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 100vh;
+      padding: 130px 0 70px;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-container {
+      width: min(1180px, 92%);
+      margin: auto;
+
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 65px;
+      align-items: center;
+    }
+
+    .hero-content {
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 18px;
+      padding: 8px 15px;
+
+      background: var(--accent);
+      color: var(--primary-dark);
+
+      border-radius: 50px;
+
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "✦";
+      font-size: 13px;
+    }
+
+    .hero h1 {
+      max-width: 570px;
+
+      font-size: clamp(48px, 6vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -3px;
+
+      color: var(--text);
+
+      margin-bottom: 25px;
+    }
+
+    .hero h1 em {
+      color: var(--primary);
+      font-style: italic;
+    }
+
+    .hero-description {
+      max-width: 520px;
+
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 15px 27px;
+
+      border: none;
+      border-radius: 50px;
+
+      background: var(--primary);
+      color: white;
+
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.25s ease;
+    }
+
+    .primary-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 14px 25px;
+
+      border: 1px solid var(--line);
+      border-radius: 50px;
+
+      color: var(--primary-dark);
+
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+
+      background: white;
+
+      transition: 0.25s ease;
+    }
+
+    .secondary-btn:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* =========================
+       HERO IMAGE
+    ========================= */
+
+    .hero-image-wrap {
+      position: relative;
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 590px;
+
+      display: block;
+      object-fit: cover;
+
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f6d7c9,
+          #ead0c3
+        );
+
+      box-shadow: var(--shadow);
+    }
+
+    /*
+      PUT YOUR IMAGE LINK HERE:
+
+      <img
+        src=""
+        alt="Bloom Haven"
+        class="hero-image"
+      />
+
+      Just replace src="" with your image URL.
+    */
+
+    .image-placeholder-label {
+      position: absolute;
+      inset: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      pointer-events: none;
+      color: rgba(109, 62, 41, 0.45);
+
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .promo-card {
+      position: absolute;
+      left: -35px;
+      bottom: 35px;
+
+      width: 215px;
+
+      padding: 20px;
+
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+
+      box-shadow: var(--shadow);
+    }
+
+    .promo-card small {
+      display: block;
+      margin-bottom: 4px;
+
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .promo-card strong {
+      display: block;
+
+      color: var(--primary-dark);
+
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    /* =========================
+       PROMO SECTION
+    ========================= */
+
+    .promo-section {
+      padding: 90px 0;
+    }
+
+    .section-container {
+      width: min(1080px, 90%);
+      margin: auto;
+    }
+
+    .promo-box {
+      position: relative;
+      overflow: hidden;
+
+      padding: 60px;
+
+      background: var(--accent);
+      border-radius: 30px;
+
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .promo-box::before {
+      content: "";
+      position: absolute;
+
+      width: 220px;
+      height: 220px;
+
+      right: -70px;
+      top: -90px;
+
+      border-radius: 50%;
+      border: 30px solid rgba(255,255,255,0.35);
+    }
+
+    .promo-label {
+      color: var(--primary-dark);
+
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      margin-bottom: 10px;
+    }
+
+    .promo-box h2 {
+      max-width: 650px;
+
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -1px;
+
+      margin-bottom: 14px;
+    }
+
+    .promo-box p {
+      max-width: 600px;
+
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+    }
+
+    .promo-button {
+      position: relative;
+      z-index: 2;
+
+      white-space: nowrap;
+    }
+
+    /* =========================
+       FEATURES
+    ========================= */
+
+    .features-section {
+      padding: 40px 0 110px;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 50px;
+    }
+
+    .section-heading span {
+      display: block;
+
+      color: var(--primary);
+
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      margin-bottom: 12px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(35px, 4vw, 50px);
+      line-height: 1.05;
+      margin-bottom: 15px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature-card {
+      padding: 32px;
+
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-bottom: 20px;
+
+      background: var(--accent);
+      border-radius: 14px;
+
+      color: var(--primary-dark);
+      font-size: 21px;
+    }
+
+    .feature-card h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 35px 0;
+
+      border-top: 1px solid var(--line);
+
+      text-align: center;
+
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: var(--primary-dark);
+    }
+
+    /* =========================
+       BOOKING MODAL
+    ========================= */
+
+    .booking-modal {
+      position: fixed;
+      inset: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background: rgba(42, 33, 29, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+
+      z-index: 2000;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+    }
+
+    .booking-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .booking-card {
+      position: relative;
+
+      width: min(570px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+
+      padding: 38px;
+
+      background: var(--panel);
+
+      border-radius: 25px;
+
+      box-shadow: 0 30px 80px rgba(42, 33, 29, 0.25);
+
+      transform: translateY(20px) scale(0.98);
+
+      transition: transform 0.3s ease;
+    }
+
+    .booking-modal.active .booking-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .booking-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+
+      width: 38px;
+      height: 38px;
+
+      border: none;
+      border-radius: 50%;
+
+      background: var(--bg);
+      color: var(--primary-dark);
+
+      font-size: 25px;
+      line-height: 1;
+
+      cursor: pointer;
+
+      transition: 0.2s ease;
+    }
+
+    .booking-close:hover {
+      background: var(--accent);
+    }
+
+    .booking-card h2 {
+      color: var(--primary-dark);
+      font-size: 35px;
+      margin-bottom: 6px;
+    }
+
+    .booking-card > p {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .booking-field {
+      margin-bottom: 18px;
+    }
+
+    .booking-field label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: var(--text);
+
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .booking-field input,
+    .booking-field textarea {
+      width: 100%;
+
+      padding: 13px 14px;
+
+      background: #fffaf6;
+
+      border: 1px solid var(--line);
+      border-radius: 12px;
+
+      color: var(--text);
+
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+
+      outline: none;
+
+      transition: border 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .booking-field textarea {
+      min-height: 105px;
+      resize: vertical;
+    }
+
+    .booking-field input:focus,
+    .booking-field textarea:focus {
+      border-color: var(--primary);
+
+      box-shadow: 0 0 0 3px rgba(155, 93, 60, 0.10);
+    }
+
+    .booking-submit {
+      width: 100%;
+
+      margin-top: 5px;
+      padding: 15px;
+
+      border: none;
+      border-radius: 12px;
+
+      background: var(--primary);
+      color: white;
+
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 14px;
+
+      cursor: pointer;
+
+      transition: 0.25s ease;
+    }
+
+    .booking-submit:hover {
+      background: var(--primary-dark);
+    }
+
+    /* =========================
+       SUCCESS POPUP
+    ========================= */
+
+    .booking-success-popup {
+      position: fixed;
+      inset: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background: rgba(42, 33, 29, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+
+      z-index: 3000;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: 0.3s ease;
+    }
+
+    .booking-success-popup.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .booking-success-box {
+      width: min(420px, 100%);
+
+      padding: 40px 30px;
+
+      background: white;
+      border-radius: 25px;
+
+      text-align: center;
+
+      box-shadow: var(--shadow);
+
+      transform: translateY(20px);
+      transition: 0.3s ease;
+    }
+
+    .booking-success-popup.active .booking-success-box {
+      transform: translateY(0);
+    }
+
+    .booking-success-icon {
+      width: 65px;
+      height: 65px;
+
+      margin: 0 auto 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--accent);
+      color: var(--primary-dark);
+
+      border-radius: 50%;
+
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .booking-success-box h3 {
+      color: var(--primary-dark);
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .booking-success-box p {
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .booking-success-ok {
+      padding: 12px 30px;
+
+      border: none;
+      border-radius: 50px;
+
+      background: var(--primary);
+      color: white;
+
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.25s ease;
+    }
+
+    .booking-success-ok:hover {
+      background: var(--primary-dark);
+    }
+
+    /* =========================
+       ANIMATION
+    ========================= */
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .hero h1,
+      .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-image {
+        height: 480px;
+      }
+
+      .promo-card {
+        left: 20px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .promo-box {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        height: 72px;
+      }
+
+      .nav-container {
+        grid-template-columns: auto 1fr auto;
+        width: 94%;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .nav-home {
+        font-size: 13px;
+      }
+
+      .nav-cta {
+        padding: 10px 14px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding-top: 105px;
+      }
+
+      .hero h1 {
+        font-size: 50px;
+        letter-spacing: -2px;
+      }
+
+      .hero-image {
+        height: 390px;
+        border-radius: 22px;
+      }
+
+      .promo-card {
+        left: 12px;
+        bottom: 15px;
+        width: 185px;
+        padding: 15px;
+      }
+
+      .promo-card strong {
+        font-size: 17px;
+      }
+
+      .promo-section {
+        padding: 65px 0;
+      }
+
+      .promo-box {
+        padding: 35px 25px;
+        border-radius: 22px;
+      }
+
+      .features-section {
+        padding-bottom: 70px;
+      }
+
+      .booking-card {
+        padding: 30px 20px;
+      }
+
+      .booking-card h2 {
+        font-size: 30px;
+      }
+    }
+
+    /* Prevent background scrolling when modal is open */
+    body.modal-open {
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <header class="navbar">
+    <div class="nav-container">
+
+      <a href="#home" class="logo">
+        Bloom <span>Haven</span>
+      </a>
+
+      <!-- HOME IN THE MIDDLE -->
+      <a href="index.html" class="nav-home">
+        Home 🏚️
+      </a>
+
+      <!-- BOOK NOW ON THE RIGHT -->
+      <a href="#" class="nav-cta booking-btn">
+        Book Your Stay
+      </a>
+
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero" id="home">
+      <div class="hero-container">
+
+        <div class="hero-content">
+
+          <div class="eyebrow">
+            Your peaceful escape
+          </div>
+
+          <h1>
+            Stay somewhere that feels like <em>home.</em>
+          </h1>
+
+          <p class="hero-description">
+            Slow down, breathe deeply, and enjoy a beautiful stay
+            surrounded by comfort, warmth, and unforgettable moments.
+            Your next peaceful getaway begins here.
+          </p>
+
+          <div class="hero-buttons">
+
+            <a href="#" class="primary-btn booking-btn">
+              Book Your Stay
+            </a>
+
+            <a href="#offer" class="secondary-btn">
+              Explore Our Offer
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             IMAGE PLACEHOLDER
+        ========================== -->
+
+        <div class="hero-image-wrap">
+
+          <!--
+            JUST PUT YOUR IMAGE LINK INSIDE src=""
+
+            Example:
+
+            <img
+              src="https://yourwebsite.com/your-image.jpg"
+              alt="Bloom Haven"
+              class="hero-image"
+            >
+
+            For now it is intentionally blank.
+          -->
+
+          <img
+            src=""
+            alt="Bloom Haven"
+            class="hero-image"
+          />
+
+          <div class="image-placeholder-label">
+            Lagayan ng Promo image soon
+          </div>
+
+          <div class="promo-card">
+            <small>Special offer</small>
+            <strong>
+              Make your stay a memory.
+            </strong>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         PROMO
+    ========================== -->
+
+    <section class="promo-section" id="offer">
+
+      <div class="section-container">
+
+        <div class="promo-box">
+
+          <div>
+            <div class="promo-label">
+              Limited Stay Offer
+            </div>
+
+            <h2>
+              A little escape can make a big difference.
+            </h2>
+
+            <p>
+              Treat yourself to a relaxing stay where every detail
+              is designed to help you rest, reconnect, and enjoy
+              the simple moments.
+            </p>
+          </div>
+
+          <a href="#" class="primary-btn promo-button booking-btn">
+            Reserve Now
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section class="features-section">
+
+      <div class="section-container">
+
+        <div class="section-heading">
+
+          <span>
+            Why Bloom Haven
+          </span>
+
+          <h2>
+            Designed for slow days & beautiful memories.
+          </h2>
+
+          <p>
+            Everything you need for a comfortable and peaceful stay,
+            wrapped in a warm and welcoming atmosphere.
+          </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+          <div class="feature-card">
+
+            <div class="feature-icon">
+              ♡
+            </div>
+
+            <h3>
+              Cozy & Comfortable
+            </h3>
+
+            <p>
+              Relax in a welcoming space thoughtfully prepared
+              to make your stay comfortable from arrival to departure.
+            </p>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <div class="feature-icon">
+              ✦
+            </div>
+
+            <h3>
+              Peaceful Atmosphere
+            </h3>
+
+            <p>
+              Escape the everyday rush and enjoy a calm environment
+              where you can simply slow down and breathe.
+            </p>
+
+          </div>
+
+
+          <div class="feature-card">
+
+            <div class="feature-icon">
+              ❋
+            </div>
+
+            <h3>
+              Made for Memories
+            </h3>
+
+            <p>
+              Whether it's a weekend getaway or a special occasion,
+              create moments you'll want to remember.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         BOOKING FORM MODAL
+    ========================== -->
+
+    <div
+      class="booking-modal"
+      id="bookingModal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="bookingTitle"
+    >
+
+      <div class="booking-card">
+
+        <button
+          type="button"
+          class="booking-close"
+          id="bookingClose"
+          aria-label="Close booking form"
+        >
+          &times;
+        </button>
+
+        <h2 id="bookingTitle">
+          Book Your Stay
+        </h2>
+
+        <p>
+          Fill in your details below and we'll prepare your booking request.
+        </p>
+
+
+        <!--
+          NOTE:
+
+          We are using JavaScript + mailto instead of FormSubmit.
+
+          Change the email address inside the JavaScript below
+          if you want to use another email.
+        -->
+
+        <form id="bookingForm">
+
+          <div class="booking-field">
+
+            <label for="bookingName">
+              Full Name
+            </label>
+
+            <input
+              type="text"
+              id="bookingName"
+              name="name"
+              placeholder="Enter your full name"
+              required
+            />
+
+          </div>
+
+
+          <div class="booking-field">
+
+            <label for="bookingContact">
+              Contact Number
+            </label>
+
+            <input
+              type="tel"
+              id="bookingContact"
+              name="contact"
+              placeholder="Example: 09123456789"
+              required
+            />
+
+          </div>
+
+
+          <div class="booking-field">
+
+            <label for="bookingDate">
+              Date of Booking
+            </label>
+
+            <input
+              type="date"
+              id="bookingDate"
+              name="date"
+              required
+            />
+
+          </div>
+
+
+          <div class="booking-field">
+
+            <label for="bookingPax">
+              Number of Pax
+            </label>
+
+            <input
+              type="number"
+              id="bookingPax"
+              name="pax"
+              min="1"
+              placeholder="Example: 4"
+              required
+            />
+
+          </div>
+
+
+          <div class="booking-field">
+
+            <label for="bookingNotes">
+              Message / Notes
+            </label>
+
+            <textarea
+              id="bookingNotes"
+              name="notes"
+              placeholder="Number of guests, preferred check-in time, special requests, etc."
+            ></textarea>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="booking-submit"
+          >
+            Done
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         BOOKING SUCCESS POPUP
+    ========================== -->
+
+    <div
+      class="booking-success-popup"
+      id="bookingSuccessPopup"
+      role="alertdialog"
+      aria-modal="true"
+      aria-labelledby="bookingSuccessTitle"
+    >
+
+      <div class="booking-success-box">
+
+        <div class="booking-success-icon">
+          ✓
+        </div>
+
+        <h3 id="bookingSuccessTitle">
+          Booking Ready
+        </h3>
+
+        <p>
+          Your booking details have been prepared.
+          Please send the email from your email application to complete your request.
+        </p>
+
+        <button
+          type="button"
+          class="booking-success-ok"
+          id="bookingSuccessOk"
+        >
+          OK
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+    © 2026 <strong>Bloom Haven</strong>. All rights reserved.
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    /*
+      ==========================================
+      BOOKING SETTINGS
+      ==========================================
+
+      This is the email address that will receive
+      the booking request.
+
+      Change this if needed.
+    */
+
+    const bookingEmail = "ammasivilmar2@gmail.com";
+
+
+    /*
+      ==========================================
+      GET ELEMENTS
+      ==========================================
+    */
+
+    const bookingModal =
+      document.getElementById("bookingModal");
+
+    const bookingClose =
+      document.getElementById("bookingClose");
+
+    const bookingForm =
+      document.getElementById("bookingForm");
+
+    const bookingSuccessPopup =
+      document.getElementById("bookingSuccessPopup");
+
+    const bookingSuccessOk =
+      document.getElementById("bookingSuccessOk");
+
+    const bookingButtons =
+      document.querySelectorAll(".booking-btn");
+
+
+    /*
+      ==========================================
+      OPEN BOOKING MODAL
+      ==========================================
+    */
+
+    bookingButtons.forEach(button => {
+
+      button.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        bookingModal.classList.add("active");
+
+        document.body.classList.add("modal-open");
+
+      });
+
+    });
+
+
+    /*
+      ==========================================
+      CLOSE BOOKING MODAL
+      ==========================================
+    */
+
+    function closeBookingModal() {
+
+      bookingModal.classList.remove("active");
+
+      document.body.classList.remove("modal-open");
+
+    }
+
+
+    bookingClose.addEventListener("click", closeBookingModal);
+
+
+    /*
+      Close modal when clicking outside
+    */
+
+    bookingModal.addEventListener("click", function(event) {
+
+      if (event.target === bookingModal) {
+        closeBookingModal();
+      }
+
+    });
+
+
+    /*
+      Close with ESC key
+    */
+
+    document.addEventListener("keydown", function(event) {
+
+      if (event.key === "Escape") {
+
+        closeBookingModal();
+
+        bookingSuccessPopup.classList.remove("active");
+
+        document.body.classList.remove("modal-open");
+
+      }
+
+    });
+
+
+    /*
+      ==========================================
+      BOOKING FORM
+      ==========================================
+
+      When the user clicks DONE:
+
+      1. Get all information
+      2. Create an email
+      3. Open their email application
+      4. Put the booking information into
+         the email automatically
+    */
+
+    bookingForm.addEventListener("submit", function(event) {
+
+      event.preventDefault();
+
+
+      // Get form values
+
+      const name =
+        document.getElementById("bookingName").value.trim();
+
+      const contact =
+        document.getElementById("bookingContact").value.trim();
+
+      const date =
+        document.getElementById("bookingDate").value;
+
+      const pax =
+        document.getElementById("bookingPax").value;
+
+      const notes =
+        document.getElementById("bookingNotes").value.trim();
+
+
+      /*
+        Format the booking date
+      */
+
+      let formattedDate = date;
+
+      if (date) {
+
+        const dateObject = new Date(date + "T00:00:00");
+
+        formattedDate = dateObject.toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
+
+      }
+
+
+      /*
+        ==========================================
+        EMAIL SUBJECT
+        ==========================================
+      */
+
+      const subject =
+        "New Bloom Haven Booking Request";
+
+
+      /*
+        ==========================================
+        EMAIL BODY
+        ==========================================
+      */
+
+      const body = `
+Hello Bloom Haven,
+
+I would like to make a booking request.
+
+BOOKING DETAILS
+----------------------------
+
+Full Name:
+${name}
+
+Contact Number:
+${contact}
+
+Date of Booking:
+${formattedDate}
+
+Number of Pax:
+${pax}
+
+Message / Notes:
+${notes || "None"}
+
+----------------------------
+
+Thank you.
+      `.trim();
+
+
+      /*
+        ==========================================
+        CREATE MAILTO LINK
+        ==========================================
+      */
+
+      const mailtoLink =
+        "mailto:" +
+        bookingEmail +
+        "?subject=" +
+        encodeURIComponent(subject) +
+        "&body=" +
+        encodeURIComponent(body);
+
+
+      /*
+        Open the visitor's email application
+      */
+
+      window.location.href = mailtoLink;
+
+
+      /*
+        Close booking modal
+      */
+
+      closeBookingModal();
+
+
+      /*
+        Show success popup
+      */
+
+      setTimeout(function() {
+
+        bookingSuccessPopup.classList.add("active");
+
+        document.body.classList.add("modal-open");
+
+      }, 500);
+
+    });
+
+
+    /*
+      ==========================================
+      SUCCESS POPUP OK BUTTON
+      ==========================================
+    */
+
+    bookingSuccessOk.addEventListener("click", function() {
+
+      bookingSuccessPopup.classList.remove("active");
+
+      document.body.classList.remove("modal-open");
+
+      bookingForm.reset();
+
+    });
+
+
+    /*
+      Close success popup when clicking outside
+    */
+
+    bookingSuccessPopup.addEventListener("click", function(event) {
+
+      if (event.target === bookingSuccessPopup) {
+
+        bookingSuccessPopup.classList.remove("active");
+
+        document.body.classList.remove("modal-open");
+
+        bookingForm.reset();
+
+      }
+
+    });
+
+
+    /*
+      ==========================================
+      SET MINIMUM BOOKING DATE
+      ==========================================
+
+      Prevent users from selecting a date
+      in the past.
+    */
+
+    const bookingDate =
+      document.getElementById("bookingDate");
+
+    const today =
+      new Date().toISOString().split("T")[0];
+
+    bookingDate.min = today;
+
+  </script>
+
+</body>
+</html>
