@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BLOOM HAVEN | Airbnb Staycation</title>
+
     <style>
       :root {
         --bg: #fffaf6;
@@ -279,7 +280,11 @@
       }
 
       .image-card {
-        background: linear-gradient(135deg, #f7e3d6 0%, #f4efe8 100%);
+        background: linear-gradient(
+          135deg,
+          #f7e3d6 0%,
+          #f4efe8 100%
+        );
         border: 1px solid rgba(155, 93, 60, 0.08);
         border-radius: 28px;
         padding: 16px;
@@ -429,7 +434,11 @@
       }
 
       .promo-wrap {
-        background: linear-gradient(135deg, #f7e7dc 0%, #f9f3ef 100%);
+        background: linear-gradient(
+          135deg,
+          #f7e7dc 0%,
+          #f9f3ef 100%
+        );
         border: 1px solid var(--line);
         border-radius: 30px;
         padding: 32px;
@@ -527,8 +536,8 @@
         }
       }
 
-
       /* MOBILE HAMBURGER MENU */
+
       .hamburger-btn {
         display: none;
         width: 46px;
@@ -550,7 +559,9 @@
         height: 2px;
         border-radius: 999px;
         background: var(--primary-dark);
-        transition: transform 0.25s ease, opacity 0.25s ease;
+        transition:
+          transform 0.25s ease,
+          opacity 0.25s ease;
       }
 
       .hamburger-btn.open span:nth-child(1) {
@@ -636,6 +647,7 @@
       }
 
       /* BOOKING MODAL */
+
       .booking-modal {
         position: fixed;
         inset: 0;
@@ -669,6 +681,7 @@
           opacity: 0;
           transform: translateY(16px) scale(0.98);
         }
+
         to {
           opacity: 1;
           transform: translateY(0) scale(1);
@@ -756,7 +769,8 @@
         overflow: hidden;
       }
 
-      /* BOOKING SUCCESS POPUP */
+      /* BEAUTIFUL BOOKING SUCCESS ANIMATION */
+
       .booking-success-popup {
         position: fixed;
         inset: 0;
@@ -764,103 +778,662 @@
         align-items: center;
         justify-content: center;
         padding: 20px;
-        background: rgba(42, 33, 29, 0.55);
+        overflow: hidden;
+
+        background:
+          radial-gradient(
+            circle at 50% 45%,
+            rgba(246, 215, 201, 0.28),
+            transparent 32%
+          ),
+          rgba(42, 33, 29, 0.72);
+
+        backdrop-filter: blur(8px);
+
         z-index: 10000;
+
+        opacity: 0;
       }
 
       .booking-success-popup.active {
         display: flex;
+        animation: successBackdropIn 0.55s ease forwards;
+      }
+
+      @keyframes successBackdropIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
       }
 
       .booking-success-box {
-        width: min(380px, 100%);
-        padding: 34px 28px;
+        position: relative;
+
+        width: min(410px, 100%);
+
+        padding: 44px 30px 32px;
+
         text-align: center;
-        background: #fff;
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        box-shadow: 0 24px 70px rgba(42, 33, 29, 0.25);
-        animation: bookingPop 0.22s ease;
+
+        background:
+          linear-gradient(#fff, #fff) padding-box,
+          linear-gradient(
+            135deg,
+            rgba(155, 93, 60, 0.55),
+            rgba(246, 215, 201, 0.95),
+            rgba(155, 93, 60, 0.35)
+          )
+          border-box;
+
+        border: 1px solid transparent;
+
+        border-radius: 30px;
+
+        box-shadow:
+          0 30px 90px rgba(42, 33, 29, 0.34),
+          0 0 55px rgba(246, 215, 201, 0.22);
+
+        overflow: hidden;
+
+        transform-origin: center;
+
+        animation: successCardIn
+          0.85s
+          cubic-bezier(.16, 1.35, .3, 1)
+          both;
+      }
+
+      .booking-success-box::before {
+        content: "";
+
+        position: absolute;
+
+        width: 170%;
+        height: 70px;
+
+        left: -35%;
+        top: -80px;
+
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.92),
+          transparent
+        );
+
+        transform: rotate(-12deg);
+
+        animation: successShine 1.25s 0.35s ease forwards;
+
+        pointer-events: none;
+      }
+
+      .booking-success-box::after {
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        border-radius: inherit;
+
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.75);
+
+        pointer-events: none;
+      }
+
+      @keyframes successCardIn {
+        0% {
+          opacity: 0;
+
+          transform:
+            translateY(48px)
+            scale(0.72)
+            rotateX(12deg);
+
+          filter: blur(7px);
+        }
+
+        65% {
+          opacity: 1;
+
+          transform:
+            translateY(-6px)
+            scale(1.035)
+            rotateX(0);
+
+          filter: blur(0);
+        }
+
+        100% {
+          opacity: 1;
+
+          transform:
+            translateY(0)
+            scale(1)
+            rotateX(0);
+        }
+      }
+
+      @keyframes successShine {
+        0% {
+          top: -90px;
+          opacity: 0;
+        }
+
+        20% {
+          opacity: 0.95;
+        }
+
+        100% {
+          top: 115%;
+          opacity: 0;
+        }
+      }
+
+      .booking-success-icon-wrap {
+        position: relative;
+
+        width: 94px;
+        height: 94px;
+
+        margin: 0 auto 20px;
+
+        display: grid;
+        place-items: center;
+      }
+
+      .booking-success-ring,
+      .booking-success-ring::before {
+        position: absolute;
+
+        inset: 0;
+
+        content: "";
+
+        border-radius: 50%;
+
+        border: 2px solid rgba(155, 93, 60, 0.22);
+
+        animation:
+          successRing
+          1.8s
+          0.25s
+          ease-out
+          infinite;
+      }
+
+      .booking-success-ring::before {
+        inset: 9px;
+
+        animation-delay: 0.7s;
+      }
+
+      @keyframes successRing {
+        0% {
+          transform: scale(0.72);
+          opacity: 0;
+        }
+
+        28% {
+          opacity: 0.9;
+        }
+
+        100% {
+          transform: scale(1.45);
+          opacity: 0;
+        }
       }
 
       .booking-success-icon {
-        width: 68px;
-        height: 68px;
-        margin: 0 auto 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        position: relative;
+
+        z-index: 2;
+
+        width: 74px;
+        height: 74px;
+
+        display: grid;
+
+        place-items: center;
+
         border-radius: 50%;
-        background: #f7e3d6;
-        color: var(--primary-dark);
-        font-size: 2rem;
-        font-weight: 900;
+
+        background: linear-gradient(
+          145deg,
+          #fff6f1,
+          #f6d7c9
+        );
+
+        box-shadow:
+          0 14px 30px rgba(155, 93, 60, 0.2),
+          inset 0 0 0 1px rgba(155, 93, 60, 0.12);
+
+        animation:
+          successIconBounce
+          0.85s
+          0.18s
+          cubic-bezier(.16, 1.45, .35, 1)
+          both;
+      }
+
+      @keyframes successIconBounce {
+        0% {
+          transform:
+            scale(0)
+            rotate(-25deg);
+        }
+
+        70% {
+          transform:
+            scale(1.12)
+            rotate(4deg);
+        }
+
+        100% {
+          transform:
+            scale(1)
+            rotate(0);
+        }
+      }
+
+      .booking-success-icon svg {
+        width: 39px;
+        height: 39px;
+
+        overflow: visible;
+      }
+
+      .booking-success-icon circle {
+        fill: none;
+
+        stroke: rgba(155, 93, 60, 0.24);
+
+        stroke-width: 2.4;
+      }
+
+      .booking-success-icon path {
+        fill: none;
+
+        stroke: var(--primary-dark);
+
+        stroke-width: 3.6;
+
+        stroke-linecap: round;
+        stroke-linejoin: round;
+
+        stroke-dasharray: 42;
+        stroke-dashoffset: 42;
+
+        animation:
+          successCheckDraw
+          0.65s
+          0.7s
+          ease
+          forwards;
+      }
+
+      @keyframes successCheckDraw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+
+      .booking-success-sparkle {
+        position: absolute;
+
+        width: 8px;
+        height: 8px;
+
+        border-radius: 50%;
+
+        background: #d7a98a;
+
+        box-shadow:
+          0 0 14px rgba(215, 169, 138, 0.8);
+
+        opacity: 0;
+
+        animation:
+          successSparkle
+          1.6s
+          ease-in-out
+          infinite;
+      }
+
+      .booking-success-sparkle.s1 {
+        top: 12px;
+
+        left: 18px;
+
+        animation-delay: 0.15s;
+      }
+
+      .booking-success-sparkle.s2 {
+        right: 16px;
+
+        top: 22px;
+
+        width: 6px;
+        height: 6px;
+
+        animation-delay: 0.55s;
+      }
+
+      .booking-success-sparkle.s3 {
+        right: 24px;
+
+        bottom: 8px;
+
+        width: 5px;
+        height: 5px;
+
+        animation-delay: 0.9s;
+      }
+
+      @keyframes successSparkle {
+        0%,
+        100% {
+          opacity: 0;
+
+          transform:
+            scale(0.3)
+            rotate(0deg);
+        }
+
+        45% {
+          opacity: 1;
+
+          transform:
+            scale(1.45)
+            rotate(90deg);
+        }
       }
 
       .booking-success-box h3 {
         margin: 0 0 8px;
-        font-size: 1.8rem;
+
+        font-size: 1.95rem;
+
         color: var(--primary-dark);
+
+        letter-spacing: -0.035em;
+
+        opacity: 0;
+
+        animation:
+          successTextIn
+          0.55s
+          0.55s
+          ease
+          forwards;
       }
 
       .booking-success-box p {
-        margin: 0 0 22px;
+        margin: 0 0 24px;
+
         color: var(--muted);
-        line-height: 1.6;
+
+        line-height: 1.65;
+
+        opacity: 0;
+
+        animation:
+          successTextIn
+          0.55s
+          0.68s
+          ease
+          forwards;
+      }
+
+      @keyframes successTextIn {
+        from {
+          opacity: 0;
+
+          transform:
+            translateY(12px);
+        }
+
+        to {
+          opacity: 1;
+
+          transform:
+            translateY(0);
+        }
       }
 
       .booking-success-ok {
-        min-width: 130px;
-        padding: 12px 22px;
+        position: relative;
+
+        min-width: 145px;
+
+        padding: 13px 24px;
+
         border: 0;
+
         border-radius: 999px;
-        background: var(--primary);
+
+        overflow: hidden;
+
+        background:
+          linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark)
+          );
+
         color: #fff;
+
         font: inherit;
+
         font-weight: 800;
+
         cursor: pointer;
+
+        box-shadow:
+          0 12px 26px rgba(109, 62, 41, 0.22);
+
+        opacity: 0;
+
+        animation:
+          successTextIn
+          0.55s
+          0.8s
+          ease
+          forwards;
+
+        transition:
+          transform 0.22s ease,
+          box-shadow 0.22s ease;
+      }
+
+      .booking-success-ok::before {
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        background:
+          linear-gradient(
+            100deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.35),
+            transparent 70%
+          );
+
+        transform:
+          translateX(-120%);
+
+        transition:
+          transform 0.55s ease;
       }
 
       .booking-success-ok:hover {
-        background: var(--primary-dark);
+        transform:
+          translateY(-2px)
+          scale(1.03);
+
+        box-shadow:
+          0 16px 32px rgba(109, 62, 41, 0.3);
       }
 
-    </style> 
+      .booking-success-ok:hover::before {
+        transform:
+          translateX(120%);
+      }
+
+      .success-confetti {
+        position: absolute;
+
+        top: -30px;
+
+        width: 9px;
+        height: 16px;
+
+        border-radius: 3px;
+
+        pointer-events: none;
+
+        animation:
+          confettiFall
+          var(--fall-duration, 2.8s)
+          var(--fall-delay, 0s)
+          cubic-bezier(.2, .65, .35, 1)
+          forwards;
+      }
+
+      @keyframes confettiFall {
+        0% {
+          opacity: 0;
+
+          transform:
+            translate3d(0, -10px, 0)
+            rotate(0deg)
+            scale(0.8);
+        }
+
+        10% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 0;
+
+          transform:
+            translate3d(
+              var(--drift, 30px),
+              110vh,
+              0
+            )
+            rotate(var(--spin, 720deg))
+            scale(1);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .booking-success-popup.active,
+        .booking-success-box,
+        .booking-success-box::before,
+        .booking-success-ring,
+        .booking-success-ring::before,
+        .booking-success-icon,
+        .booking-success-icon path,
+        .booking-success-sparkle,
+        .booking-success-box h3,
+        .booking-success-box p,
+        .booking-success-ok,
+        .success-confetti {
+          animation: none !important;
+
+          opacity: 1;
+
+          transform: none;
+        }
+      }
+    </style>
   </head>
 
-
-
-
-
-
-
-
-
-
   <body>
+
     <header class="topbar">
+
       <div class="container nav">
-        <a href="#home" class="brand" aria-label="Bloom Haven home">
+
+        <a
+          href="#home"
+          class="brand"
+          aria-label="Bloom Haven home"
+        >
+
           <span class="brand-mark"></span>
+
           BLOOM HAVEN
+
         </a>
 
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="#about">About</a>
+        <nav
+          class="nav-links"
+          aria-label="Main navigation"
+        >
+
+          <a href="#about">
+            About
+          </a>
+
           <div class="gallery-dropdown">
-            <button type="button" class="gallery-trigger" aria-expanded="false" aria-label="Open Gallery menu">
+
+            <button
+              type="button"
+              class="gallery-trigger"
+              aria-expanded="false"
+              aria-label="Open Gallery menu"
+            >
+
               Gallery
+
             </button>
-            <div class="gallery-menu" aria-label="Gallery menu">
-              <a href="hampton1.html">Hampton Unit 1 </a>
-              <a href="hampton2.html">Hampton Unit 2</a>
-              <a href="fair.html">FairGrounds</a>
+
+            <div
+              class="gallery-menu"
+              aria-label="Gallery menu"
+            >
+
+              <a href="hampton1.html">
+                Hampton Unit 1
+              </a>
+
+              <a href="hampton2.html">
+                Hampton Unit 2
+              </a>
+
+              <a href="fair.html">
+                FairGrounds
+              </a>
+
             </div>
+
           </div>
-          <a href="promo.html">Promo Offer</a>
+
+          <a href="promo.html">
+            Promo Offer
+          </a>
+
         </nav>
 
-        <a href="#" class="nav-cta booking-btn">Book Your Stay</a>
+        <a
+          href="#"
+          class="nav-cta booking-btn"
+        >
+
+          Book Your Stay
+
+        </a>
 
         <button
           type="button"
@@ -870,266 +1443,635 @@
           aria-expanded="false"
           aria-controls="mobileMenu"
         >
+
           <span></span>
+
           <span></span>
+
           <span></span>
+
         </button>
 
-        <div class="mobile-menu" id="mobileMenu">
-          <a href="#about" class="mobile-menu-link">About</a>
-          <a href="#gallery-unit-1" class="mobile-menu-link">Gallery</a>
-          <a href="#promo.html" class="mobile-menu-link">Promo Offer</a>
-          <a href="#" class="mobile-menu-link mobile-booking booking-btn">Book Your Stay</a>
+        <div
+          class="mobile-menu"
+          id="mobileMenu"
+        >
+
+          <a
+            href="#about"
+            class="mobile-menu-link"
+          >
+
+            About
+
+          </a>
+
+          <a
+            href="#gallery-unit-1"
+            class="mobile-menu-link"
+          >
+
+            Gallery
+
+          </a>
+
+          <a
+            href="#promo.html"
+            class="mobile-menu-link"
+          >
+
+            Promo Offer
+
+          </a>
+
+          <a
+            href="#"
+            class="mobile-menu-link mobile-booking booking-btn"
+          >
+
+            Book Your Stay
+
+          </a>
+
         </div>
 
-
-      
-
       </div>
+
     </header>
 
     <main id="home">
+
       <section class="hero">
+
         <div class="container hero-inner">
+
           <div>
-            <span class="eyebrow">Airbnb staycation</span>
-            <h1>Feel at home in a dreamy getaway.</h1>
+
+            <span class="eyebrow">
+
+              Airbnb staycation
+
+            </span>
+
+            <h1>
+
+              Feel at home in a dreamy getaway.
+
+            </h1>
+
             <p class="lead">
-              Escape to BLOOM HAVEN, a stylish and peaceful staycation made for slow mornings, cozy nights, and unforgettable weekends away from the rush.
+
+              Escape to BLOOM HAVEN, a stylish and peaceful
+              staycation made for slow mornings, cozy nights,
+              and unforgettable weekends away from the rush.
+
             </p>
 
             <div class="hero-actions">
-              <a href="#" class="btn btn-primary booking-btn">Reserve Now</a>
-              <a href="#about" class="btn btn-secondary">Discover More</a>
+
+              <a
+                href="#"
+                class="btn btn-primary booking-btn"
+              >
+
+                Reserve Now
+
+              </a>
+
+              <a
+                href="#about"
+                class="btn btn-secondary"
+              >
+
+                Discover More
+
+              </a>
+
             </div>
 
             <div class="stats">
+
               <div class="stat">
-                <strong>4.9/5</strong>
-                <span>guest rating</span>
+
+                <strong>
+                  4.9/5
+                </strong>
+
+                <span>
+                  guest rating
+                </span>
+
               </div>
+
               <div class="stat">
-                <strong>2–3 nights</strong>
-                <span>ideal escape</span>
+
+                <strong>
+                  2–3 nights
+                </strong>
+
+                <span>
+                  ideal escape
+                </span>
+
               </div>
+
               <div class="stat">
-                <strong>24/7</strong>
-                <span>host support</span>
+
+                <strong>
+                  24/7
+                </strong>
+
+                <span>
+                  host support
+                </span>
+
               </div>
+
             </div>
+
           </div>
 
-          <div class="hero-visual" aria-label="Staycation home showcase">
+          <div
+            class="hero-visual"
+            aria-label="Staycation home showcase"
+          >
+
             <div class="image-card">
+
               <img
                 src="hsala.jpg"
                 alt="Modern cozy Airbnb staycation home"
               />
+
             </div>
+
           </div>
+
         </div>
+
       </section>
 
+      <section
+        id="gallery-unit-1"
+        class="gallery-section"
+      >
 
-
-
-
-
-      <section id="gallery-unit-1" class="gallery-section">
         <div class="container">
+
           <div class="section-header">
-            <span class="eyebrow">Unit 1</span>
-            <h2>Bloom Haven Hampton Deca Home Unit 1</h2>
+
+            <span class="eyebrow">
+              Unit 1
+            </span>
+
+            <h2>
+
+              Bloom Haven Hampton Deca Home Unit 1
+
+            </h2>
+
             <p>
-              Explore the details that turn our staycation into a warm, memorable escape.
+
+              Explore the details that turn our staycation
+              into a warm, memorable escape.
+
             </p>
+
           </div>
 
           <div class="gallery-grid">
-            <article class="gallery-item" id="gallery-lounge-1">
-              <img src="hsala.jpg" alt="Cozy lounge area" />
+
+            <article
+              class="gallery-item"
+              id="gallery-lounge-1"
+            >
+
+              <img
+                src="hsala.jpg"
+                alt="Cozy lounge area"
+              />
+
               <div class="gallery-caption">
-                <strong>Cozy Lounge</strong>
-                <span>Soft textures, natural light, and a slow-living vibe.</span>
+
+                <strong>
+
+                  Cozy Lounge
+
+                </strong>
+
+                <span>
+
+                  Soft textures, natural light,
+                  and a slow-living vibe.
+
+                </span>
+
               </div>
+
             </article>
 
-            <article class="gallery-item" id="gallery-bedroom-1">
-              <img src="hamptonbed.jpg" alt="Elegant bedroom interior" />
+            <article
+              class="gallery-item"
+              id="gallery-bedroom-1"
+            >
+
+              <img
+                src="hamptonbed.jpg"
+                alt="Elegant bedroom interior"
+              />
+
               <div class="gallery-caption">
-                <strong>Private Bedroom</strong>
-                <span>Restful bedding and warm, calming details.</span>
+
+                <strong>
+
+                  Private Bedroom
+
+                </strong>
+
+                <span>
+
+                  Restful bedding and warm,
+                  calming details.
+
+                </span>
+
               </div>
+
             </article>
 
-            <article class="gallery-item" id="gallery-kitchen-1">
-              <img src="hkitchen.jpg" alt="Kitchen area" />
+            <article
+              class="gallery-item"
+              id="gallery-kitchen-1"
+            >
+
+              <img
+                src="hkitchen.jpg"
+                alt="Kitchen area"
+              />
+
               <div class="gallery-caption">
-                <strong>Kitchen</strong>
-                <span>Fresh flavors, warm meals, and cozy moments.</span>
+
+                <strong>
+
+                  Kitchen
+
+                </strong>
+
+                <span>
+
+                  Fresh flavors, warm meals,
+                  and cozy moments.
+
+                </span>
+
               </div>
+
             </article>
+
           </div>
+
         </div>
+
       </section>
 
+      <section
+        id="gallery-unit-2"
+        class="gallery-section"
+      >
 
-
-
-
-
-
-
-
- <section id="gallery-unit-2" class="gallery-section">
         <div class="container">
+
           <div class="section-header">
-            <span class="eyebrow">Unit 2</span>
-            <h2>Bloom Haven Hampton Deca Home Unit 2</h2>
+
+            <span class="eyebrow">
+
+              Unit 2
+
+            </span>
+
+            <h2>
+
+              Bloom Haven Hampton Deca Home Unit 2
+
+            </h2>
+
             <p>
-              Experience the simple comforts that make every staycation feel special and memorable.
+
+              Experience the simple comforts
+              that make every staycation feel special
+              and memorable.
 
             </p>
+
           </div>
 
           <div class="gallery-grid">
-            <article class="gallery-item" id="gallery-lounge-2">
-              <img src="hamtonkitchen.jpg" alt="Cozy lounge area" />
+
+            <article
+              class="gallery-item"
+              id="gallery-lounge-2"
+            >
+
+              <img
+                src="hamtonkitchen.jpg"
+                alt="Cozy lounge area"
+              />
+
               <div class="gallery-caption">
-                <strong>Play Billards</strong>
-                <span>Sleek equipment, clean lines, and a functional space.</span>
+
+                <strong>
+
+                  Play Billards
+
+                </strong>
+
+                <span>
+
+                  Sleek equipment, clean lines,
+                  and a functional space.
+
+                </span>
+
               </div>
+
             </article>
 
-            <article class="gallery-item" id="gallery-bedroom-2">
-              <img src="unit2sala.jpg" alt="Elegant bedroom interior" />
+            <article
+              class="gallery-item"
+              id="gallery-bedroom-2"
+            >
+
+              <img
+                src="unit2sala.jpg"
+                alt="Elegant bedroom interior"
+              />
+
               <div class="gallery-caption">
-                <strong>Cozy Lounge</strong>
-                <span>Warm lighting, plush seating, and a relaxing atmosphere.
-</span>
+
+                <strong>
+
+                  Cozy Lounge
+
+                </strong>
+
+                <span>
+
+                  Warm lighting, plush seating,
+                  and a relaxing atmosphere.
+
+                </span>
+
               </div>
+
             </article>
 
-            <article class="gallery-item" id="gallery-kitchen-2">
-              <img src="unit2.jpg" alt="Kitchen area" />
+            <article
+              class="gallery-item"
+              id="gallery-kitchen-2"
+            >
+
+              <img
+                src="unit2.jpg"
+                alt="Kitchen area"
+              />
+
               <div class="gallery-caption">
-                <strong>Peaceful Bedroom</strong>
-                <span>Soft bedding, warm lighting, and a peaceful retreat.</span>
+
+                <strong>
+
+                  Peaceful Bedroom
+
+                </strong>
+
+                <span>
+
+                  Soft bedding, warm lighting,
+                  and a peaceful retreat.
+
+                </span>
+
               </div>
+
             </article>
+
           </div>
+
         </div>
+
       </section>
 
+      <section
+        id="gallery-unit-2"
+        class="gallery-section"
+      >
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <section id="gallery-unit-2" class="gallery-section">
         <div class="container">
+
           <div class="section-header">
-            <span class="eyebrow">FairGrounds</span>
-            <h2>Bloom Haven FairGround Subdivision</h2>
+
+            <span class="eyebrow">
+
+              FairGrounds
+
+            </span>
+
+            <h2>
+
+              Bloom Haven FairGround Subdivision
+
+            </h2>
+
             <p>
-              Discover the little touches that make your staycation feel comfortable, relaxing, and unforgettable.
+
+              Discover the little touches
+              that make your staycation feel comfortable,
+              relaxing, and unforgettable.
 
             </p>
+
           </div>
 
           <div class="gallery-grid">
-            <article class="gallery-item" id="gallery-lounge-2">
-              <img src="bloombilliard.jpg" alt="Cozy lounge area" />
+
+            <article
+              class="gallery-item"
+              id="gallery-lounge-2"
+            >
+
+              <img
+                src="bloombilliard.jpg"
+                alt="Cozy lounge area"
+              />
+
               <div class="gallery-caption">
-                <strong>Modern Kitchen</strong>
-                <span>Enjoy a fun game of billiards during your stay.</span>
+
+                <strong>
+
+                  Modern Kitchen
+
+                </strong>
+
+                <span>
+
+                  Enjoy a fun game of billiards
+                  during your stay.
+
+                </span>
+
               </div>
+
             </article>
 
-            <article class="gallery-item" id="gallery-bedroom-2">
-              <img src="blompool.jpg" alt="Elegant bedroom interior" />
+            <article
+              class="gallery-item"
+              id="gallery-bedroom-2"
+            >
+
+              <img
+                src="blompool.jpg"
+                alt="Elegant bedroom interior"
+              />
+
               <div class="gallery-caption">
-                <strong>Mini Pool & Gym Equipment</strong>
-                <span>Enjoy a fun and relaxing game of mini pool and gym equipment during your stay.
-</span>
+
+                <strong>
+
+                  Mini Pool & Gym Equipment
+
+                </strong>
+
+                <span>
+
+                  Enjoy a fun and relaxing game
+                  of mini pool and gym equipment
+                  during your stay.
+
+                </span>
+
               </div>
+
             </article>
 
-            <article class="gallery-item" id="gallery-kitchen-2">
-              <img src="blombed1.jpg" alt="Kitchen area" />
+            <article
+              class="gallery-item"
+              id="gallery-kitchen-2"
+            >
+
+              <img
+                src="blombed1.jpg"
+                alt="Kitchen area"
+              />
+
               <div class="gallery-caption">
-                <strong>Peaceful Bedroom</strong>
-                <span>Soft bedding, warm lighting, and a peaceful retreat.</span>
+
+                <strong>
+
+                  Peaceful Bedroom
+
+                </strong>
+
+                <span>
+
+                  Soft bedding, warm lighting,
+                  and a peaceful retreat.
+
+                </span>
+
               </div>
+
+            </article>
+
+            <!-- Sample -->
+
+            <!--
+
+            <article
+              class="gallery-item"
+              id="gallery-kitchen-2"
+            >
+
+              <img
+                src="bloombilliard.jpg"
+                alt="Kitchen area"
+              />
+
+              <div class="gallery-caption">
+
+                <strong>
+                  Peaceful Bedroom
+                </strong>
+
+                <span>
+                  Soft bedding, warm lighting,
+                  and a peaceful retreat.
+                </span>
+
+              </div>
+
             </article>
 
 
+            <article
+              class="gallery-item"
+              id="gallery-kitchen-2"
+            >
 
+              <img
+                src="bloomdining.jpg"
+                alt="Kitchen area"
+              />
 
-<!-- Sample-->
-
-
-
-<!--
-
- <article class="gallery-item" id="gallery-kitchen-2">
-              <img src="bloombilliard.jpg" alt="Kitchen area" />
               <div class="gallery-caption">
-                <strong>Peaceful Bedroom</strong>
-                <span>Soft bedding, warm lighting, and a peaceful retreat.</span>
+
+                <strong>
+                  Peaceful Bedroom
+                </strong>
+
+                <span>
+                  Soft bedding, warm lighting,
+                  and a peaceful retreat.
+                </span>
+
               </div>
+
             </article>
 
 
+            <article
+              class="gallery-item"
+              id="gallery-kitchen-2"
+            >
 
+              <img
+                src="blombed2.jpg"
+                alt="Kitchen area"
+              />
 
-
-             <article class="gallery-item" id="gallery-kitchen-2">
-              <img src="bloomdining.jpg" alt="Kitchen area" />
               <div class="gallery-caption">
-                <strong>Peaceful Bedroom</strong>
-                <span>Soft bedding, warm lighting, and a peaceful retreat.</span>
+
+                <strong>
+                  Peaceful Bedroom
+                </strong>
+
+                <span>
+                  Soft bedding, warm lighting,
+                  and a peaceful retreat.
+                </span>
+
               </div>
+
             </article>
 
-
-
-
-             <article class="gallery-item" id="gallery-kitchen-2">
-              <img src="blombed2.jpg" alt="Kitchen area" />
-              <div class="gallery-caption">
-                <strong>Peaceful Bedroom</strong>
-                <span>Soft bedding, warm lighting, and a peaceful retreat.</span>
-              </div>
-            </article>
-
--->
-
-
-
+            -->
 
           </div>
+
         </div>
+
       </section>
-
-
-
-
-
-
-
-
 
       <!-- BOOKING FORM MODAL -->
+
       <div
         class="booking-modal"
         id="bookingModal"
@@ -1137,29 +2079,65 @@
         aria-modal="true"
         aria-labelledby="bookingTitle"
       >
+
         <div class="booking-card">
+
           <button
             type="button"
             class="booking-close"
             id="bookingClose"
             aria-label="Close booking form"
           >
+
             &times;
+
           </button>
 
-          <h2 id="bookingTitle">Book Your Stay</h2>
-          <p>Fill in your details below and we’ll prepare your booking request.</p>
+          <h2 id="bookingTitle">
+
+            Book Your Stay
+
+          </h2>
+
+          <p>
+
+            Fill in your details below and we’ll
+            prepare your booking request.
+
+          </p>
 
           <form
             id="bookingForm"
             action="https://formsubmit.co/ammasivilmar2@gmail.com"
             method="POST"
           >
-            <input type="hidden" name="_subject" value="New Bloom Haven Booking Request" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
+
+            <input
+              type="hidden"
+              name="_subject"
+              value="New Bloom Haven Booking Request"
+            />
+
+            <input
+              type="hidden"
+              name="_template"
+              value="basic"
+            />
+
+            <input
+              type="hidden"
+              name="_captcha"
+              value="false"
+            />
+
             <div class="booking-field">
-              <label for="bookingName">Full Name</label>
+
+              <label for="bookingName">
+
+                Full Name
+
+              </label>
+
               <input
                 type="text"
                 id="bookingName"
@@ -1167,10 +2145,17 @@
                 placeholder="Enter your full name"
                 required
               />
+
             </div>
 
             <div class="booking-field">
-              <label for="bookingContact">Contact Number</label>
+
+              <label for="bookingContact">
+
+                Contact Number
+
+              </label>
+
               <input
                 type="tel"
                 id="bookingContact"
@@ -1178,20 +2163,34 @@
                 placeholder="Example: 09123456789"
                 required
               />
+
             </div>
 
             <div class="booking-field">
-              <label for="bookingDate">Date of Booking</label>
+
+              <label for="bookingDate">
+
+                Date of Booking
+
+              </label>
+
               <input
                 type="date"
                 id="bookingDate"
                 name="date"
                 required
               />
+
             </div>
 
             <div class="booking-field">
-              <label for="bookingPax">Number of Pax</label>
+
+              <label for="bookingPax">
+
+                Number of Pax
+
+              </label>
+
               <input
                 type="number"
                 id="bookingPax"
@@ -1200,211 +2199,928 @@
                 placeholder="Example: 4"
                 required
               />
+
             </div>
 
             <div class="booking-field">
-              <label for="bookingNotes">Message / Notes</label>
+
+              <label for="bookingNotes">
+
+                Message / Notes
+
+              </label>
+
               <textarea
                 id="bookingNotes"
                 name="notes"
                 placeholder="Number of guests, preferred check-in time, special requests, etc."
               ></textarea>
+
             </div>
 
-            <button type="submit" class="booking-submit">Done</button>
+            <button
+              type="submit"
+              class="booking-submit"
+            >
+
+              Done
+
+            </button>
+
           </form>
+
         </div>
+
       </div>
 
-      <!-- BOOKING SUCCESS POPUP -->
-      <div class="booking-success-popup" id="bookingSuccessPopup" role="alertdialog" aria-modal="true" aria-labelledby="bookingSuccessTitle">
+      <!-- BEAUTIFUL BOOKING SUCCESS POPUP -->
+
+      <div
+        class="booking-success-popup"
+        id="bookingSuccessPopup"
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="bookingSuccessTitle"
+      >
+
         <div class="booking-success-box">
-          <div class="booking-success-icon">✓</div>
-          <h3 id="bookingSuccessTitle">Booked Done</h3>
-          <p>Your booking request has been submitted successfully.</p>
-          <button type="button" class="booking-success-ok" id="bookingSuccessOk">OK</button>
+
+          <div
+            class="booking-success-icon-wrap"
+            aria-hidden="true"
+          >
+
+            <span class="booking-success-ring"></span>
+
+            <span
+              class="booking-success-sparkle s1"
+            ></span>
+
+            <span
+              class="booking-success-sparkle s2"
+            ></span>
+
+            <span
+              class="booking-success-sparkle s3"
+            ></span>
+
+            <div class="booking-success-icon">
+
+              <svg
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="20"
+                ></circle>
+
+                <path
+                  d="M14.5 24.5 21 31l13-14"
+                ></path>
+
+              </svg>
+
+            </div>
+
+          </div>
+
+          <h3 id="bookingSuccessTitle">
+
+            Booked Successfully!
+
+          </h3>
+
+          <p>
+
+            Your Bloom Haven booking request
+            has been sent. We’ll get back to you
+            as soon as possible.
+
+          </p>
+
+          <button
+            type="button"
+            class="booking-success-ok"
+            id="bookingSuccessOk"
+          >
+
+            Awesome!
+
+          </button>
+
         </div>
+
       </div>
 
     </main>
 
     <script>
-      const galleryDropdown = document.querySelector('.gallery-dropdown');
-      const galleryTrigger = document.querySelector('.gallery-trigger');
 
-      if (galleryDropdown && galleryTrigger) {
-        galleryTrigger.addEventListener('click', function (event) {
-          event.stopPropagation();
-          const isOpen = galleryDropdown.classList.toggle('open');
-          galleryTrigger.setAttribute('aria-expanded', String(isOpen));
-        });
+      const galleryDropdown =
+        document.querySelector(
+          ".gallery-dropdown"
+        );
 
-        document.addEventListener('click', function (event) {
-          if (!galleryDropdown.contains(event.target)) {
-            galleryDropdown.classList.remove('open');
-            galleryTrigger.setAttribute('aria-expanded', 'false');
+      const galleryTrigger =
+        document.querySelector(
+          ".gallery-trigger"
+        );
+
+
+      if (
+        galleryDropdown &&
+        galleryTrigger
+      ) {
+
+        galleryTrigger.addEventListener(
+          "click",
+          function (event) {
+
+            event.stopPropagation();
+
+            const isOpen =
+              galleryDropdown.classList.toggle(
+                "open"
+              );
+
+            galleryTrigger.setAttribute(
+              "aria-expanded",
+              String(isOpen)
+            );
+
           }
-        });
-      }
+        );
 
+
+        document.addEventListener(
+          "click",
+          function (event) {
+
+            if (
+              !galleryDropdown.contains(
+                event.target
+              )
+            ) {
+
+              galleryDropdown.classList.remove(
+                "open"
+              );
+
+              galleryTrigger.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+
+            }
+
+          }
+        );
+
+      }
 
 
       // MOBILE HAMBURGER MENU
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 
-      if (hamburgerBtn && mobileMenu) {
-        hamburgerBtn.addEventListener('click', function (event) {
-          event.stopPropagation();
+      const hamburgerBtn =
+        document.getElementById(
+          "hamburgerBtn"
+        );
 
-          const isOpen = mobileMenu.classList.toggle('open');
-          hamburgerBtn.classList.toggle('open', isOpen);
-          hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
-          hamburgerBtn.setAttribute(
-            'aria-label',
-            isOpen ? 'Close navigation menu' : 'Open navigation menu'
-          );
-        });
+      const mobileMenu =
+        document.getElementById(
+          "mobileMenu"
+        );
 
-        mobileMenuLinks.forEach(function (link) {
-          link.addEventListener('click', function () {
-            mobileMenu.classList.remove('open');
-            hamburgerBtn.classList.remove('open');
-            hamburgerBtn.setAttribute('aria-expanded', 'false');
-            hamburgerBtn.setAttribute('aria-label', 'Open navigation menu');
-          });
-        });
+      const mobileMenuLinks =
+        document.querySelectorAll(
+          ".mobile-menu-link"
+        );
 
-        document.addEventListener('click', function (event) {
-          if (
-            mobileMenu.classList.contains('open') &&
-            !mobileMenu.contains(event.target) &&
-            !hamburgerBtn.contains(event.target)
-          ) {
-            mobileMenu.classList.remove('open');
-            hamburgerBtn.classList.remove('open');
-            hamburgerBtn.setAttribute('aria-expanded', 'false');
-            hamburgerBtn.setAttribute('aria-label', 'Open navigation menu');
+
+      if (
+        hamburgerBtn &&
+        mobileMenu
+      ) {
+
+        hamburgerBtn.addEventListener(
+          "click",
+          function (event) {
+
+            event.stopPropagation();
+
+            const isOpen =
+              mobileMenu.classList.toggle(
+                "open"
+              );
+
+            hamburgerBtn.classList.toggle(
+              "open",
+              isOpen
+            );
+
+            hamburgerBtn.setAttribute(
+              "aria-expanded",
+              String(isOpen)
+            );
+
+            hamburgerBtn.setAttribute(
+              "aria-label",
+              isOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            );
+
           }
-        });
+        );
+
+
+        mobileMenuLinks.forEach(
+          function (link) {
+
+            link.addEventListener(
+              "click",
+              function () {
+
+                mobileMenu.classList.remove(
+                  "open"
+                );
+
+                hamburgerBtn.classList.remove(
+                  "open"
+                );
+
+                hamburgerBtn.setAttribute(
+                  "aria-expanded",
+                  "false"
+                );
+
+                hamburgerBtn.setAttribute(
+                  "aria-label",
+                  "Open navigation menu"
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+        document.addEventListener(
+          "click",
+          function (event) {
+
+            if (
+              mobileMenu.classList.contains(
+                "open"
+              ) &&
+              !mobileMenu.contains(
+                event.target
+              ) &&
+              !hamburgerBtn.contains(
+                event.target
+              )
+            ) {
+
+              mobileMenu.classList.remove(
+                "open"
+              );
+
+              hamburgerBtn.classList.remove(
+                "open"
+              );
+
+              hamburgerBtn.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+
+              hamburgerBtn.setAttribute(
+                "aria-label",
+                "Open navigation menu"
+              );
+
+            }
+
+          }
+        );
+
       }
+
 
       // BOOKING MODAL
-      const bookingModal = document.getElementById('bookingModal');
-      const bookingButtons = document.querySelectorAll('.booking-btn');
-      const bookingClose = document.getElementById('bookingClose');
-      const bookingForm = document.getElementById('bookingForm');
-      const bookingDate = document.getElementById('bookingDate');
 
-      function openBookingModal(event) {
-        if (event) event.preventDefault();
-        bookingModal.classList.add('active');
-        document.body.classList.add('booking-open');
+      const bookingModal =
+        document.getElementById(
+          "bookingModal"
+        );
+
+      const bookingButtons =
+        document.querySelectorAll(
+          ".booking-btn"
+        );
+
+      const bookingClose =
+        document.getElementById(
+          "bookingClose"
+        );
+
+      const bookingForm =
+        document.getElementById(
+          "bookingForm"
+        );
+
+      const bookingDate =
+        document.getElementById(
+          "bookingDate"
+        );
+
+
+      function openBookingModal(
+        event
+      ) {
+
+        if (event) {
+
+          event.preventDefault();
+
+        }
+
+        bookingModal.classList.add(
+          "active"
+        );
+
+        document.body.classList.add(
+          "booking-open"
+        );
+
       }
+
 
       function closeBookingModal() {
-        bookingModal.classList.remove('active');
-        document.body.classList.remove('booking-open');
+
+        bookingModal.classList.remove(
+          "active"
+        );
+
+        document.body.classList.remove(
+          "booking-open"
+        );
+
       }
 
-      bookingButtons.forEach(function (button) {
-        button.addEventListener('click', openBookingModal);
-      });
 
-      bookingClose.addEventListener('click', closeBookingModal);
+      bookingButtons.forEach(
+        function (button) {
 
-      bookingModal.addEventListener('click', function (event) {
-        if (event.target === bookingModal) {
-          closeBookingModal();
+          button.addEventListener(
+            "click",
+            openBookingModal
+          );
+
         }
-      });
+      );
 
-      document.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && bookingModal.classList.contains('active')) {
-          closeBookingModal();
-        }
-      });
 
-      // Prevent choosing a past date
-      const today = new Date();
-      const localToday =
-        today.getFullYear() +
-        '-' +
-        String(today.getMonth() + 1).padStart(2, '0') +
-        '-' +
-        String(today.getDate()).padStart(2, '0');
+      bookingClose.addEventListener(
+        "click",
+        closeBookingModal
+      );
 
-      bookingDate.min = localToday;
 
-      const bookingSuccessPopup = document.getElementById('bookingSuccessPopup');
-      const bookingSuccessOk = document.getElementById('bookingSuccessOk');
+      bookingModal.addEventListener(
+        "click",
+        function (event) {
 
-      function showBookingSuccess() {
-        bookingSuccessPopup.classList.add('active');
-      }
+          if (
+            event.target === bookingModal
+          ) {
 
-      function hideBookingSuccess() {
-        bookingSuccessPopup.classList.remove('active');
-      }
+            closeBookingModal();
 
-      bookingSuccessOk.addEventListener('click', hideBookingSuccess);
-
-      bookingSuccessPopup.addEventListener('click', function (event) {
-        if (event.target === bookingSuccessPopup) {
-          hideBookingSuccess();
-        }
-      });
-
-      bookingForm.addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        const contact = document.getElementById('bookingContact').value.trim();
-        const submitButton = bookingForm.querySelector('.booking-submit');
-        const phonePattern = /^[0-9+\-\s()]{7,20}$/;
-
-        if (!phonePattern.test(contact)) {
-          alert('Please enter a valid contact number.');
-          return;
-        }
-
-        submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
-
-        try {
-          const formData = new FormData(bookingForm);
-          const bookingData = Object.fromEntries(formData.entries());
-
-          const response = await fetch('https://formsubmit.co/ajax/ammasivilmar2@gmail.com', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(bookingData)
-          });
-
-          const result = await response.json();
-
-          if (!response.ok || result.success === false) {
-            throw new Error(result.message || 'Booking submission failed.');
           }
 
-          bookingForm.reset();
-          bookingDate.min = localToday;
-          closeBookingModal();
-          showBookingSuccess();
-        } catch (error) {
-          console.error('Booking error:', error);
-          alert('Sorry, your booking could not be sent. Please try again.');
-        } finally {
-          submitButton.disabled = false;
-          submitButton.textContent = 'Done';
         }
-      });
+      );
+
+
+      document.addEventListener(
+        "keydown",
+        function (event) {
+
+          if (
+            event.key === "Escape" &&
+            bookingModal.classList.contains(
+              "active"
+            )
+          ) {
+
+            closeBookingModal();
+
+          }
+
+        }
+      );
+
+
+      // PREVENT CHOOSING A PAST DATE
+
+      const today =
+        new Date();
+
+
+      const localToday =
+
+        today.getFullYear() +
+
+        "-" +
+
+        String(
+          today.getMonth() + 1
+        ).padStart(
+          2,
+          "0"
+        ) +
+
+        "-" +
+
+        String(
+          today.getDate()
+        ).padStart(
+          2,
+          "0"
+        );
+
+
+      bookingDate.min =
+        localToday;
+
+
+      // SUCCESS POPUP
+
+      const bookingSuccessPopup =
+        document.getElementById(
+          "bookingSuccessPopup"
+        );
+
+
+      const bookingSuccessOk =
+        document.getElementById(
+          "bookingSuccessOk"
+        );
+
+
+      // CONFETTI ANIMATION
+
+      function launchSuccessConfetti() {
+
+        const colors = [
+
+          "#9b5d3c",
+
+          "#6d3e29",
+
+          "#f6d7c9",
+
+          "#d7a98a",
+
+          "#fff3ee",
+
+          "#ffffff"
+
+        ];
+
+
+        const pieces = 70;
+
+
+        for (
+          let i = 0;
+          i < pieces;
+          i++
+        ) {
+
+          const confetti =
+            document.createElement(
+              "span"
+            );
+
+
+          confetti.className =
+            "success-confetti";
+
+
+          confetti.style.left =
+            Math.random() * 100 +
+            "%";
+
+
+          confetti.style.background =
+
+            colors[
+              Math.floor(
+                Math.random() *
+                colors.length
+              )
+            ];
+
+
+          confetti.style.setProperty(
+
+            "--fall-duration",
+
+            (
+              2.2 +
+              Math.random() *
+              1.8
+            ) +
+            "s"
+
+          );
+
+
+          confetti.style.setProperty(
+
+            "--fall-delay",
+
+            (
+              Math.random() *
+              0.45
+            ) +
+            "s"
+
+          );
+
+
+          confetti.style.setProperty(
+
+            "--drift",
+
+            (
+              (
+                Math.random() -
+                0.5
+              ) *
+              220
+            ) +
+            "px"
+
+          );
+
+
+          confetti.style.setProperty(
+
+            "--spin",
+
+            (
+              (
+                Math.random() >
+                0.5
+                  ? 1
+                  : -1
+              ) *
+
+              (
+                520 +
+                Math.random() *
+                900
+              )
+            ) +
+            "deg"
+
+          );
+
+
+          confetti.style.width =
+
+            (
+              6 +
+              Math.random() *
+              6
+            ) +
+            "px";
+
+
+          confetti.style.height =
+
+            (
+              9 +
+              Math.random() *
+              12
+            ) +
+            "px";
+
+
+          bookingSuccessPopup.appendChild(
+            confetti
+          );
+
+
+          setTimeout(
+            function () {
+
+              confetti.remove();
+
+            },
+            4500
+          );
+
+        }
+
+      }
+
+
+      function showBookingSuccess() {
+
+        bookingSuccessPopup.classList.remove(
+          "active"
+        );
+
+
+        void bookingSuccessPopup.offsetWidth;
+
+
+        bookingSuccessPopup.classList.add(
+          "active"
+        );
+
+
+        launchSuccessConfetti();
+
+      }
+
+
+      function hideBookingSuccess() {
+
+        bookingSuccessPopup.classList.remove(
+          "active"
+        );
+
+
+        bookingSuccessPopup
+          .querySelectorAll(
+            ".success-confetti"
+          )
+          .forEach(
+            function (piece) {
+
+              piece.remove();
+
+            }
+          );
+
+      }
+
+
+      bookingSuccessOk.addEventListener(
+        "click",
+        hideBookingSuccess
+      );
+
+
+      bookingSuccessPopup.addEventListener(
+        "click",
+        function (event) {
+
+          if (
+            event.target ===
+            bookingSuccessPopup
+          ) {
+
+            hideBookingSuccess();
+
+          }
+
+        }
+      );
+
+
+      // BOOKING FORM SUBMISSION
+
+      bookingForm.addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+
+          const contact =
+
+            document
+              .getElementById(
+                "bookingContact"
+              )
+              .value
+              .trim();
+
+
+          const submitButton =
+
+            bookingForm.querySelector(
+              ".booking-submit"
+            );
+
+
+          const phonePattern =
+
+            /^[0-9+\-\s()]{7,20}$/;
+
+
+          if (
+            !phonePattern.test(
+              contact
+            )
+          ) {
+
+            alert(
+              "Please enter a valid contact number."
+            );
+
+            return;
+
+          }
+
+
+          submitButton.disabled =
+            true;
+
+
+          submitButton.textContent =
+            "Sending...";
+
+
+          try {
+
+            const name =
+
+              document
+                .getElementById(
+                  "bookingName"
+                )
+                .value
+                .trim();
+
+
+            const date =
+
+              document
+                .getElementById(
+                  "bookingDate"
+                )
+                .value;
+
+
+            const pax =
+
+              document
+                .getElementById(
+                  "bookingPax"
+                )
+                .value;
+
+
+            const notes =
+
+              document
+                .getElementById(
+                  "bookingNotes"
+                )
+                .value
+                .trim();
+
+
+            // EMAIL WILL APPEAR AS A MESSAGE
+
+            const message =
+`NEW BLOOM HAVEN BOOKING REQUEST
+
+Hello,
+
+I would like to make a booking at Bloom Haven.
+
+Name: ${name}
+Contact Number: ${contact}
+Date of Booking: ${date}
+Number of Pax: ${pax}
+
+Message / Notes:
+${notes || "No additional notes."}
+
+Thank you.`;
+
+
+            const response =
+              await fetch(
+
+                "https://formsubmit.co/ajax/ammasivilmar2@gmail.com",
+
+                {
+
+                  method:
+                    "POST",
+
+                  headers: {
+
+                    "Content-Type":
+                      "application/json",
+
+                    "Accept":
+                      "application/json"
+
+                  },
+
+                  body:
+                    JSON.stringify(
+                      {
+
+                        _subject:
+                          "New Bloom Haven Booking Request",
+
+                        _template:
+                          "basic",
+
+                        _captcha:
+                          "false",
+
+                        message:
+                          message
+
+                      }
+                    )
+
+                }
+
+              );
+
+
+            const result =
+              await response.json();
+
+
+            if (
+              !response.ok ||
+              result.success === false
+            ) {
+
+              throw new Error(
+
+                result.message ||
+
+                "Booking submission failed."
+
+              );
+
+            }
+
+
+            bookingForm.reset();
+
+
+            bookingDate.min =
+              localToday;
+
+
+            closeBookingModal();
+
+
+            showBookingSuccess();
+
+          }
+
+          catch (error) {
+
+            console.error(
+              "Booking error:",
+              error
+            );
+
+
+            alert(
+
+              "Sorry, your booking could not be sent. Please try again."
+
+            );
+
+          }
+
+          finally {
+
+            submitButton.disabled =
+              false;
+
+
+            submitButton.textContent =
+              "Done";
+
+          }
+
+        }
+      );
 
     </script>
 
   </body>
 </html>
-
