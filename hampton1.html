@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -1215,3 +1216,1222 @@
 </body>
 
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staycation Gallery | Bloom Haven</title>
+
+    <style>
+        :root {
+            --bg: #fffaf6;
+            --panel: #ffffff;
+            --primary: #9b5d3c;
+            --primary-dark: #6d3e29;
+            --accent: #f6d7c9;
+            --text: #2a211d;
+            --muted: #6d5d58;
+            --line: #f0e1d9;
+            --shadow: 0 18px 40px rgba(89, 52, 39, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #fffaf6, #ffffff);
+            color: var(--text);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            width: min(1200px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           FULL BLOOM HAVEN NAVIGATION
+        ===================================================== */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            background: rgba(255, 250, 246, 0.92);
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid rgba(155, 93, 60, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 76px;
+            gap: 20px;
+        }
+
+        /* LOGO */
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+
+            white-space: nowrap;
+        }
+
+        .brand-mark {
+            width: 16px;
+            height: 16px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                #d7a98a
+            );
+
+            box-shadow:
+                0 0 0 6px rgba(155, 93, 60, 0.12);
+
+            flex-shrink: 0;
+        }
+
+        /* DESKTOP NAVIGATION */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+
+            font-size: 0.96rem;
+            color: var(--muted);
+        }
+
+        .nav-links a {
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+
+            width: 100%;
+            height: 2px;
+
+            background: var(--primary);
+
+            transform: scaleX(0);
+            transform-origin: left;
+
+            transition: transform 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-dark);
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* GALLERY DROPDOWN */
+
+        .gallery-dropdown {
+            position: relative;
+        }
+
+        .gallery-trigger {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            cursor: pointer;
+
+            background: transparent;
+            border: none;
+            padding: 0;
+
+            color: var(--muted);
+
+            font: inherit;
+            font-size: 0.96rem;
+        }
+
+        .gallery-trigger::after {
+            content: "▾";
+            font-size: 0.8rem;
+        }
+
+        .gallery-trigger:hover {
+            color: var(--primary-dark);
+        }
+
+        .gallery-menu {
+            position: absolute;
+
+            top: calc(100% + 16px);
+            left: 0;
+
+            min-width: 190px;
+
+            background: #ffffff;
+
+            border: 1px solid var(--line);
+            border-radius: 14px;
+
+            box-shadow:
+                0 18px 40px rgba(76, 52, 43, 0.12);
+
+            padding: 10px;
+
+            display: none;
+
+            z-index: 200;
+        }
+
+        .gallery-dropdown.open .gallery-menu {
+            display: block;
+        }
+
+        .gallery-menu a {
+            display: block;
+
+            padding: 10px 12px;
+
+            border-radius: 10px;
+
+            color: var(--text);
+            font-weight: 600;
+
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .gallery-menu a:hover {
+            background: #fff4ee;
+            color: var(--primary-dark);
+        }
+
+        .gallery-menu a::after {
+            display: none;
+        }
+
+        /* BOOK YOUR STAY BUTTON */
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px 18px;
+
+            border-radius: 999px;
+
+            background: var(--primary);
+            color: #ffffff;
+
+            font-weight: 700;
+
+            box-shadow: var(--shadow);
+
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* =====================================================
+           MOBILE HAMBURGER
+        ===================================================== */
+
+        .hamburger-btn {
+            display: none;
+
+            width: 46px;
+            height: 46px;
+
+            padding: 10px;
+
+            border: 1px solid var(--line);
+            border-radius: 12px;
+
+            background: #ffffff;
+
+            cursor: pointer;
+
+            align-items: center;
+            justify-content: center;
+
+            flex-direction: column;
+
+            gap: 5px;
+        }
+
+        .hamburger-btn span {
+            display: block;
+
+            width: 23px;
+            height: 2px;
+
+            border-radius: 999px;
+
+            background: var(--primary-dark);
+
+            transition:
+                transform 0.25s ease,
+                opacity 0.25s ease;
+        }
+
+        .hamburger-btn.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger-btn.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-btn.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* MOBILE MENU */
+
+        .mobile-menu {
+            display: none;
+        }
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            padding: 90px 0 50px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 16px;
+
+            background: #fff3ee;
+            border: 1px solid var(--line);
+
+            border-radius: 50px;
+
+            color: var(--primary-dark);
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+
+            margin: 20px 0;
+
+            letter-spacing: -3px;
+            line-height: 1.05;
+        }
+
+        .hero-description {
+            max-width: 650px;
+            margin: 0 auto;
+
+            color: var(--muted);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        /* =====================================================
+           GALLERY
+        ===================================================== */
+
+        .gallery {
+            padding: 50px 0 90px;
+        }
+
+        .gallery-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--panel);
+
+            border: 1px solid var(--line);
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            box-shadow: var(--shadow);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 25px 50px rgba(89, 52, 39, 0.18);
+        }
+
+        /* IMAGE */
+
+        .image-container {
+            width: 100%;
+            height: 330px;
+
+            background: linear-gradient(
+                135deg,
+                #f7e3d6,
+                #f4efe8
+            );
+
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .image-container img {
+            transform: scale(1.05);
+        }
+
+        /* CAPTION */
+
+        .caption {
+            padding: 20px;
+        }
+
+        .caption h3 {
+            margin-bottom: 8px;
+
+            color: var(--text);
+            font-size: 21px;
+        }
+
+        .caption p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            color: var(--muted);
+
+            border-top: 1px solid var(--line);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 860px) {
+
+            .nav {
+                position: relative;
+
+                flex-wrap: nowrap;
+
+                justify-content: space-between;
+
+                min-height: 70px;
+
+                padding: 10px 0;
+            }
+
+            .nav-links,
+            .nav > .nav-cta {
+                display: none;
+            }
+
+            .hamburger-btn {
+                display: inline-flex;
+            }
+
+            .mobile-menu {
+                position: absolute;
+
+                top: calc(100% + 8px);
+
+                left: 0;
+                right: 0;
+
+                display: none;
+
+                flex-direction: column;
+
+                gap: 6px;
+
+                padding: 12px;
+
+                background: rgba(
+                    255,
+                    255,
+                    255,
+                    0.98
+                );
+
+                border: 1px solid var(--line);
+
+                border-radius: 18px;
+
+                box-shadow:
+                    0 18px 40px rgba(
+                        76,
+                        52,
+                        43,
+                        0.12
+                    );
+
+                z-index: 200;
+            }
+
+            .mobile-menu.open {
+                display: flex;
+            }
+
+            .mobile-menu-link {
+                display: block;
+
+                padding: 13px 14px;
+
+                border-radius: 12px;
+
+                color: var(--text);
+
+                font-weight: 700;
+
+                transition:
+                    background 0.2s ease,
+                    color 0.2s ease;
+            }
+
+            .mobile-menu-link:hover,
+            .mobile-menu-link:focus {
+                background: #fff4ee;
+                color: var(--primary-dark);
+            }
+
+            .mobile-booking {
+                margin-top: 4px;
+
+                text-align: center;
+
+                background: var(--primary);
+                color: #ffffff;
+            }
+
+            .mobile-booking:hover,
+            .mobile-booking:focus {
+                background: var(--primary-dark);
+                color: #ffffff;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-container {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .container {
+                width: min(
+                    100% - 24px,
+                    1200px
+                );
+            }
+
+            .brand {
+                font-size: 14px;
+                letter-spacing: 0.06em;
+            }
+
+            .brand-mark {
+                width: 14px;
+                height: 14px;
+            }
+
+            .hero {
+                padding: 65px 0 35px;
+            }
+
+            .gallery {
+                padding: 30px 0 60px;
+            }
+
+            .image-container {
+                height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================================
+         FULL BLOOM HAVEN NAVIGATION
+    ====================================================== -->
+
+    <header class="topbar">
+
+        <div class="container nav">
+
+            <!-- LOGO -->
+
+            <a
+                href="#home"
+                class="brand"
+                aria-label="Bloom Haven home"
+            >
+
+                <span class="brand-mark"></span>
+
+                BLOOM HAVEN
+
+            </a>
+
+
+            <!-- DESKTOP NAVIGATION -->
+
+            <nav
+                class="nav-links"
+                aria-label="Main navigation"
+            >
+
+                <a href="#about">
+                    About
+                </a>
+
+
+                <!-- GALLERY DROPDOWN -->
+
+                <div class="gallery-dropdown">
+
+                    <button
+                        type="button"
+                        class="gallery-trigger"
+                        aria-expanded="false"
+                        aria-label="Open Gallery menu"
+                    >
+                        Gallery
+                    </button>
+
+
+                    <div
+                        class="gallery-menu"
+                        aria-label="Gallery menu"
+                    >
+
+                        <a href="hampton1.html">
+                            Hampton Unit 1
+                        </a>
+
+                        <a href="hampton2.html">
+                            Hampton Unit 2
+                        </a>
+
+                        <a href="fair.html">
+                            FairGrounds
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PROMO -->
+
+                <a href="promo.html">
+                    Promo Offer
+                </a>
+
+            </nav>
+
+
+            <!-- BOOKING BUTTON -->
+
+            <a
+                href="#"
+                class="nav-cta booking-btn"
+            >
+                Book Your Stay
+            </a>
+
+
+            <!-- MOBILE HAMBURGER -->
+
+            <button
+                type="button"
+                class="hamburger-btn"
+                id="hamburgerBtn"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="mobileMenu"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+
+            <!-- MOBILE MENU -->
+
+            <div
+                class="mobile-menu"
+                id="mobileMenu"
+            >
+
+                <a
+                    href="#about"
+                    class="mobile-menu-link"
+                >
+                    About
+                </a>
+
+                <a
+                    href="hampton1.html"
+                    class="mobile-menu-link"
+                >
+                    Gallery
+                </a>
+
+                <a
+                    href="promo.html"
+                    class="mobile-menu-link"
+                >
+                    Promo Offer
+                </a>
+
+                <a
+                    href="#"
+                    class="mobile-menu-link mobile-booking booking-btn"
+                >
+                    Book Your Stay
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <main id="home">
+
+        <section class="hero">
+
+            <div class="container">
+
+                <span class="badge">
+                    Hampton Unit 1
+                </span>
+
+                <h1>
+                    Discover Your Perfect Escape
+                </h1>
+
+                <p class="hero-description">
+                    Explore our relaxing rooms, amenities,
+                    and memorable staycation moments.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             GALLERY
+        ================================================== -->
+
+        <section
+            class="gallery"
+            id="gallery-unit-1"
+        >
+
+            <div class="container">
+
+                <div class="gallery-grid">
+
+
+                    <!-- IMAGE 1 -->
+
+                    <div class="card">
+
+                        <div class="image-container">
+
+                            <img
+                                src="hamptonbedd.jpg"
+                                alt="Comfortable Room"
+                            >
+
+                        </div>
+
+                        <div class="caption">
+
+                            <h3>
+                                Comfortable Room
+                            </h3>
+
+                            <p>
+                                Comfortable space designed
+                                for relaxation.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 2 -->
+
+                    <div class="card">
+
+                        <div class="image-container">
+
+                            <img
+                                src="hamtonkitchen.jpg"
+                                alt="Fully Equipped Kitchen"
+                            >
+
+                        </div>
+
+                        <div class="caption">
+
+                            <h3>
+                                Fully Equipped Kitchen
+                            </h3>
+
+                            <p>
+                                Everything you need for
+                                a comfortable stay.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 3 -->
+
+                    <div class="card">
+
+                        <div class="image-container">
+
+                            <img
+                                src="hamptonsala.jpg"
+                                alt="Cozy Living Room"
+                            >
+
+                        </div>
+
+                        <div class="caption">
+
+                            <h3>
+                                Cozy Living Room
+                            </h3>
+
+                            <p>
+                                A welcoming space to relax,
+                                unwind, and spend quality
+                                time together.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 4 -->
+
+                    <div class="card">
+
+                        <div class="image-container">
+
+                            <img
+                                src="hamptonbedchair.jpg"
+                                alt="Bedside and Lounge Corner"
+                            >
+
+                        </div>
+
+                        <div class="caption">
+
+                            <h3>
+                                Bedside & Lounge Corner
+                            </h3>
+
+                            <p>
+                                A cozy spot to relax, unwind,
+                                and enjoy a quiet moment.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 5 -->
+
+                    <div class="card">
+
+                        <div class="image-container">
+
+                            <img
+                                src="hamptondining.jpg"
+                                alt="Dining Area"
+                            >
+
+                        </div>
+
+                        <div class="caption">
+
+                            <h3>
+                                Dining Area
+                            </h3>
+
+                            <p>
+                                A lovely space to enjoy delicious
+                                meals and meaningful moments together.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE 6 -->
+
+                    <div class="card">
+
+                        <div class="image-container">
+
+                            <img
+                                src="hamptondoor.jpg"
+                                alt="Dining and Exit View"
+                            >
+
+                        </div>
+
+                        <div class="caption">
+
+                            <h3>
+                                Dining & Exit View
+                            </h3>
+
+                            <p>
+                                Enjoy your meals in comfort with
+                                a convenient view toward the exit.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        © 2026 Bloom Haven Hampton Unit.
+        All rights reserved.
+
+    </footer>
+
+
+    <!-- =====================================================
+         NAVIGATION JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+        /* =================================================
+           GALLERY DROPDOWN
+        ================================================= */
+
+        const galleryDropdown =
+            document.querySelector(
+                ".gallery-dropdown"
+            );
+
+        const galleryTrigger =
+            document.querySelector(
+                ".gallery-trigger"
+            );
+
+
+        if (
+            galleryDropdown &&
+            galleryTrigger
+        ) {
+
+            galleryTrigger.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    const isOpen =
+                        galleryDropdown.classList.toggle(
+                            "open"
+                        );
+
+                    galleryTrigger.setAttribute(
+                        "aria-expanded",
+                        String(isOpen)
+                    );
+
+                }
+            );
+
+
+            document.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        !galleryDropdown.contains(
+                            event.target
+                        )
+                    ) {
+
+                        galleryDropdown.classList.remove(
+                            "open"
+                        );
+
+                        galleryTrigger.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        /* =================================================
+           MOBILE HAMBURGER MENU
+        ================================================= */
+
+        const hamburgerBtn =
+            document.getElementById(
+                "hamburgerBtn"
+            );
+
+        const mobileMenu =
+            document.getElementById(
+                "mobileMenu"
+            );
+
+        const mobileMenuLinks =
+            document.querySelectorAll(
+                ".mobile-menu-link"
+            );
+
+
+        if (
+            hamburgerBtn &&
+            mobileMenu
+        ) {
+
+            hamburgerBtn.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+                    const isOpen =
+                        mobileMenu.classList.toggle(
+                            "open"
+                        );
+
+                    hamburgerBtn.classList.toggle(
+                        "open",
+                        isOpen
+                    );
+
+                    hamburgerBtn.setAttribute(
+                        "aria-expanded",
+                        String(isOpen)
+                    );
+
+                    hamburgerBtn.setAttribute(
+                        "aria-label",
+                        isOpen
+                            ? "Close navigation menu"
+                            : "Open navigation menu"
+                    );
+
+                }
+            );
+
+
+            /* CLOSE MOBILE MENU
+               WHEN A LINK IS CLICKED
+            */
+
+            mobileMenuLinks.forEach(
+                function (link) {
+
+                    link.addEventListener(
+                        "click",
+                        function () {
+
+                            mobileMenu.classList.remove(
+                                "open"
+                            );
+
+                            hamburgerBtn.classList.remove(
+                                "open"
+                            );
+
+                            hamburgerBtn.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                            hamburgerBtn.setAttribute(
+                                "aria-label",
+                                "Open navigation menu"
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+            /* CLOSE MOBILE MENU
+               WHEN CLICKING OUTSIDE
+            */
+
+            document.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        mobileMenu.classList.contains(
+                            "open"
+                        ) &&
+                        !mobileMenu.contains(
+                            event.target
+                        ) &&
+                        !hamburgerBtn.contains(
+                            event.target
+                        )
+                    ) {
+
+                        mobileMenu.classList.remove(
+                            "open"
+                        );
+
+                        hamburgerBtn.classList.remove(
+                            "open"
+                        );
+
+                        hamburgerBtn.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                        hamburgerBtn.setAttribute(
+                            "aria-label",
+                            "Open navigation menu"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+>>>>>>> 3eb4c9f78a092d8bfde172b52a6c6f05eede2548
