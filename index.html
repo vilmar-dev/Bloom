@@ -507,74 +507,6 @@
         color: var(--muted);
       }
 
-      /* PAGE BOTTOM + FOOTER FIX */
-      main {
-        display: block;
-      }
-
-      main > .gallery-section:last-of-type {
-        padding-bottom: 48px;
-      }
-
-      .site-footer {
-        padding: 0;
-        text-align: left;
-        color: var(--muted);
-        background: #fffaf6;
-        border-top: 1px solid var(--line);
-      }
-
-      .footer-inner {
-        min-height: 92px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 24px;
-        padding-top: 22px;
-        padding-bottom: 22px;
-      }
-
-      .footer-brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--text);
-        font-weight: 800;
-        letter-spacing: .06em;
-      }
-
-      .footer-copy {
-        margin: 5px 0 0;
-        font-size: .88rem;
-      }
-
-      .footer-links {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 18px;
-        font-size: .9rem;
-        font-weight: 700;
-      }
-
-      .footer-links a:hover {
-        color: var(--primary-dark);
-      }
-
-      @media (max-width: 700px) {
-        main > .gallery-section:last-of-type {
-          padding-bottom: 32px;
-        }
-
-        .footer-inner {
-          min-height: 0;
-          flex-direction: column;
-          align-items: flex-start;
-          padding-top: 24px;
-          padding-bottom: 24px;
-        }
-      }
-
       @media (max-width: 860px) {
         .nav {
           flex-wrap: wrap;
@@ -2815,25 +2747,6 @@
       </div>
 
     </main>
-
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <div>
-          <div class="footer-brand">
-            <span class="brand-mark" aria-hidden="true"></span>
-            <span>BLOOM HAVEN</span>
-          </div>
-          <p class="footer-copy">Cozy stays, peaceful moments, unforgettable getaways.</p>
-        </div>
-
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="promo.html">Promo Offer</a>
-          <a href="#" class="booking-btn">Book Your Stay</a>
-        </nav>
-      </div>
-    </footer>
 
     <script>
 
