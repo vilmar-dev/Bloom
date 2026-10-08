@@ -2,2683 +2,2254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fffaf6">
-  <title>BLOOM HAVEN | Airbnb Staycation</title>
-
-  <style>
-    /* ==========================================
-       BLOOM HAVEN - MAIN DESIGN
-       ========================================== */
-
-    :root {
-      --bg: #fffaf6;
-      --white: #ffffff;
-      --primary: #9b5d3c;
-      --dark: #6d3e29;
-      --accent: #f6d7c9;
-      --text: #2a211d;
-      --muted: #6d5d58;
-      --line: #f0e1d9;
-      --shadow: 0 18px 40px rgba(89,52,39,.12);
-      --ease: cubic-bezier(.16,1,.3,1);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 100px;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background: linear-gradient(180deg,#fffaf6,#fff);
-      overflow-x: hidden;
-    }
-
-    body.booking-open {
-      overflow: hidden;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button, input, textarea {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    .container {
-      width: min(1160px,calc(100% - 40px));
-      margin: auto;
-    }
-
-    section {
-      padding: 85px 0;
-    }
-
-    /* ==========================================
-       NAVIGATION
-       ========================================== */
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(255,250,246,.94);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(16px);
-      transition: .3s ease;
-    }
-
-    .topbar.scrolled {
-      background: rgba(255,250,246,.85);
-      box-shadow: 0 10px 35px rgba(76,52,43,.08);
-    }
-
-    .nav {
-      min-height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      position: relative;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      font-weight: 900;
-      font-size: 1.15rem;
-      letter-spacing: 2px;
-      white-space: nowrap;
-    }
-
-    .brand-mark {
-      width: 19px;
-      height: 19px;
-      flex-shrink: 0;
-      background: linear-gradient(135deg,var(--primary),#d7a98a);
-      border-radius: 50%;
-      box-shadow: 0 0 0 7px rgba(155,93,60,.12);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      color: var(--muted);
-    }
-
-    .nav-links a,
-    .gallery-trigger {
-      font-size: .95rem;
-      font-weight: 600;
-      transition: color .25s;
-    }
-
-    .nav-links a:hover,
-    .gallery-trigger:hover {
-      color: var(--primary);
-    }
-
-    .gallery-dropdown {
-      position: relative;
-    }
-
-    .gallery-trigger {
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      padding: 12px 0;
-    }
-
-    .gallery-trigger::after {
-      content: " ▾";
-      margin-left: 4px;
-    }
-
-    .gallery-menu {
-      position: absolute;
-      top: calc(100% + 7px);
-      left: -18px;
-      width: 220px;
-      display: none;
-      background: white;
-      padding: 10px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    .gallery-dropdown.open .gallery-menu {
-      display: block;
-      animation: fadeDown .25s ease;
-    }
-
-    .gallery-menu a {
-      display: block;
-      padding: 13px;
-      border-radius: 10px;
-    }
-
-    .gallery-menu a:hover {
-      background: #fff4ee;
-    }
-
-    .nav-cta,
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 15px 25px;
-      border-radius: 50px;
-      font-weight: 700;
-      transition: .3s ease;
-    }
-
-    .nav-cta,
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      box-shadow: var(--shadow);
-    }
-
-    .nav-cta:hover,
-    .btn-primary:hover {
-      background: var(--dark);
-      transform: translateY(-3px);
-    }
-
-    .btn-secondary {
-      color: var(--text);
-      background: white;
-      border: 1px solid var(--line);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--primary);
-      transform: translateY(-3px);
-    }
-
-    /* ==========================================
-       MOBILE MENU
-       ========================================== */
-
-    .hamburger-btn {
-      width: 46px;
-      height: 46px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: white;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .hamburger-btn span {
-      width: 23px;
-      height: 2px;
-      background: var(--dark);
-      border-radius: 5px;
-      transition: .3s;
-    }
-
-    .hamburger-btn.open span:first-child {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .hamburger-btn.open span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger-btn.open span:last-child {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .mobile-menu {
-      display: none;
-    }
-
-    /* ==========================================
-       HERO SECTION
-       ========================================== */
-
-    .hero {
-      padding: 100px 0 85px;
-    }
-
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      align-items: center;
-      gap: 65px;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 9px 16px;
-      border-radius: 50px;
-      background: #fff3ee;
-      border: 1px solid var(--line);
-      color: var(--dark);
-      font-size: .75rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      font-size: clamp(2.7rem,5.5vw,5.2rem);
-      line-height: 1.04;
-      letter-spacing: -3px;
-      margin: 25px 0;
-    }
-
-    .lead {
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.85;
-      max-width: 580px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin: 32px 0;
-    }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-      margin-top: 35px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 1.6rem;
-      margin-bottom: 7px;
-    }
-
-    .stat span {
-      font-size: .85rem;
-      color: var(--muted);
-    }
-
-    .hero-visual {
-      position: relative;
-    }
-
-    .image-card {
-      padding: 15px;
-      border-radius: 30px;
-      background: linear-gradient(135deg,#f7e3d6,#f4efe8);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--line);
-      overflow: hidden;
-      transition: transform .2s ease, box-shadow .3s;
-    }
-
-    .image-card img {
-      width: 100%;
-      max-height: 680px;
-      height: auto;
-      object-fit: contain;
-      border-radius: 22px;
-      transition: transform .6s var(--ease);
-    }
-
-    .image-card:hover img {
-      transform: scale(1.025);
-    }
-
-    /* ==========================================
-       SECTION HEADINGS
-       ========================================== */
-
-    .section-header {
-      max-width: 720px;
-      margin-bottom: 38px;
-    }
-
-    .section-header h2 {
-      font-size: clamp(2rem,3.5vw,3.2rem);
-      line-height: 1.15;
-      letter-spacing: -1.5px;
-      margin: 18px 0;
-    }
-
-    .section-header p {
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 1.02rem;
-    }
-
-    .section-header::after {
-      content: "";
-      display: block;
-      width: 70px;
-      height: 3px;
-      margin-top: 25px;
-      background: linear-gradient(90deg,var(--primary),var(--accent));
-      border-radius: 20px;
-    }
-
-    /* ==========================================
-       ABOUT SECTION
-       ========================================== */
-
-    .about-section {
-      background: #fff7f2;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 45px;
-      align-items: center;
-    }
-
-    .about-card {
-      background: white;
-      padding: 38px;
-      border: 1px solid var(--line);
-      border-radius: 25px;
-      box-shadow: 0 12px 35px rgba(43,31,24,.05);
-    }
-
-    .about-card h3 {
-      font-size: 1.6rem;
-      margin-top: 0;
-    }
-
-    .about-card p {
-      color: var(--muted);
-      line-height: 1.9;
-    }
-
-    .feature-list {
-      list-style: none;
-      padding: 0;
-      display: grid;
-      gap: 18px;
-    }
-
-    .feature-list li {
-      display: flex;
-      gap: 12px;
-      font-weight: 600;
-      align-items: center;
-    }
-
-    .feature-list li::before {
-      content: "✓";
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      width: 27px;
-      height: 27px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: var(--dark);
-    }
-
-    /* ==========================================
-       PROPERTY GALLERY
-       ========================================== */
-
-    .gallery-section:nth-of-type(even) {
-      background: #fffaf6;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3,minmax(0,1fr));
-      gap: 25px;
-    }
-
-    .gallery-item {
-      background: white;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      box-shadow: 0 12px 28px rgba(43,31,24,.06);
-      transition: transform .4s var(--ease),box-shadow .4s;
-    }
-
-    .gallery-item:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 55px rgba(43,31,24,.14);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      transition: transform .7s var(--ease);
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.07);
-    }
-
-    .gallery-caption {
-      padding: 23px;
-    }
-
-    .gallery-caption strong {
-      display: block;
-      font-size: 1.15rem;
-      margin-bottom: 10px;
-    }
-
-    .gallery-caption span {
-      color: var(--muted);
-      line-height: 1.65;
-      font-size: .94rem;
-    }
-
-    /* ==========================================
-       PROMO SECTION
-       ========================================== */
-
-    .promo-wrap {
-      display: grid;
-      grid-template-columns: 1.3fr .7fr;
-      gap: 30px;
-      align-items: center;
-      padding: 40px;
-      border-radius: 30px;
-      background: linear-gradient(135deg,#f7e7dc,#f9f3ef);
-      border: 1px solid var(--line);
-    }
-
-    .promo-wrap h3 {
-      font-size: clamp(2rem,3vw,3rem);
-      margin: 20px 0;
-      letter-spacing: -1px;
-    }
-
-    .promo-wrap p {
-      line-height: 1.8;
-      color: var(--muted);
-    }
-
-    .promo-card {
-      background: white;
-      padding: 32px;
-      border-radius: 24px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(76,52,43,.08);
-    }
-
-    .promo-card h4 {
-      color: var(--dark);
-      font-size: 1.6rem;
-      margin: 10px 0;
-    }
-
-    /* ==========================================
-       FOOTER
-       ========================================== */
-
-    footer {
-      background: #f8eee8;
-      padding: 45px 20px;
-      text-align: center;
-      border-top: 1px solid var(--line);
-    }
-
-    footer strong {
-      font-size: 1.3rem;
-      letter-spacing: 2px;
-      color: var(--dark);
-    }
-
-    footer p {
-      color: var(--muted);
-      font-size: .9rem;
-    }
-
-    /* ==========================================
-       BOOKING MODAL
-       ========================================== */
-
-    .booking-modal,
-    .booking-success-popup {
-      position: fixed;
-      inset: 0;
-      z-index: 10000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background: rgba(42,33,29,.7);
-      backdrop-filter: blur(7px);
-    }
-
-    .booking-modal.active,
-    .booking-success-popup.active {
-      display: flex;
-      animation: fadeIn .3s ease;
-    }
-
-    .booking-card {
-      position: relative;
-      width: min(480px,100%);
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 35px;
-      border-radius: 26px;
-      background: white;
-      box-shadow: 0 25px 80px rgba(42,33,29,.3);
-      animation: modalPop .5s var(--ease);
-    }
-
-    .booking-card h2 {
-      font-size: 2rem;
-      margin: 0 0 10px;
-    }
-
-    .booking-card > p {
-      line-height: 1.7;
-      color: var(--muted);
-      margin-bottom: 25px;
-    }
-
-    .booking-close {
-      position: absolute;
-      right: 17px;
-      top: 17px;
-      width: 38px;
-      height: 38px;
-      border: 0;
-      border-radius: 50%;
-      background: #fff3ee;
-      color: var(--dark);
-      font-size: 1.5rem;
-    }
-
-    .booking-field {
-      margin-bottom: 17px;
-    }
-
-    .booking-field label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 700;
-      font-size: .92rem;
-    }
-
-    .booking-field input,
-    .booking-field textarea {
-      display: block;
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #e9d8ce;
-      border-radius: 12px;
-      background: #fffdfb;
-      outline: none;
-      transition: .2s;
-    }
-
-    .booking-field input:focus,
-    .booking-field textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(155,93,60,.1);
-    }
-
-    .booking-field textarea {
-      resize: vertical;
-      min-height: 110px;
-    }
-
-    .booking-submit {
-      width: 100%;
-      padding: 16px;
-      background: var(--primary);
-      border: 0;
-      color: white;
-      font-weight: 800;
-      border-radius: 50px;
-      transition: .25s;
-    }
-
-    .booking-submit:hover {
-      background: var(--dark);
-    }
-
-    .booking-submit:disabled {
-      opacity: .65;
-      cursor: wait;
-    }
-
-    /* ==========================================
-       BOOKING SUCCESS ANIMATION
-       ========================================== */
-
-    .booking-success-popup {
-      z-index: 10001;
-    }
-
-    .booking-success-box {
-      position: relative;
-      width: min(420px,100%);
-      background: white;
-      border-radius: 30px;
-      padding: 48px 30px 35px;
-      text-align: center;
-      overflow: hidden;
-      border: 1px solid var(--accent);
-      box-shadow: 0 30px 90px rgba(42,33,29,.35);
-      animation: successBounce .85s cubic-bezier(.16,1.35,.3,1);
-    }
-
-    .booking-success-box::before {
-      content: "";
-      position: absolute;
-      width: 170%;
-      height: 65px;
-      left: -35%;
-      top: -90px;
-      background: linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
-      transform: rotate(-12deg);
-      animation: shine 1.3s .3s ease forwards;
-      pointer-events: none;
-    }
-
-    .booking-success-icon-wrap {
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 20px;
-      position: relative;
-      display: grid;
-      place-items: center;
-    }
-
-    .booking-success-ring {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      border: 2px solid rgba(155,93,60,.25);
-      animation: ringPulse 1.8s infinite;
-    }
-
-    .booking-success-icon {
-      width: 76px;
-      height: 76px;
-      display: grid;
-      place-items: center;
-      position: relative;
-      z-index: 2;
-      border-radius: 50%;
-      background: linear-gradient(135deg,#fff6f1,#f6d7c9);
-      box-shadow: 0 12px 30px rgba(155,93,60,.2);
-      animation: iconBounce .8s ease;
-    }
-
-    .booking-success-icon svg {
-      width: 42px;
-      height: 42px;
-    }
-
-    .booking-success-icon circle {
-      fill: none;
-      stroke: rgba(155,93,60,.25);
-      stroke-width: 2;
-    }
-
-    .booking-success-icon path {
-      fill: none;
-      stroke: var(--dark);
-      stroke-width: 4;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      stroke-dasharray: 45;
-      stroke-dashoffset: 45;
-      animation: drawCheck .8s .6s forwards;
-    }
-
-    .booking-success-box h3 {
-      color: var(--dark);
-      font-size: 2rem;
-      margin: 0 0 15px;
-    }
-
-    .booking-success-box p {
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 27px;
-    }
-
-    .booking-success-ok {
-      padding: 14px 30px;
-      color: white;
-      background: linear-gradient(135deg,var(--primary),var(--dark));
-      border: 0;
-      border-radius: 50px;
-      font-weight: 800;
-      transition: .3s;
-    }
-
-    .booking-success-ok:hover {
-      transform: translateY(-3px) scale(1.03);
-    }
-
-    .success-confetti {
-      position: absolute;
-      top: -30px;
-      width: 9px;
-      height: 16px;
-      border-radius: 3px;
-      pointer-events: none;
-      animation: confettiFall var(--fall-duration,3s) var(--fall-delay,0s) ease-in forwards;
-    }
-
-    /* ==========================================
-       CINEMATIC ANIMATION SYSTEM
-       ========================================== */
-
-    .motion-loader {
-      position: fixed;
-      inset: 0;
-      z-index: 20000;
-      background: var(--bg);
-      display: grid;
-      place-items: center;
-      transition: opacity .8s,visibility .8s;
-    }
-
-    .motion-loader.done {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .motion-loader-inner {
-      display: grid;
-      justify-items: center;
-      gap: 20px;
-    }
-
-    .loader-orb {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%,white,#f6d7c9 42%,#9b5d3c);
-      box-shadow: 0 0 45px rgba(155,93,60,.25);
-      animation: orbPulse 1.3s infinite;
-    }
-
-    .loader-line {
-      width: 120px;
-      height: 3px;
-      overflow: hidden;
-      background: var(--accent);
-      border-radius: 20px;
-    }
-
-    .loader-line::after {
-      content: "";
-      display: block;
-      width: 40%;
-      height: 100%;
-      background: var(--primary);
-      animation: loaderSweep 1s infinite;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(45px);
-      transition: opacity .9s var(--ease),transform .9s var(--ease);
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: none;
-    }
-
-    .hero-copy > * {
-      animation: heroEntrance .9s var(--ease) both;
-    }
-
-    .hero-copy > :nth-child(1) { animation-delay: .1s; }
-    .hero-copy > :nth-child(2) { animation-delay: .2s; }
-    .hero-copy > :nth-child(3) { animation-delay: .3s; }
-    .hero-copy > :nth-child(4) { animation-delay: .4s; }
-    .hero-copy > :nth-child(5) { animation-delay: .5s; }
-
-    .hero-visual {
-      animation: heroEntrance 1.2s .3s var(--ease) both;
-    }
-
-    .ambient-particles {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .ambient-particle {
-      position: absolute;
-      width: var(--size,8px);
-      height: var(--size,8px);
-      background: rgba(155,93,60,.12);
-      border-radius: 65% 35% 65% 35%;
-      animation: particleDrift var(--duration,14s) var(--delay,0s) linear infinite;
-    }
-
-    .cursor-aura {
-      position: fixed;
-      z-index: 9998;
-      width: 180px;
-      height: 180px;
-      transform: translate(-50%,-50%);
-      background: radial-gradient(circle,rgba(246,215,201,.22),transparent 70%);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .3s;
-    }
-
-    body.has-pointer .cursor-aura {
-      opacity: 1;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes modalPop {
-      from { opacity: 0; transform: translateY(25px) scale(.95); }
-      to { opacity: 1; transform: none; }
-    }
-
-    @keyframes heroEntrance {
-      from { opacity: 0; transform: translateY(35px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    @keyframes successBounce {
-      0% { opacity: 0; transform: translateY(50px) scale(.7); }
-      65% { opacity: 1; transform: translateY(-8px) scale(1.04); }
-      100% { transform: none; }
-    }
-
-    @keyframes iconBounce {
-      0% { transform: scale(0) rotate(-25deg); }
-      70% { transform: scale(1.15); }
-      100% { transform: none; }
-    }
-
-    @keyframes drawCheck {
-      to { stroke-dashoffset: 0; }
-    }
-
-    @keyframes ringPulse {
-      0% { opacity: 0; transform: scale(.7); }
-      30% { opacity: 1; }
-      100% { opacity: 0; transform: scale(1.5); }
-    }
-
-    @keyframes shine {
-      from { top: -90px; opacity: 0; }
-      25% { opacity: 1; }
-      to { top: 115%; opacity: 0; }
-    }
-
-    @keyframes confettiFall {
-      0% {
-        opacity: 0;
-        transform: translateY(-10px) rotate(0);
-      }
-      10% { opacity: 1; }
-      100% {
-        opacity: 0;
-        transform: translate(var(--drift,30px),110vh)
-                   rotate(var(--spin,720deg));
-      }
-    }
-
-    @keyframes orbPulse {
-      0%,100% { transform: scale(.9); }
-      50% { transform: scale(1.08); }
-    }
-
-    @keyframes loaderSweep {
-      from { transform: translateX(-130%); }
-      to { transform: translateX(330%); }
-    }
-
-    @keyframes particleDrift {
-      0% {
-        opacity: 0;
-        transform: translateY(110vh) rotate(0);
-      }
-      15% { opacity: .8; }
-      85% { opacity: .5; }
-      100% {
-        opacity: 0;
-        transform: translate(var(--drift,70px),-15vh) rotate(420deg);
-      }
-    }
-
-    /* ==========================================
-       RESPONSIVE DESIGN
-       ========================================== */
-
-    @media (max-width: 900px) {
-      .nav-links,
-      .nav > .nav-cta {
-        display: none;
-      }
-
-      .hamburger-btn {
-        display: flex;
-      }
-
-      .mobile-menu {
-        position: absolute;
-        top: calc(100% + 8px);
-        left: 0;
-        right: 0;
-        display: none;
-        flex-direction: column;
-        padding: 15px;
-        gap: 5px;
-        background: white;
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        box-shadow: var(--shadow);
-      }
-
-      .mobile-menu.open {
-        display: flex;
-        animation: fadeDown .3s ease;
-      }
-
-      .mobile-menu-link {
-        padding: 14px;
-        border-radius: 10px;
-        font-weight: 700;
-      }
-
-      .mobile-menu-link:hover {
-        background: #fff4ee;
-        color: var(--dark);
-      }
-
-      .mobile-booking {
-        background: var(--primary);
-        color: white;
-        text-align: center;
-      }
-
-      .mobile-booking:hover {
-        background: var(--dark);
-        color: white;
-      }
-
-      .hero-inner,
-      .about-grid,
-      .promo-wrap {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-inner {
-        gap: 45px;
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(2,1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        width: calc(100% - 30px);
-      }
-
-      section {
-        padding: 60px 0;
-      }
-
-      .hero {
-        padding: 60px 0;
-      }
-
-      h1 {
-        letter-spacing: -1.5px;
-      }
-
-      .brand {
-        font-size: .95rem;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-item img {
-        height: 280px;
-      }
-
-      .stats {
-        gap: 25px;
-      }
-
-      .stat strong {
-        font-size: 1.35rem;
-      }
-
-      .about-card,
-      .promo-wrap {
-        padding: 25px;
-      }
-
-      .booking-card {
-        padding: 28px 22px;
-      }
-
-      .hero-actions .btn {
-        padding: 14px 20px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-      }
-
-      .motion-loader,
-      .ambient-particles,
-      .cursor-aura {
-        display: none;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fffaf6">
+<title>BLOOM HAVEN | Staycation</title>
+
+<style>
+/* ========================================
+   BLOOM HAVEN - WEBSITE DESIGN
+======================================== */
+
+:root {
+  --bg:#fffaf6;
+  --white:#ffffff;
+  --primary:#9b5d3c;
+  --dark:#6d3e29;
+  --accent:#f6d7c9;
+  --text:#2a211d;
+  --muted:#6d5d58;
+  --line:#f0e1d9;
+  --shadow:0 18px 40px rgba(89,52,39,.12);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+* {box-sizing:border-box}
+
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:90px;
+}
+
+body {
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(180deg,#fffaf6,#fff);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+body.modal-open {overflow:hidden}
+
+a {text-decoration:none;color:inherit}
+button,input,select,textarea {font:inherit}
+button {cursor:pointer}
+img {display:block;max-width:100%}
+
+.container {
+  width:min(1160px,calc(100% - 36px));
+  margin:auto;
+}
+
+section {padding:80px 0}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.topbar {
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,250,246,.95);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(14px);
+  transition:.3s;
+}
+
+.topbar.scrolled {
+  background:rgba(255,250,246,.85);
+  box-shadow:0 10px 35px rgba(76,52,43,.08);
+}
+
+.nav {
+  min-height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+  position:relative;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  font-size:1.14rem;
+  font-weight:900;
+  letter-spacing:2px;
+  white-space:nowrap;
+}
+
+.brand-mark {
+  width:18px;
+  height:18px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),#d7a98a);
+  box-shadow:0 0 0 7px rgba(155,93,60,.12);
+}
+
+.nav-links {
+  display:flex;
+  gap:27px;
+  align-items:center;
+  color:var(--muted);
+  font-weight:600;
+  font-size:.95rem;
+}
+
+.nav-links a:hover,
+.gallery-trigger:hover {color:var(--primary)}
+
+.gallery-dropdown {position:relative}
+
+.gallery-trigger {
+  background:none;
+  border:0;
+  padding:12px 0;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.gallery-trigger::after {
+  content:" ▾";
+  margin-left:5px;
+}
+
+.gallery-menu {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:-15px;
+  width:230px;
+  padding:10px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:#fff;
+  box-shadow:var(--shadow);
+  z-index:20;
+}
+
+.gallery-dropdown.open .gallery-menu {
+  display:block;
+  animation:fadeDown .25s ease;
+}
+
+.gallery-menu a {
+  display:block;
+  padding:13px;
+  border-radius:10px;
+}
+
+.gallery-menu a:hover {background:#fff4ee}
+
+.btn,.nav-cta {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 24px;
+  border-radius:50px;
+  font-weight:700;
+  transition:transform .3s,background .3s,box-shadow .3s;
+}
+
+.btn-primary,.nav-cta {
+  background:var(--primary);
+  color:#fff;
+  box-shadow:var(--shadow);
+}
+
+.btn-primary:hover,.nav-cta:hover {
+  background:var(--dark);
+  transform:translateY(-3px);
+}
+
+.btn-secondary {
+  background:white;
+  border:1px solid var(--line);
+}
+
+.btn-secondary:hover {
+  border-color:var(--primary);
+  transform:translateY(-3px);
+}
+
+/* ========================================
+   MOBILE NAVIGATION
+======================================== */
+
+.hamburger-btn {
+  display:none;
+  width:46px;
+  height:46px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:white;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:5px;
+}
+
+.hamburger-btn span {
+  width:23px;
+  height:2px;
+  background:var(--dark);
+  border-radius:5px;
+  transition:.3s;
+}
+
+.hamburger-btn.open span:first-child {
+  transform:translateY(7px) rotate(45deg);
+}
+
+.hamburger-btn.open span:nth-child(2) {opacity:0}
+
+.hamburger-btn.open span:last-child {
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+.mobile-menu {display:none}
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {padding:95px 0 75px}
+
+.hero-inner {
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  align-items:center;
+  gap:55px;
+}
+
+.eyebrow {
+  display:inline-block;
+  padding:9px 15px;
+  background:#fff3ee;
+  border:1px solid var(--line);
+  border-radius:50px;
+  color:var(--dark);
+  font-size:.75rem;
+  font-weight:800;
+  letter-spacing:1.3px;
+  text-transform:uppercase;
+}
+
+h1 {
+  font-size:clamp(2.7rem,5.5vw,5.1rem);
+  letter-spacing:-.055em;
+  line-height:1.05;
+  margin:25px 0;
+}
+
+.lead {
+  font-size:1.06rem;
+  line-height:1.85;
+  color:var(--muted);
+  max-width:580px;
+}
+
+.hero-actions {
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin:30px 0;
+}
+
+.stats {
+  display:flex;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-top:32px;
+}
+
+.stat strong {
+  display:block;
+  font-size:1.5rem;
+  margin-bottom:7px;
+}
+
+.stat span {
+  color:var(--muted);
+  font-size:.86rem;
+}
+
+.hero-visual {position:relative}
+
+.image-card {
+  padding:15px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#f7e3d6,#f4efe8);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  transition:transform .2s,box-shadow .3s;
+}
+
+.image-card img {
+  width:100%;
+  height:auto;
+  max-height:680px;
+  object-fit:contain;
+  border-radius:21px;
+  transition:transform .7s var(--ease);
+}
+
+.image-card:hover img {transform:scale(1.025)}
+
+/* ========================================
+   SECTION HEADINGS
+======================================== */
+
+.section-header {
+  max-width:720px;
+  margin-bottom:36px;
+}
+
+.section-header h2 {
+  font-size:clamp(2rem,3.5vw,3.1rem);
+  line-height:1.16;
+  letter-spacing:-.04em;
+  margin:17px 0;
+}
+
+.section-header p {
+  color:var(--muted);
+  line-height:1.8;
+  font-size:1.02rem;
+}
+
+.section-header::after {
+  content:"";
+  display:block;
+  width:64px;
+  height:3px;
+  margin-top:23px;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--accent));
+}
+
+/* ========================================
+   ABOUT
+======================================== */
+
+.about-section {background:#fff7f2}
+
+.about-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.about-card {
+  padding:32px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(43,31,24,.05);
+}
+
+.about-card h3 {
+  margin-top:0;
+  font-size:1.45rem;
+}
+
+.about-card p {
+  color:var(--muted);
+  line-height:1.85;
+}
+
+.feature-list {
+  list-style:none;
+  padding:0;
+  display:grid;
+  gap:16px;
+}
+
+.feature-list li {
+  display:flex;
+  gap:12px;
+  align-items:center;
+  font-weight:600;
+}
+
+.feature-list li::before {
+  content:"✓";
+  width:25px;
+  height:25px;
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+  background:var(--accent);
+  color:var(--dark);
+  border-radius:50%;
+}
+
+/* ========================================
+   GALLERIES
+======================================== */
+
+.gallery-section:nth-of-type(even) {background:#fffaf6}
+
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+
+.gallery-item {
+  background:white;
+  border:1px solid var(--line);
+  border-radius:23px;
+  overflow:hidden;
+  box-shadow:0 12px 28px rgba(43,31,24,.06);
+  transition:transform .4s var(--ease),box-shadow .4s;
+}
+
+.gallery-item:hover {
+  transform:translateY(-9px);
+  box-shadow:0 23px 50px rgba(43,31,24,.13);
+}
+
+.gallery-item img {
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  transition:transform .7s var(--ease);
+}
+
+.gallery-item:hover img {transform:scale(1.06)}
+
+.gallery-caption {padding:22px}
+
+.gallery-caption strong {
+  display:block;
+  font-size:1.15rem;
+  margin-bottom:9px;
+}
+
+.gallery-caption span {
+  display:block;
+  color:var(--muted);
+  line-height:1.65;
+  font-size:.94rem;
+}
+
+.unit-actions {
+  margin-top:32px;
+  text-align:center;
+}
+
+/* ========================================
+   PROMO
+======================================== */
+
+.promo-wrap {
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:35px;
+  align-items:center;
+  padding:40px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#f7e7dc,#f9f3ef);
+  border:1px solid var(--line);
+}
+
+.promo-wrap h3 {
+  font-size:clamp(2rem,3vw,3rem);
+  letter-spacing:-.04em;
+  margin:20px 0;
+}
+
+.promo-wrap p {
+  color:var(--muted);
+  line-height:1.8;
+}
+
+.promo-card {
+  background:white;
+  padding:32px;
+  border-radius:24px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(76,52,43,.08);
+}
+
+.promo-card h4 {
+  color:var(--dark);
+  font-size:1.6rem;
+  margin:15px 0;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+  padding:45px 20px;
+  background:#f8eee8;
+  border-top:1px solid var(--line);
+  text-align:center;
+}
+
+footer strong {
+  color:var(--dark);
+  font-size:1.3rem;
+  letter-spacing:2px;
+}
+
+footer p {
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* ========================================
+   BOOKING MODAL
+======================================== */
+
+.booking-modal,
+.success-popup {
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(42,33,29,.72);
+  backdrop-filter:blur(8px);
+  z-index:10000;
+}
+
+.booking-modal.active,
+.success-popup.active {
+  display:flex;
+  animation:fadeIn .3s ease;
+}
+
+.booking-card {
+  position:relative;
+  width:min(490px,100%);
+  max-height:92vh;
+  overflow-y:auto;
+  background:white;
+  padding:33px;
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:0 25px 80px rgba(42,33,29,.3);
+  animation:modalPop .5s var(--ease);
+}
+
+.booking-close {
+  position:absolute;
+  top:16px;
+  right:17px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:#fff3ee;
+  color:var(--dark);
+  font-size:1.5rem;
+}
+
+.booking-card h2 {
+  margin:0 40px 9px 0;
+  font-size:2rem;
+}
+
+.booking-card > p {
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:23px;
+}
+
+.booking-field {margin-bottom:16px}
+
+.booking-field label {
+  display:block;
+  font-size:.92rem;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.booking-field input,
+.booking-field select,
+.booking-field textarea {
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #e9d8ce;
+  border-radius:12px;
+  background:#fffdfb;
+  outline:none;
+  color:var(--text);
+  transition:.2s;
+}
+
+.booking-field input:focus,
+.booking-field select:focus,
+.booking-field textarea:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(155,93,60,.1);
+}
+
+.booking-field textarea {
+  min-height:95px;
+  resize:vertical;
+}
+
+.booking-submit {
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:50px;
+  background:var(--primary);
+  color:white;
+  font-weight:800;
+  transition:.25s;
+}
+
+.booking-submit:hover {background:var(--dark)}
+
+.booking-submit:disabled {
+  opacity:.65;
+  cursor:wait;
+}
+
+.form-error {
+  display:none;
+  padding:12px 14px;
+  margin-bottom:16px;
+  color:#8a2c2c;
+  background:#fff0ee;
+  border:1px solid #f3c3bc;
+  border-radius:12px;
+  line-height:1.5;
+  font-size:.9rem;
+}
+
+.form-error.visible {display:block}
+
+/* ========================================
+   SUCCESS POPUP
+======================================== */
+
+.success-popup {z-index:10001}
+
+.success-box {
+  position:relative;
+  width:min(420px,100%);
+  background:white;
+  padding:45px 30px 35px;
+  border:1px solid var(--accent);
+  border-radius:30px;
+  text-align:center;
+  overflow:hidden;
+  box-shadow:0 30px 90px rgba(42,33,29,.35);
+  animation:successBounce .8s cubic-bezier(.16,1.35,.3,1);
+}
+
+.success-box::before {
+  content:"";
+  position:absolute;
+  width:170%;
+  height:70px;
+  left:-35%;
+  top:-90px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
+  transform:rotate(-12deg);
+  animation:shine 1.3s .35s ease forwards;
+  pointer-events:none;
+}
+
+.success-icon-wrap {
+  position:relative;
+  width:100px;
+  height:100px;
+  margin:0 auto 20px;
+  display:grid;
+  place-items:center;
+}
+
+.success-ring {
+  position:absolute;
+  inset:0;
+  border:2px solid rgba(155,93,60,.25);
+  border-radius:50%;
+  animation:ringPulse 1.8s infinite;
+}
+
+.success-icon {
+  width:76px;
+  height:76px;
+  display:grid;
+  place-items:center;
+  position:relative;
+  z-index:2;
+  border-radius:50%;
+  background:linear-gradient(135deg,#fff6f1,#f6d7c9);
+  box-shadow:0 12px 30px rgba(155,93,60,.2);
+  animation:iconBounce .8s ease;
+}
+
+.success-icon svg {
+  width:42px;
+  height:42px;
+}
+
+.success-icon circle {
+  fill:none;
+  stroke:rgba(155,93,60,.25);
+  stroke-width:2;
+}
+
+.success-icon path {
+  fill:none;
+  stroke:var(--dark);
+  stroke-width:4;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:45;
+  stroke-dashoffset:45;
+  animation:drawCheck .8s .55s forwards;
+}
+
+.success-box h3 {
+  color:var(--dark);
+  font-size:1.95rem;
+  margin:0 0 12px;
+}
+
+.success-box p {
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.success-ok {
+  border:0;
+  border-radius:50px;
+  padding:14px 30px;
+  font-weight:800;
+  color:white;
+  background:linear-gradient(135deg,var(--primary),var(--dark));
+  transition:.3s;
+}
+
+.success-ok:hover {transform:translateY(-3px)}
+
+.success-confetti {
+  position:absolute;
+  top:-30px;
+  border-radius:3px;
+  pointer-events:none;
+  animation:confettiFall var(--duration,3s) var(--delay,0s) ease-in forwards;
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
+
+.motion-loader {
+  position:fixed;
+  inset:0;
+  z-index:20000;
+  display:grid;
+  place-items:center;
+  background:var(--bg);
+  transition:opacity .7s,visibility .7s;
+}
+
+.motion-loader.done {
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.loader-inner {
+  display:grid;
+  justify-items:center;
+  gap:20px;
+}
+
+.loader-orb {
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,white,#f6d7c9 42%,#9b5d3c);
+  box-shadow:0 0 45px rgba(155,93,60,.25);
+  animation:orbPulse 1.3s infinite;
+}
+
+.loader-line {
+  width:120px;
+  height:3px;
+  background:var(--accent);
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.loader-line::after {
+  content:"";
+  display:block;
+  height:100%;
+  width:40%;
+  background:var(--primary);
+  animation:loaderSweep 1s infinite;
+}
+
+.reveal {
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .85s var(--ease),transform .85s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity:1;
+  transform:none;
+}
+
+.hero-copy > * {
+  animation:heroEntrance .9s var(--ease) both;
+}
+
+.hero-copy > :nth-child(1) {animation-delay:.1s}
+.hero-copy > :nth-child(2) {animation-delay:.2s}
+.hero-copy > :nth-child(3) {animation-delay:.3s}
+.hero-copy > :nth-child(4) {animation-delay:.4s}
+.hero-copy > :nth-child(5) {animation-delay:.5s}
+
+.hero-visual {
+  animation:heroEntrance 1.1s .3s var(--ease) both;
+}
+
+.ambient-particles {
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.ambient-particle {
+  position:absolute;
+  width:var(--size,8px);
+  height:var(--size,8px);
+  background:rgba(155,93,60,.11);
+  border-radius:65% 35% 65% 35%;
+  animation:particleDrift var(--duration,14s) var(--delay,0s) linear infinite;
+}
+
+.cursor-aura {
+  position:fixed;
+  width:180px;
+  height:180px;
+  z-index:9998;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(246,215,201,.22),transparent 70%);
+  opacity:0;
+}
+
+body.has-pointer .cursor-aura {opacity:1}
+
+@keyframes fadeIn {
+  from {opacity:0}
+  to {opacity:1}
+}
+
+@keyframes fadeDown {
+  from {opacity:0;transform:translateY(-10px)}
+  to {opacity:1;transform:none}
+}
+
+@keyframes modalPop {
+  from {opacity:0;transform:translateY(25px) scale(.95)}
+  to {opacity:1;transform:none}
+}
+
+@keyframes heroEntrance {
+  from {opacity:0;transform:translateY(35px)}
+  to {opacity:1;transform:none}
+}
+
+@keyframes successBounce {
+  0% {opacity:0;transform:translateY(48px) scale(.7)}
+  65% {opacity:1;transform:translateY(-7px) scale(1.04)}
+  100% {transform:none}
+}
+
+@keyframes iconBounce {
+  0% {transform:scale(0) rotate(-25deg)}
+  70% {transform:scale(1.15)}
+  100% {transform:none}
+}
+
+@keyframes drawCheck {
+  to {stroke-dashoffset:0}
+}
+
+@keyframes ringPulse {
+  0% {opacity:0;transform:scale(.7)}
+  30% {opacity:1}
+  100% {opacity:0;transform:scale(1.5)}
+}
+
+@keyframes shine {
+  from {top:-90px;opacity:0}
+  25% {opacity:1}
+  to {top:115%;opacity:0}
+}
+
+@keyframes confettiFall {
+  0% {opacity:0;transform:translateY(-10px) rotate(0)}
+  10% {opacity:1}
+  100% {
+    opacity:0;
+    transform:translate(var(--drift,30px),110vh)
+      rotate(var(--spin,720deg));
+  }
+}
+
+@keyframes orbPulse {
+  0%,100% {transform:scale(.9)}
+  50% {transform:scale(1.08)}
+}
+
+@keyframes loaderSweep {
+  from {transform:translateX(-130%)}
+  to {transform:translateX(330%)}
+}
+
+@keyframes particleDrift {
+  0% {opacity:0;transform:translateY(110vh) rotate(0)}
+  15% {opacity:.8}
+  85% {opacity:.5}
+  100% {
+    opacity:0;
+    transform:translate(var(--drift,70px),-15vh) rotate(420deg);
+  }
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+======================================== */
+
+@media(max-width:900px) {
+  .nav-links,.nav > .nav-cta {display:none}
+  .hamburger-btn {display:flex}
+
+  .mobile-menu {
+    position:absolute;
+    top:calc(100% + 8px);
+    left:0;
+    right:0;
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background:#fff;
+    padding:14px;
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+
+  .mobile-menu.open {
+    display:flex;
+    animation:fadeDown .3s ease;
+  }
+
+  .mobile-menu-link {
+    padding:13px 14px;
+    border-radius:11px;
+    font-weight:700;
+  }
+
+  .mobile-menu-link:hover {
+    background:#fff4ee;
+    color:var(--dark);
+  }
+
+  .mobile-booking {
+    background:var(--primary);
+    color:white;
+    text-align:center;
+  }
+
+  .hero-inner,.about-grid,.promo-wrap {
+    grid-template-columns:1fr;
+  }
+
+  .gallery-grid {grid-template-columns:repeat(2,1fr)}
+  .hero-inner {gap:45px}
+}
+
+@media(max-width:600px) {
+  section {padding:60px 0}
+  .hero {padding:60px 0}
+  h1 {letter-spacing:-.04em}
+  .brand {font-size:.95rem}
+  .gallery-grid {grid-template-columns:1fr}
+  .gallery-item img {height:280px}
+  .stats {gap:22px}
+  .stat strong {font-size:1.3rem}
+  .about-card,.promo-wrap {padding:24px}
+  .booking-card {padding:28px 21px}
+  .hero-actions .btn {padding:14px 20px}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+
+  .reveal {opacity:1;transform:none}
+
+  .motion-loader,.ambient-particles,.cursor-aura {
+    display:none;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- ==========================================
-       PAGE LOADER AND ANIMATION ELEMENTS
-       ========================================== -->
+<!-- PAGE LOADER -->
 
-  <div class="motion-loader" id="motionLoader" aria-hidden="true">
-    <div class="motion-loader-inner">
-      <div class="loader-orb"></div>
-      <div class="loader-line"></div>
-    </div>
+<div class="motion-loader" id="motionLoader" aria-hidden="true">
+  <div class="loader-inner">
+    <div class="loader-orb"></div>
+    <div class="loader-line"></div>
   </div>
+</div>
 
-  <div class="cursor-aura" id="cursorAura" aria-hidden="true"></div>
-  <div class="ambient-particles" id="ambientParticles" aria-hidden="true"></div>
+<div class="cursor-aura" id="cursorAura" aria-hidden="true"></div>
+<div class="ambient-particles" id="ambientParticles" aria-hidden="true"></div>
 
-  <!-- ==========================================
-       HEADER AND NAVIGATION
-       ========================================== -->
+<!-- ========================================
+     NAVIGATION
+======================================== -->
 
-  <header class="topbar">
-    <div class="container nav">
+<header class="topbar">
+  <div class="container nav">
 
-      <a href="#home" class="brand" aria-label="Bloom Haven home">
-        <span class="brand-mark"></span>
-        BLOOM HAVEN
-      </a>
+    <a href="#home" class="brand">
+      <span class="brand-mark"></span>
+      BLOOM HAVEN
+    </a>
 
-      <!-- DESKTOP MENU -->
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#about">About</a>
 
-      <nav class="nav-links" aria-label="Main navigation">
+      <div class="gallery-dropdown">
+        <button type="button" class="gallery-trigger" aria-expanded="false">
+          Gallery
+        </button>
 
-        <a href="#about">About</a>
-
-        <div class="gallery-dropdown">
-
-          <button
-            type="button"
-            class="gallery-trigger"
-            aria-expanded="false"
-          >
-            Gallery
-          </button>
-
-          <div class="gallery-menu">
-
-            <a href="hampton1.html">
-              Hampton Unit 1
-            </a>
-
-            <a href="hampton2.html">
-              Hampton Unit 2
-            </a>
-
-            <a href="fair.html">
-              FairGrounds
-            </a>
-
-          </div>
+        <div class="gallery-menu">
+          <a href="fair.html">Pink House</a>
+          <a href="hampton1.html">Sylvia</a>
+          <a href="hampton2.html">Anne</a>
         </div>
+      </div>
 
-        <a href="promo.html">Promo Offer</a>
+      <a href="promo.html">Promo Offer</a>
+    </nav>
 
-      </nav>
+    <a href="#" class="nav-cta booking-btn">
+      Book Your Stay
+    </a>
 
-      <a href="#" class="nav-cta booking-btn">
+    <button
+      type="button"
+      class="hamburger-btn"
+      id="hamburgerBtn"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <span></span><span></span><span></span>
+    </button>
+
+    <!-- MOBILE MENU -->
+
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="#about" class="mobile-menu-link">About</a>
+      <a href="fair.html" class="mobile-menu-link">Pink House</a>
+      <a href="hampton1.html" class="mobile-menu-link">Sylvia</a>
+      <a href="hampton2.html" class="mobile-menu-link">Anne</a>
+      <a href="promo.html" class="mobile-menu-link">Promo Offer</a>
+
+      <a href="#" class="mobile-menu-link mobile-booking booking-btn">
         Book Your Stay
       </a>
+    </nav>
 
-      <!-- HAMBURGER BUTTON -->
+  </div>
+</header>
 
-      <button
-        type="button"
-        class="hamburger-btn"
-        id="hamburgerBtn"
-        aria-label="Open navigation menu"
-        aria-expanded="false"
-        aria-controls="mobileMenu"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
+<main id="home">
+
+<!-- ========================================
+     HERO SECTION
+======================================== -->
+
+<section class="hero">
+  <div class="container hero-inner">
+
+    <div class="hero-copy">
+      <span class="eyebrow">Airbnb Staycation</span>
+
+      <h1>Feel at home in a dreamy getaway.</h1>
+
+      <p class="lead">
+        Need a break? Come stay at Bloom Haven.
+        Enjoy a cozy place where you can relax,
+        spend time with family and friends,
+        and make good memories together.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#" class="btn btn-primary booking-btn">Reserve Now</a>
+        <a href="#about" class="btn btn-secondary">Discover More</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>3 Units</strong>
+          <span>Places to choose from</span>
+        </div>
+        <div class="stat">
+          <strong>Cozy</strong>
+          <span>Feel right at home</span>
+        </div>
+        <div class="stat">
+          <strong>Easy</strong>
+          <span>Send a booking request</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="image-card">
+        <img src="colgate.png" alt="Bloom Haven Staycation">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================================
+     ABOUT
+======================================== -->
+
+<section id="about" class="about-section">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="eyebrow">About Bloom Haven</span>
+      <h2>A little break from your busy days.</h2>
+      <p>
+        Bloom Haven is a place where you can take it easy
+        and enjoy time with the people you love.
+      </p>
+    </div>
+
+    <div class="about-grid">
+
+      <div class="about-card reveal">
+        <h3>Stay, relax, and enjoy.</h3>
+        <p>
+          Whether it's a weekend with friends, family time,
+          or just a quiet day off, we'd love to welcome you.
+          Pick a unit, settle in, and enjoy your stay.
+        </p>
+      </div>
+
+      <div class="about-card reveal">
+        <h3>What you'll love</h3>
+
+        <ul class="feature-list">
+          <li>Comfortable bedrooms</li>
+          <li>Cozy living areas</li>
+          <li>Kitchen space for your meals</li>
+          <li>Three units to choose from</li>
+          <li>A place to relax with family and friends</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========================================
+     SYLVIA - HAMPTON UNIT 1
+======================================== -->
+
+<section id="sylvia" class="gallery-section">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="eyebrow">Sylvia</span>
+      <h2>Bloom Haven Sylvia</h2>
+      <p>
+        A cozy place to rest, relax, and enjoy
+        a simple getaway with your loved ones.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+
+      <article class="gallery-item reveal">
+        <img src="hsala.jpg" alt="Sylvia living room" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Living Room</strong>
+          <span>
+            A comfy spot to sit back, watch TV,
+            or hang out with everyone.
+          </span>
+        </div>
+      </article>
+
+      <article class="gallery-item reveal">
+        <img src="hamptonbed.jpg" alt="Sylvia bedroom" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Bedroom</strong>
+          <span>
+            A cozy bed waiting for you
+            after a long day.
+          </span>
+        </div>
+      </article>
+
+      <article class="gallery-item reveal">
+        <img src="hkitchen.jpg" alt="Sylvia kitchen" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Kitchen</strong>
+          <span>
+            Prepare your meals and enjoy
+            good food together.
+          </span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="unit-actions reveal">
+      <button class="btn btn-primary book-unit" data-unit="Sylvia">
+        Book Sylvia
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================================
+     ANNE - HAMPTON UNIT 2
+======================================== -->
+
+<section id="anne" class="gallery-section">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="eyebrow">Anne</span>
+      <h2>Bloom Haven Anne</h2>
+      <p>
+        Your own little space to unwind,
+        enjoy meals, and spend time together.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+
+      <article class="gallery-item reveal">
+        <img src="hams2kitchen.jpg" alt="Anne kitchen" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Kitchen</strong>
+          <span>
+            Cook your favorite meals
+            and enjoy them with your group.
+          </span>
+        </div>
+      </article>
+
+      <article class="gallery-item reveal">
+        <img src="unit2sala.jpg" alt="Anne living room" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Living Room</strong>
+          <span>
+            A nice place to chill,
+            chat, and spend time together.
+          </span>
+        </div>
+      </article>
+
+      <article class="gallery-item reveal">
+        <img src="ham2bes11.png" alt="Anne bedroom" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Bedroom</strong>
+          <span>
+            Get comfortable and
+            have a good night's rest.
+          </span>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="unit-actions reveal">
+      <button class="btn btn-primary book-unit" data-unit="Anne">
+        Book Anne
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================================
+     PINK HOUSE - FAIRGROUNDS
+======================================== -->
+
+<section id="pink-house" class="gallery-section">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="eyebrow">Pink House</span>
+      <h2>Bloom Haven Pink House</h2>
+      <p>
+        A fun place to stay with family and friends.
+        Relax, play a little, and enjoy your time together.
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+
+      <article class="gallery-item reveal">
+        <img src="bloombilliard.jpg" alt="Pink House billiards" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Billiards Area</strong>
+          <span>
+            Challenge your friends to a game
+            and have some fun.
+          </span>
+        </div>
+      </article>
+
+      <article class="gallery-item reveal">
+        <img src="blompool.jpg" alt="Pink House mini pool and gym" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Mini Pool &amp; Gym Equipment</strong>
+          <span>
+            Take a dip in the mini pool
+            or enjoy a quick workout.
+          </span>
+        </div>
+      </article>
+
+      <article class="gallery-item reveal">
+        <img src="blombed1.jpg" alt="Pink House bedroom" loading="lazy">
+        <div class="gallery-caption">
+          <strong>Bedroom</strong>
+          <span>
+            A comfortable place to rest
+            after a day of fun.
+          </span>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Additional original image names:
+         bloomdining.jpg
+         blombed2.jpg
+    -->
+
+    <div class="unit-actions reveal">
+      <button class="btn btn-primary book-unit" data-unit="Pink House">
+        Book Pink House
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================================
+     PROMO
+======================================== -->
+
+<section id="promo" class="promo-section">
+  <div class="container">
+
+    <div class="promo-wrap reveal">
+
+      <div>
+        <span class="eyebrow">Special Offers</span>
+        <h3>Planning your next stay?</h3>
+        <p>
+          Check out our latest promos.
+          You might find a great deal for
+          your next getaway.
+        </p>
+
+        <a href="promo.html" class="btn btn-primary">
+          View Our Promos
+        </a>
+      </div>
+
+      <div class="promo-card">
+        <span class="eyebrow">Bloom Haven</span>
+        <h4>Your next getaway starts here.</h4>
+        <p>
+          Choose your favorite unit
+          and send us a booking request.
+        </p>
+
+        <a href="#" class="btn btn-secondary booking-btn">
+          Book Your Stay
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ========================================
+     BOOKING FORM
+======================================== -->
+
+<div
+  class="booking-modal"
+  id="bookingModal"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-labelledby="bookingTitle"
+>
+  <div class="booking-card">
+
+    <button
+      type="button"
+      class="booking-close"
+      id="bookingClose"
+      aria-label="Close booking form"
+    >&times;</button>
+
+    <h2 id="bookingTitle">Book Your Stay</h2>
+
+    <p>
+      Just fill in the details below.
+      We'll get back to you to confirm your booking.
+    </p>
+
+    <form id="bookingForm">
+
+      <!-- CUSTOMER NAME -->
+
+      <div class="booking-field">
+        <label for="bookingName">Full Name</label>
+        <input
+          type="text"
+          id="bookingName"
+          placeholder="Your full name"
+          autocomplete="name"
+          maxlength="100"
+          required
+        >
+      </div>
+
+      <!-- CONTACT NUMBER -->
+
+      <div class="booking-field">
+        <label for="bookingContact">Contact Number</label>
+        <input
+          type="tel"
+          id="bookingContact"
+          placeholder="09XXXXXXXXX"
+          autocomplete="tel"
+          maxlength="20"
+          required
+        >
+      </div>
+
+      <!-- UNIT SELECTION -->
+
+      <div class="booking-field">
+        <label for="bookingUnit">Which unit would you like to book?</label>
+
+        <select id="bookingUnit" required>
+          <option value="" disabled selected>Select a unit</option>
+          <option value="Pink House">Pink House</option>
+          <option value="Sylvia">Sylvia</option>
+          <option value="Anne">Anne</option>
+        </select>
+      </div>
+
+      <!-- BOOKING DATE -->
+
+      <div class="booking-field">
+        <label for="bookingDate">Preferred Check-in Date</label>
+        <input type="date" id="bookingDate" required>
+      </div>
+
+      <!-- NUMBER OF GUESTS -->
+
+      <div class="booking-field">
+        <label for="bookingPax">Number of Guests</label>
+        <input
+          type="number"
+          id="bookingPax"
+          min="1"
+          max="100"
+          placeholder="How many guests?"
+          required
+        >
+      </div>
+
+      <!-- SPECIAL REQUESTS -->
+
+      <div class="booking-field">
+        <label for="bookingNotes">Message / Special Requests (Optional)</label>
+        <textarea
+          id="bookingNotes"
+          placeholder="Anything else you'd like us to know?"
+          maxlength="1500"
+        ></textarea>
+      </div>
+
+      <!-- ERROR MESSAGE -->
+
+      <div
+        class="form-error"
+        id="bookingError"
+        role="alert"
+        aria-live="polite"
+      ></div>
+
+      <button type="submit" class="booking-submit" id="bookingSubmit">
+        Send Booking Request
       </button>
 
-      <!-- MOBILE NAVIGATION -->
+    </form>
 
-      <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+  </div>
+</div>
 
-        <a href="#about" class="mobile-menu-link">
-          About
-        </a>
+<!-- ========================================
+     SUCCESS POPUP
+======================================== -->
 
-        <a href="hampton1.html" class="mobile-menu-link">
-          Hampton Unit 1
-        </a>
+<div
+  class="success-popup"
+  id="successPopup"
+  role="alertdialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-labelledby="successTitle"
+>
+  <div class="success-box">
 
-        <a href="hampton2.html" class="mobile-menu-link">
-          Hampton Unit 2
-        </a>
+    <div class="success-icon-wrap" aria-hidden="true">
+      <span class="success-ring"></span>
 
-        <a href="fair.html" class="mobile-menu-link">
-          FairGrounds
-        </a>
-
-        <a href="promo.html" class="mobile-menu-link">
-          Promo Offer
-        </a>
-
-        <a href="#" class="mobile-menu-link mobile-booking booking-btn">
-          Book Your Stay
-        </a>
-
-      </nav>
-
-    </div>
-  </header>
-
-  <main id="home">
-
-    <!-- ==========================================
-         HERO SECTION
-         ========================================== -->
-
-    <section class="hero">
-      <div class="container hero-inner">
-
-        <div class="hero-copy">
-
-          <span class="eyebrow">
-            Airbnb Staycation
-          </span>
-
-          <h1>
-            Feel at home in a dreamy getaway.
-          </h1>
-
-          <p class="lead">
-            Escape to BLOOM HAVEN, a stylish and peaceful
-            staycation made for slow mornings, cozy nights,
-            and unforgettable weekends away from the rush.
-          </p>
-
-          <div class="hero-actions">
-
-            <a href="#" class="btn btn-primary booking-btn">
-              Reserve Now
-            </a>
-
-            <a href="#about" class="btn btn-secondary">
-              Discover More
-            </a>
-
-          </div>
-
-          <div class="stats">
-
-            <div class="stat">
-              <strong>4.9/5</strong>
-              <span>guest rating</span>
-            </div>
-
-            <div class="stat">
-              <strong>2–3 nights</strong>
-              <span>ideal escape</span>
-            </div>
-
-            <div class="stat">
-              <strong>24/7</strong>
-              <span>host support</span>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="hero-visual">
-
-          <div class="image-card">
-            <img
-              src="colgate.png"
-              alt="Modern cozy Airbnb staycation home"
-            >
-          </div>
-
-        </div>
-
+      <div class="success-icon">
+        <svg viewBox="0 0 48 48">
+          <circle cx="24" cy="24" r="20"></circle>
+          <path d="M14.5 24.5 21 31l13-14"></path>
+        </svg>
       </div>
-    </section>
-
-    <!-- ==========================================
-         ABOUT BLOOM HAVEN
-         ========================================== -->
-
-    <section id="about" class="about-section">
-      <div class="container">
-
-        <div class="section-header reveal">
-
-          <span class="eyebrow">
-            About Bloom Haven
-          </span>
-
-          <h2>
-            Your home away from home.
-          </h2>
-
-          <p>
-            Experience a relaxing staycation at Bloom Haven.
-            Our comfortable spaces are designed for guests
-            who want to unwind, spend quality time together,
-            and enjoy a memorable getaway.
-          </p>
-
-        </div>
-
-        <div class="about-grid">
-
-          <div class="about-card reveal">
-
-            <h3>
-              A cozy escape for every occasion.
-            </h3>
-
-            <p>
-              Whether you're planning a quick weekend escape,
-              a peaceful break, or a special stay with family
-              and friends, Bloom Haven offers welcoming
-              spaces where you can relax and feel at home.
-            </p>
-
-          </div>
-
-          <div class="about-card reveal">
-
-            <h3>
-              What makes Bloom Haven special?
-            </h3>
-
-            <ul class="feature-list">
-
-              <li>Comfortable and relaxing spaces</li>
-              <li>Cozy bedrooms and lounge areas</li>
-              <li>Kitchen facilities</li>
-              <li>Multiple staycation units</li>
-              <li>Ideal for family and friends</li>
-
-            </ul>
-
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================
-         HAMPTON DECA HOME UNIT 1
-         ========================================== -->
-
-    <section id="gallery-unit-1" class="gallery-section">
-      <div class="container">
-
-        <div class="section-header reveal">
-
-          <span class="eyebrow">
-            Unit 1
-          </span>
-
-          <h2>
-            Bloom Haven Hampton Deca Home Unit 1
-          </h2>
-
-          <p>
-            Explore the details that turn our staycation
-            into a warm, memorable escape.
-          </p>
-
-        </div>
-
-        <div class="gallery-grid">
-
-          <!-- UNIT 1 LOUNGE -->
-
-          <article class="gallery-item reveal" id="gallery-lounge-1">
-
-            <img
-              src="hsala.jpg"
-              alt="Cozy lounge area"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-              <strong>Cozy Lounge</strong>
-              <span>
-                Soft textures, natural light,
-                and a slow-living vibe.
-              </span>
-            </div>
-
-          </article>
-
-          <!-- UNIT 1 BEDROOM -->
-
-          <article class="gallery-item reveal" id="gallery-bedroom-1">
-
-            <img
-              src="hamptonbed.jpg"
-              alt="Elegant bedroom interior"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-              <strong>Private Bedroom</strong>
-              <span>
-                Restful bedding and warm,
-                calming details.
-              </span>
-            </div>
-
-          </article>
-
-          <!-- UNIT 1 KITCHEN -->
-
-          <article class="gallery-item reveal" id="gallery-kitchen-1">
-
-            <img
-              src="hkitchen.jpg"
-              alt="Kitchen area"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-              <strong>Kitchen</strong>
-              <span>
-                Fresh flavors, warm meals,
-                and cozy moments.
-              </span>
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================
-         HAMPTON DECA HOME UNIT 2
-         ========================================== -->
-
-    <section id="gallery-unit-2" class="gallery-section">
-      <div class="container">
-
-        <div class="section-header reveal">
-
-          <span class="eyebrow">
-            Unit 2
-          </span>
-
-          <h2>
-            Bloom Haven Hampton Deca Home Unit 2
-          </h2>
-
-          <p>
-            Experience the simple comforts
-            that make every staycation feel special
-            and memorable.
-          </p>
-
-        </div>
-
-        <div class="gallery-grid">
-
-          <!-- UNIT 2 KITCHEN -->
-
-          <article class="gallery-item reveal" id="gallery-kitchen-2">
-
-            <img
-              src="hams2kitchen.jpg"
-              alt="Fully equipped kitchen"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-
-              <strong>
-                Fully Equipped Kitchen
-              </strong>
-
-              <span>
-                Fully functional kitchen. Spacious and
-                homey for comfortable cooking during your stay.
-              </span>
-
-            </div>
-
-          </article>
-
-          <!-- UNIT 2 LOUNGE -->
-
-          <article class="gallery-item reveal" id="gallery-lounge-2">
-
-            <img
-              src="unit2sala.jpg"
-              alt="Cozy lounge area"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-
-              <strong>
-                Cozy Lounge
-              </strong>
-
-              <span>
-                Warm lighting, plush seating,
-                and a relaxing atmosphere.
-              </span>
-
-            </div>
-
-          </article>
-
-          <!-- UNIT 2 BEDROOM -->
-
-          <article class="gallery-item reveal" id="gallery-bedroom-2">
-
-            <img
-              src="ham2bes11.png"
-              alt="Peaceful bedroom"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-
-              <strong>
-                Peaceful Bedroom
-              </strong>
-
-              <span>
-                Plush bedding, soft ambient light, and a
-                serene escape for restful nights.
-              </span>
-
-            </div>
-
-          </article>
-
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ==========================================
-         FAIRGROUNDS SUBDIVISION
-         ========================================== -->
-
-    <section id="gallery-fairgrounds" class="gallery-section">
-      <div class="container">
-
-        <div class="section-header reveal">
-
-          <span class="eyebrow">
-            FairGrounds
-          </span>
-
-          <h2>
-            Bloom Haven FairGround Subdivision
-          </h2>
-
-          <p>
-            Discover the little touches
-            that make your staycation feel comfortable,
-            relaxing, and unforgettable.
-          </p>
-
-        </div>
-
-        <div class="gallery-grid">
-
-          <!-- FAIRGROUNDS BILLIARDS -->
-
-          <article class="gallery-item reveal" id="fairgrounds-billiards">
-
-            <img
-              src="bloombilliard.jpg"
-              alt="Billiards entertainment area"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-
-              <strong>
-                Billiards Area
-              </strong>
-
-              <span>
-                Enjoy a fun game of billiards
-                during your stay.
-              </span>
-
-            </div>
-
-          </article>
-
-          <!-- FAIRGROUNDS MINI POOL -->
-
-          <article class="gallery-item reveal" id="fairgrounds-pool">
-
-            <img
-              src="blompool.jpg"
-              alt="Mini pool and gym equipment"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-
-              <strong>
-                Mini Pool &amp; Gym Equipment
-              </strong>
-
-              <span>
-                Enjoy a fun and relaxing game
-                of mini pool and gym equipment
-                during your stay.
-              </span>
-
-            </div>
-
-          </article>
-
-          <!-- FAIRGROUNDS BEDROOM -->
-
-          <article class="gallery-item reveal" id="fairgrounds-bedroom">
-
-            <img
-              src="blombed1.jpg"
-              alt="Peaceful bedroom"
-              loading="lazy"
-            >
-
-            <div class="gallery-caption">
-
-              <strong>
-                Peaceful Bedroom
-              </strong>
-
-              <span>
-                Soft bedding, warm lighting,
-                and a peaceful retreat.
-              </span>
-
-            </div>
-
-          </article>
-
-        </div>
-
-        <!--
-          ADDITIONAL FAIRGROUNDS IMAGES
-
-          These filenames were also included in
-          the original website's commented sample:
-
-          bloombilliard.jpg
-          bloomdining.jpg
-          blombed2.jpg
-
-          Add more gallery cards here if needed.
-        -->
-
-      </div>
-    </section>
-
-    <!-- ==========================================
-         PROMO OFFER SECTION
-         ========================================== -->
-
-    <section id="promo" class="promo-section">
-
-      <div class="container">
-
-        <div class="promo-wrap reveal">
-
-          <div>
-
-            <span class="eyebrow">
-              Special Offers
-            </span>
-
-            <h3>
-              Make your next getaway even more special.
-            </h3>
-
-            <p>
-              Discover Bloom Haven's latest staycation
-              promotions and available offers.
-              Enjoy a relaxing escape with family
-              and friends.
-            </p>
-
-            <a href="promo.html" class="btn btn-primary">
-              View Promo Offers
-            </a>
-
-          </div>
-
-          <div class="promo-card">
-
-            <span class="eyebrow">
-              Bloom Haven
-            </span>
-
-            <h4>
-              Your Dream Stay Awaits
-            </h4>
-
-            <p>
-              Check our current promotions
-              and plan your next memorable staycation.
-            </p>
-
-            <a href="promo.html" class="btn btn-secondary">
-              Explore Promos
-            </a>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ==========================================
-         BOOKING FORM MODAL
-         ========================================== -->
-
-    <div
-      class="booking-modal"
-      id="bookingModal"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="bookingTitle"
-      aria-hidden="true"
-    >
-
-      <div class="booking-card">
-
-        <button
-          type="button"
-          class="booking-close"
-          id="bookingClose"
-          aria-label="Close booking form"
-        >
-          &times;
-        </button>
-
-        <h2 id="bookingTitle">
-          Book Your Stay
-        </h2>
-
-        <p>
-          Fill in your details below and we'll
-          prepare your booking request.
-        </p>
-
-        <form
-          id="bookingForm"
-          action="https://formsubmit.co/ammasivilmar2@gmail.com"
-          method="POST"
-        >
-
-          <input
-            type="hidden"
-            name="_subject"
-            value="New Bloom Haven Booking Request"
-          >
-
-          <input type="hidden" name="_template" value="basic">
-          <input type="hidden" name="_captcha" value="false">
-
-          <!-- FULL NAME -->
-
-          <div class="booking-field">
-
-            <label for="bookingName">
-              Full Name
-            </label>
-
-            <input
-              type="text"
-              id="bookingName"
-              name="name"
-              placeholder="Enter your full name"
-              autocomplete="name"
-              required
-            >
-
-          </div>
-
-          <!-- CONTACT NUMBER -->
-
-          <div class="booking-field">
-
-            <label for="bookingContact">
-              Contact Number
-            </label>
-
-            <input
-              type="tel"
-              id="bookingContact"
-              name="contact"
-              placeholder="Example: 09123456789"
-              autocomplete="tel"
-              required
-            >
-
-          </div>
-
-          <!-- BOOKING DATE -->
-
-          <div class="booking-field">
-
-            <label for="bookingDate">
-              Date of Booking
-            </label>
-
-            <input
-              type="date"
-              id="bookingDate"
-              name="date"
-              required
-            >
-
-          </div>
-
-          <!-- NUMBER OF PAX -->
-
-          <div class="booking-field">
-
-            <label for="bookingPax">
-              Number of Pax
-            </label>
-
-            <input
-              type="number"
-              id="bookingPax"
-              name="pax"
-              min="1"
-              placeholder="Example: 4"
-              required
-            >
-
-          </div>
-
-          <!-- MESSAGE -->
-
-          <div class="booking-field">
-
-            <label for="bookingNotes">
-              Message / Notes
-            </label>
-
-            <textarea
-              id="bookingNotes"
-              name="notes"
-              placeholder="Number of guests, preferred check-in time, special requests, etc."
-            ></textarea>
-
-          </div>
-
-          <button type="submit" class="booking-submit">
-            Done
-          </button>
-
-        </form>
-
-      </div>
-
     </div>
 
-    <!-- ==========================================
-         BOOKING SUCCESS POPUP
-         ========================================== -->
-
-    <div
-      class="booking-success-popup"
-      id="bookingSuccessPopup"
-      role="alertdialog"
-      aria-modal="true"
-      aria-labelledby="bookingSuccessTitle"
-      aria-hidden="true"
-    >
-
-      <div class="booking-success-box">
-
-        <div class="booking-success-icon-wrap" aria-hidden="true">
-
-          <span class="booking-success-ring"></span>
-
-          <div class="booking-success-icon">
-
-            <svg viewBox="0 0 48 48">
-
-              <circle cx="24" cy="24" r="20"></circle>
-
-              <path d="M14.5 24.5 21 31l13-14"></path>
-
-            </svg>
-
-          </div>
-
-        </div>
-
-        <h3 id="bookingSuccessTitle">
-          Booked Successfully!
-        </h3>
-
-        <p>
-          Your Bloom Haven booking request
-          has been sent. We'll get back to you
-          as soon as possible.
-        </p>
-
-        <button
-          type="button"
-          class="booking-success-ok"
-          id="bookingSuccessOk"
-        >
-          Awesome!
-        </button>
-
-      </div>
-
-    </div>
-
-  </main>
-
-  <!-- ==========================================
-       FOOTER
-       ========================================== -->
-
-  <footer>
-
-    <strong>BLOOM HAVEN</strong>
+    <h3 id="successTitle">Request Sent!</h3>
 
     <p>
-      Your peaceful home away from home.
+      Thank you for choosing Bloom Haven!
+      We've received your booking request.
+      We'll contact you soon to confirm availability.
     </p>
 
-    <p>
-      &copy; <span id="currentYear"></span>
-      Bloom Haven. All Rights Reserved.
-    </p>
+    <button type="button" class="success-ok" id="successOk">
+      Awesome!
+    </button>
 
-  </footer>
+  </div>
+</div>
 
-  <!-- ==========================================
-       JAVASCRIPT FUNCTIONS
-       ========================================== -->
+</main>
 
-  <script>
-    "use strict";
+<!-- ========================================
+     FOOTER
+======================================== -->
 
-    /* ------------------------------------------
-       DOM ELEMENTS
-       ------------------------------------------ */
+<footer>
+  <strong>BLOOM HAVEN</strong>
+  <p>A cozy place to stay, relax, and enjoy.</p>
+  <p>
+    &copy; <span id="currentYear"></span>
+    Bloom Haven. All Rights Reserved.
+  </p>
+</footer>
 
-    const galleryDropdown =
-      document.querySelector(".gallery-dropdown");
+<!-- ========================================
+     JAVASCRIPT
+======================================== -->
 
-    const galleryTrigger =
-      document.querySelector(".gallery-trigger");
+<script>
+"use strict";
 
-    const hamburgerBtn =
-      document.getElementById("hamburgerBtn");
+/* ========================================
+   CONFIGURATION
+======================================== */
 
-    const mobileMenu =
-      document.getElementById("mobileMenu");
+// IMPORTANT:
+// Keep the email you want booking requests sent to.
+const BOOKING_EMAIL = "ammasivilmar2@gmail.com";
 
-    const bookingModal =
-      document.getElementById("bookingModal");
+// Using FormSubmit's official AJAX endpoint.
+const FORM_ENDPOINT =
+  "https://formsubmit.co/ajax/" + BOOKING_EMAIL;
 
-    const bookingButtons =
-      document.querySelectorAll(".booking-btn");
+/* ========================================
+   ELEMENT REFERENCES
+======================================== */
 
-    const bookingClose =
-      document.getElementById("bookingClose");
+const $ = id => document.getElementById(id);
 
-    const bookingForm =
-      document.getElementById("bookingForm");
+const galleryDropdown = document.querySelector(".gallery-dropdown");
+const galleryTrigger = document.querySelector(".gallery-trigger");
 
-    const bookingDate =
-      document.getElementById("bookingDate");
+const hamburgerBtn = $("hamburgerBtn");
+const mobileMenu = $("mobileMenu");
 
-    const bookingSuccessPopup =
-      document.getElementById("bookingSuccessPopup");
+const bookingModal = $("bookingModal");
+const bookingForm = $("bookingForm");
+const bookingClose = $("bookingClose");
 
-    const bookingSuccessOk =
-      document.getElementById("bookingSuccessOk");
+const bookingName = $("bookingName");
+const bookingContact = $("bookingContact");
+const bookingUnit = $("bookingUnit");
+const bookingDate = $("bookingDate");
+const bookingPax = $("bookingPax");
+const bookingNotes = $("bookingNotes");
 
-    const motionLoader =
-      document.getElementById("motionLoader");
+const bookingSubmit = $("bookingSubmit");
+const bookingError = $("bookingError");
 
-    const cursorAura =
-      document.getElementById("cursorAura");
+const successPopup = $("successPopup");
+const successOk = $("successOk");
 
-    /* ------------------------------------------
-       CURRENT YEAR
-       ------------------------------------------ */
+$("currentYear").textContent = new Date().getFullYear();
 
-    document.getElementById("currentYear").textContent =
-      new Date().getFullYear();
+/* ========================================
+   DESKTOP GALLERY MENU
+======================================== */
 
-    /* ------------------------------------------
-       DESKTOP GALLERY DROPDOWN
-       ------------------------------------------ */
+function closeGalleryDropdown() {
+  galleryDropdown.classList.remove("open");
+  galleryTrigger.setAttribute("aria-expanded", "false");
+}
 
-    function closeGalleryDropdown() {
-      galleryDropdown.classList.remove("open");
-      galleryTrigger.setAttribute("aria-expanded", "false");
-    }
+galleryTrigger.addEventListener("click", event => {
+  event.stopPropagation();
 
-    galleryTrigger.addEventListener("click", function(event) {
-      event.stopPropagation();
+  const open = galleryDropdown.classList.toggle("open");
+  galleryTrigger.setAttribute("aria-expanded", String(open));
+});
 
-      const isOpen =
-        galleryDropdown.classList.toggle("open");
+document.addEventListener("click", event => {
+  if (!galleryDropdown.contains(event.target)) {
+    closeGalleryDropdown();
+  }
+});
 
-      galleryTrigger.setAttribute(
-        "aria-expanded",
-        String(isOpen)
+/* ========================================
+   MOBILE MENU
+======================================== */
+
+function closeMobileMenu() {
+  mobileMenu.classList.remove("open");
+  hamburgerBtn.classList.remove("open");
+  hamburgerBtn.setAttribute("aria-expanded", "false");
+  hamburgerBtn.setAttribute("aria-label", "Open navigation menu");
+}
+
+hamburgerBtn.addEventListener("click", event => {
+  event.stopPropagation();
+
+  const open = mobileMenu.classList.toggle("open");
+
+  hamburgerBtn.classList.toggle("open", open);
+  hamburgerBtn.setAttribute("aria-expanded", String(open));
+  hamburgerBtn.setAttribute(
+    "aria-label",
+    open ? "Close navigation menu" : "Open navigation menu"
+  );
+});
+
+document.querySelectorAll(".mobile-menu-link").forEach(link => {
+  link.addEventListener("click", closeMobileMenu);
+});
+
+document.addEventListener("click", event => {
+  if (
+    mobileMenu.classList.contains("open") &&
+    !mobileMenu.contains(event.target) &&
+    !hamburgerBtn.contains(event.target)
+  ) {
+    closeMobileMenu();
+  }
+});
+
+/* ========================================
+   GET TODAY'S LOCAL DATE
+======================================== */
+
+function getLocalToday() {
+  const now = new Date();
+
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+bookingDate.min = getLocalToday();
+
+/* ========================================
+   BOOKING POPUP
+======================================== */
+
+function openBookingModal(event, selectedUnit = "") {
+  if (event) event.preventDefault();
+
+  closeMobileMenu();
+  closeGalleryDropdown();
+
+  hideBookingError();
+
+  bookingDate.min = getLocalToday();
+
+  if (selectedUnit) {
+    bookingUnit.value = selectedUnit;
+  }
+
+  bookingModal.classList.add("active");
+  bookingModal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+
+  bookingName.focus();
+}
+
+function closeBookingModal() {
+  bookingModal.classList.remove("active");
+  bookingModal.setAttribute("aria-hidden", "true");
+
+  if (!successPopup.classList.contains("active")) {
+    document.body.classList.remove("modal-open");
+  }
+}
+
+document.querySelectorAll(".booking-btn").forEach(button => {
+  button.addEventListener("click", event => {
+    openBookingModal(event);
+  });
+});
+
+// Booking directly from each unit's gallery.
+// The correct unit will be selected automatically.
+document.querySelectorAll(".book-unit").forEach(button => {
+  button.addEventListener("click", event => {
+    openBookingModal(event, button.dataset.unit);
+  });
+});
+
+bookingClose.addEventListener("click", closeBookingModal);
+
+bookingModal.addEventListener("click", event => {
+  if (event.target === bookingModal) {
+    closeBookingModal();
+  }
+});
+
+/* ========================================
+   ERROR MESSAGE
+======================================== */
+
+function showBookingError(message) {
+  bookingError.textContent = message;
+  bookingError.classList.add("visible");
+}
+
+function hideBookingError() {
+  bookingError.textContent = "";
+  bookingError.classList.remove("visible");
+}
+
+/* ========================================
+   BOOKING SUCCESS POPUP
+======================================== */
+
+function showBookingSuccess() {
+  successPopup.classList.remove("active");
+  void successPopup.offsetWidth;
+
+  successPopup.classList.add("active");
+  successPopup.setAttribute("aria-hidden", "false");
+
+  document.body.classList.add("modal-open");
+
+  launchConfetti();
+  successOk.focus();
+}
+
+function hideBookingSuccess() {
+  successPopup.classList.remove("active");
+  successPopup.setAttribute("aria-hidden", "true");
+
+  document.body.classList.remove("modal-open");
+
+  successPopup.querySelectorAll(".success-confetti")
+    .forEach(piece => piece.remove());
+}
+
+successOk.addEventListener("click", hideBookingSuccess);
+
+successPopup.addEventListener("click", event => {
+  if (event.target === successPopup) {
+    hideBookingSuccess();
+  }
+});
+
+/* ========================================
+   ESCAPE KEY
+======================================== */
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "Escape") return;
+
+  if (successPopup.classList.contains("active")) {
+    hideBookingSuccess();
+  } else if (bookingModal.classList.contains("active")) {
+    closeBookingModal();
+  } else {
+    closeMobileMenu();
+    closeGalleryDropdown();
+  }
+});
+
+/* ========================================
+   CONFETTI ANIMATION
+======================================== */
+
+function launchConfetti() {
+  const colors = [
+    "#9b5d3c", "#6d3e29", "#f6d7c9",
+    "#d7a98a", "#fff3ee", "#ffffff"
+  ];
+
+  for (let i = 0; i < 70; i++) {
+    const piece = document.createElement("span");
+
+    piece.className = "success-confetti";
+    piece.style.left = Math.random() * 100 + "%";
+    piece.style.background =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    piece.style.width = (6 + Math.random() * 6) + "px";
+    piece.style.height = (9 + Math.random() * 12) + "px";
+
+    piece.style.setProperty(
+      "--duration",
+      (2.2 + Math.random() * 1.8) + "s"
+    );
+
+    piece.style.setProperty(
+      "--delay",
+      Math.random() * .45 + "s"
+    );
+
+    piece.style.setProperty(
+      "--drift",
+      ((Math.random() - .5) * 220) + "px"
+    );
+
+    piece.style.setProperty(
+      "--spin",
+      ((Math.random() > .5 ? 1 : -1) *
+        (520 + Math.random() * 900)) + "deg"
+    );
+
+    successPopup.appendChild(piece);
+
+    setTimeout(() => piece.remove(), 4500);
+  }
+}
+
+/* ========================================
+   EMAIL BOOKING MESSAGE
+
+   IMPORTANT CHANGE:
+   Instead of sending each customer detail
+   as a separate email field, we combine
+   the information into ONE readable message.
+
+   The receiving email will contain the
+   customer's complete booking request.
+
+   The basic template is used rather than
+   the FormSubmit table template.
+======================================== */
+
+function createBookingMessage(data) {
+  return [
+    "NEW BLOOM HAVEN BOOKING REQUEST",
+    "",
+    "Hi, I'd like to book a stay at Bloom Haven.",
+    "",
+    "Name: " + data.name,
+    "Contact Number: " + data.contact,
+    "Preferred Unit: " + data.unit,
+    "Booking Date: " + data.date,
+    "Number of Guests: " + data.pax,
+    "",
+    "Message / Special Requests:",
+    data.notes || "No special requests.",
+    "",
+    "Please contact me to confirm availability.",
+    "Thank you!"
+  ].join("\n");
+}
+
+/* ========================================
+   FIXED FORM SUBMISSION
+
+   FormSubmit requires first-time email
+   activation for the receiving address.
+
+   This code:
+   - Validates guest details
+   - Creates a readable email message
+   - Sends through the AJAX endpoint
+   - Checks the server response
+   - Shows success only after acceptance
+   - Keeps the form when submission fails
+======================================== */
+
+bookingForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  hideBookingError();
+
+  const data = {
+    name: bookingName.value.trim(),
+    contact: bookingContact.value.trim(),
+    unit: bookingUnit.value,
+    date: bookingDate.value,
+    pax: bookingPax.value,
+    notes: bookingNotes.value.trim()
+  };
+
+  // Basic validation.
+  const phonePattern = /^[0-9+\-\s()]{7,20}$/;
+
+  if (!data.name) {
+    showBookingError("Please enter your full name.");
+    bookingName.focus();
+    return;
+  }
+
+  if (!phonePattern.test(data.contact)) {
+    showBookingError("Please enter a valid contact number.");
+    bookingContact.focus();
+    return;
+  }
+
+  if (!["Pink House", "Sylvia", "Anne"].includes(data.unit)) {
+    showBookingError("Please choose which unit you'd like to book.");
+    bookingUnit.focus();
+    return;
+  }
+
+  if (!data.date || data.date < getLocalToday()) {
+    showBookingError("Please select a valid booking date.");
+    bookingDate.focus();
+    return;
+  }
+
+  if (!Number.isInteger(Number(data.pax)) ||
+      Number(data.pax) < 1 ||
+      Number(data.pax) > 100) {
+    showBookingError("Please enter a valid number of guests.");
+    bookingPax.focus();
+    return;
+  }
+
+  bookingSubmit.disabled = true;
+  bookingSubmit.textContent = "Sending Request...";
+
+  // Turn all booking details into one message.
+  const message = createBookingMessage(data);
+
+  // FormSubmit Basic template with one message.
+  const formData = new FormData();
+
+  formData.append(
+    "_subject",
+    "New Bloom Haven Booking - " + data.unit
+  );
+
+  formData.append("_template", "basic");
+  formData.append("_captcha", "false");
+
+  // Honeypot value stays empty.
+  formData.append("_honey", "");
+
+  // Only one normal email content field.
+  formData.append("message", message);
+
+  try {
+    const response = await fetch(FORM_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json"
+      },
+      body: formData
+    });
+
+    const result = await response.json();
+
+    console.log("Bloom Haven FormSubmit response:", result);
+
+    const accepted =
+      result.success === true ||
+      result.success === "true";
+
+    if (!response.ok || !accepted) {
+      throw new Error(
+        result.message ||
+        "The email service did not accept the request."
       );
-    });
-
-    document.addEventListener("click", function(event) {
-      if (!galleryDropdown.contains(event.target)) {
-        closeGalleryDropdown();
-      }
-    });
-
-    /* ------------------------------------------
-       MOBILE HAMBURGER MENU
-       ------------------------------------------ */
-
-    function closeMobileMenu() {
-      mobileMenu.classList.remove("open");
-      hamburgerBtn.classList.remove("open");
-
-      hamburgerBtn.setAttribute("aria-expanded", "false");
-      hamburgerBtn.setAttribute(
-        "aria-label",
-        "Open navigation menu"
-      );
     }
 
-    hamburgerBtn.addEventListener("click", function(event) {
-      event.stopPropagation();
-
-      const isOpen = mobileMenu.classList.toggle("open");
-
-      hamburgerBtn.classList.toggle("open", isOpen);
-
-      hamburgerBtn.setAttribute(
-        "aria-expanded",
-        String(isOpen)
-      );
-
-      hamburgerBtn.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation menu" : "Open navigation menu"
-      );
-    });
-
-    document.querySelectorAll(".mobile-menu-link").forEach(link => {
-      link.addEventListener("click", closeMobileMenu);
-    });
-
-    document.addEventListener("click", function(event) {
-      if (
-        mobileMenu.classList.contains("open") &&
-        !mobileMenu.contains(event.target) &&
-        !hamburgerBtn.contains(event.target)
-      ) {
-        closeMobileMenu();
-      }
-    });
-
-    /* ------------------------------------------
-       BOOKING MODAL OPEN AND CLOSE
-       ------------------------------------------ */
-
-    function openBookingModal(event) {
-      if (event) event.preventDefault();
-
-      closeMobileMenu();
-      closeGalleryDropdown();
-
-      bookingModal.classList.add("active");
-      bookingModal.setAttribute("aria-hidden", "false");
-
-      document.body.classList.add("booking-open");
-
-      document.getElementById("bookingName").focus();
-    }
-
-    function closeBookingModal() {
-      bookingModal.classList.remove("active");
-      bookingModal.setAttribute("aria-hidden", "true");
-
-      document.body.classList.remove("booking-open");
-    }
-
-    bookingButtons.forEach(button => {
-      button.addEventListener("click", openBookingModal);
-    });
-
-    bookingClose.addEventListener("click", closeBookingModal);
-
-    bookingModal.addEventListener("click", function(event) {
-      if (event.target === bookingModal) {
-        closeBookingModal();
-      }
-    });
-
-    /* ------------------------------------------
-       PREVENT BOOKING PAST DATES
-       ------------------------------------------ */
-
-    function getLocalToday() {
-      const today = new Date();
-
-      const year = today.getFullYear();
-
-      const month = String(
-        today.getMonth() + 1
-      ).padStart(2, "0");
-
-      const day = String(
-        today.getDate()
-      ).padStart(2, "0");
-
-      return `${year}-${month}-${day}`;
-    }
+    // Only clear the form after successful acceptance.
+    bookingForm.reset();
 
     bookingDate.min = getLocalToday();
 
-    bookingDate.addEventListener("focus", function() {
-      bookingDate.min = getLocalToday();
-    });
+    closeBookingModal();
 
-    /* ------------------------------------------
-       SUCCESS CONFETTI ANIMATION
-       ------------------------------------------ */
+    showBookingSuccess();
 
-    function launchSuccessConfetti() {
+  } catch (error) {
+    console.error("Bloom Haven booking error:", error);
 
-      const colors = [
-        "#9b5d3c",
-        "#6d3e29",
-        "#f6d7c9",
-        "#d7a98a",
-        "#fff3ee",
-        "#ffffff"
-      ];
+    const details = error.message || "";
 
-      const pieces = 70;
+    // Give the visitor useful information.
+    if (/activat|confirm|verif/i.test(details)) {
+      showBookingError(
+        "Our booking email is still being set up. " +
+        "Please contact Bloom Haven directly for now."
+      );
+    } else {
+      showBookingError(
+        "Your booking request couldn't be sent. " +
+        "Please try again or contact us directly."
+      );
+    }
 
-      for (let i = 0; i < pieces; i++) {
+  } finally {
+    bookingSubmit.disabled = false;
+    bookingSubmit.textContent = "Send Booking Request";
+  }
+});
 
-        const confetti = document.createElement("span");
+/* ========================================
+   PAGE LOADER
+======================================== */
 
-        confetti.className = "success-confetti";
+function finishLoading() {
+  setTimeout(() => {
+    $("motionLoader").classList.add("done");
+  }, 420);
+}
 
-        confetti.style.left =
-          Math.random() * 100 + "%";
+if (document.readyState === "complete") {
+  finishLoading();
+} else {
+  window.addEventListener("load", finishLoading, {once:true});
+}
 
-        confetti.style.background =
-          colors[Math.floor(Math.random() * colors.length)];
+/* ========================================
+   SCROLL REVEAL
+======================================== */
 
-        confetti.style.setProperty(
-          "--fall-duration",
-          (2.2 + Math.random() * 1.8) + "s"
-        );
+const revealTargets = document.querySelectorAll(".reveal");
 
-        confetti.style.setProperty(
-          "--fall-delay",
-          (Math.random() * .45) + "s"
-        );
-
-        confetti.style.setProperty(
-          "--drift",
-          ((Math.random() - .5) * 220) + "px"
-        );
-
-        confetti.style.setProperty(
-          "--spin",
-          ((Math.random() > .5 ? 1 : -1) *
-            (520 + Math.random() * 900)) + "deg"
-        );
-
-        confetti.style.width =
-          (6 + Math.random() * 6) + "px";
-
-        confetti.style.height =
-          (9 + Math.random() * 12) + "px";
-
-        bookingSuccessPopup.appendChild(confetti);
-
-        setTimeout(() => confetti.remove(), 4500);
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        obs.unobserve(entry.target);
       }
-    }
+    });
+  }, {
+    threshold:.12,
+    rootMargin:"0px 0px -35px 0px"
+  });
 
-    /* ------------------------------------------
-       SUCCESS POPUP
-       ------------------------------------------ */
+  revealTargets.forEach(el => observer.observe(el));
+} else {
+  revealTargets.forEach(el => el.classList.add("is-visible"));
+}
 
-    function showBookingSuccess() {
+/* ========================================
+   STICKY NAVIGATION
+======================================== */
 
-      bookingSuccessPopup.classList.remove("active");
+const topbar = document.querySelector(".topbar");
 
-      void bookingSuccessPopup.offsetWidth;
+function updateTopbar() {
+  topbar.classList.toggle("scrolled", window.scrollY > 16);
+}
 
-      bookingSuccessPopup.classList.add("active");
+updateTopbar();
+window.addEventListener("scroll", updateTopbar, {passive:true});
 
-      bookingSuccessPopup.setAttribute(
-        "aria-hidden",
-        "false"
-      );
+/* ========================================
+   FLOATING PARTICLES
+======================================== */
 
-      document.body.classList.add("booking-open");
+const reducedMotion =
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      launchSuccessConfetti();
+const particleField = $("ambientParticles");
 
-      bookingSuccessOk.focus();
-    }
+if (!reducedMotion) {
+  const count = window.innerWidth < 700 ? 12 : 20;
 
-    function hideBookingSuccess() {
+  for (let i = 0; i < count; i++) {
+    const particle = document.createElement("span");
 
-      bookingSuccessPopup.classList.remove("active");
+    particle.className = "ambient-particle";
+    particle.style.left = Math.random() * 100 + "%";
 
-      bookingSuccessPopup.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-      document.body.classList.remove("booking-open");
-
-      bookingSuccessPopup
-        .querySelectorAll(".success-confetti")
-        .forEach(piece => piece.remove());
-    }
-
-    bookingSuccessOk.addEventListener(
-      "click",
-      hideBookingSuccess
+    particle.style.setProperty(
+      "--size",
+      (4 + Math.random() * 8) + "px"
     );
 
-    bookingSuccessPopup.addEventListener("click", function(event) {
-      if (event.target === bookingSuccessPopup) {
-        hideBookingSuccess();
-      }
-    });
-
-    /* ------------------------------------------
-       ESCAPE KEY SUPPORT
-       ------------------------------------------ */
-
-    document.addEventListener("keydown", function(event) {
-
-      if (event.key !== "Escape") return;
-
-      if (bookingSuccessPopup.classList.contains("active")) {
-        hideBookingSuccess();
-        return;
-      }
-
-      if (bookingModal.classList.contains("active")) {
-        closeBookingModal();
-      }
-
-      closeGalleryDropdown();
-      closeMobileMenu();
-    });
-
-    /* ------------------------------------------
-       BOOKING FORM EMAIL SUBMISSION
-
-       Original email destination preserved:
-       ammasivilmar2@gmail.com
-
-       Uses FormSubmit AJAX.
-       ------------------------------------------ */
-
-    bookingForm.addEventListener("submit", async function(event) {
-
-      event.preventDefault();
-
-      const name =
-        document.getElementById("bookingName").value.trim();
-
-      const contact =
-        document.getElementById("bookingContact").value.trim();
-
-      const date =
-        document.getElementById("bookingDate").value;
-
-      const pax =
-        document.getElementById("bookingPax").value;
-
-      const notes =
-        document.getElementById("bookingNotes").value.trim();
-
-      const submitButton =
-        bookingForm.querySelector(".booking-submit");
-
-      const phonePattern = /^[0-9+\-\s()]{7,20}$/;
-
-      if (!phonePattern.test(contact)) {
-        alert("Please enter a valid contact number.");
-        return;
-      }
-
-      if (!date || date < getLocalToday()) {
-        alert("Please choose a valid booking date.");
-        bookingDate.focus();
-        return;
-      }
-
-      submitButton.disabled = true;
-      submitButton.textContent = "Sending...";
-
-      try {
-
-        /* Prepare email message */
-
-        const message = `
-NEW BLOOM HAVEN BOOKING REQUEST
-
-Hello,
-
-I would like to make a booking at Bloom Haven.
-
-Name: ${name}
-Contact Number: ${contact}
-Date of Booking: ${date}
-Number of Pax: ${pax}
-
-Message / Notes:
-${notes || "No additional notes."}
-
-Thank you.
-        `.trim();
-
-        /* Submit to email using FormSubmit */
-
-        const response = await fetch(
-          "https://formsubmit.co/ajax/ammasivilmar2@gmail.com",
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-            },
-
-            body: JSON.stringify({
-              _subject: "New Bloom Haven Booking Request",
-              _template: "basic",
-              _captcha: "false",
-              name: name,
-              contact: contact,
-              date: date,
-              pax: pax,
-              notes: notes,
-              message: message
-            })
-          }
-        );
-
-        const result = await response.json();
-
-        if (
-          !response.ok ||
-          result.success === false ||
-          result.success === "false"
-        ) {
-          throw new Error(
-            result.message || "Booking submission failed."
-          );
-        }
-
-        /* Clear form only after accepted submission */
-
-        bookingForm.reset();
-
-        bookingDate.min = getLocalToday();
-
-        closeBookingModal();
-
-        showBookingSuccess();
-
-      } catch (error) {
-
-        console.error("Booking error:", error);
-
-        alert(
-          "Sorry, your booking could not be sent. Please try again."
-        );
-
-      } finally {
-
-        submitButton.disabled = false;
-        submitButton.textContent = "Done";
-
-      }
-
-    });
-
-    /* ------------------------------------------
-       PAGE LOADING ANIMATION
-       ------------------------------------------ */
-
-    function finishPageLoading() {
-      setTimeout(() => {
-        motionLoader.classList.add("done");
-      }, 420);
-    }
-
-    if (document.readyState === "complete") {
-      finishPageLoading();
-    } else {
-      window.addEventListener("load", finishPageLoading, {
-        once: true
-      });
-    }
-
-    /* ------------------------------------------
-       SCROLL REVEAL ANIMATION
-       ------------------------------------------ */
-
-    const revealTargets =
-      document.querySelectorAll(".reveal");
-
-    if ("IntersectionObserver" in window) {
-
-      const observer = new IntersectionObserver(
-        function(entries, observerInstance) {
-
-          entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-              entry.target.classList.add("is-visible");
-
-              observerInstance.unobserve(entry.target);
-
-            }
-
-          });
-
-        },
-        {
-          threshold: .12,
-          rootMargin: "0px 0px -35px 0px"
-        }
-      );
-
-      revealTargets.forEach(element => {
-        observer.observe(element);
-      });
-
-    } else {
-
-      revealTargets.forEach(element => {
-        element.classList.add("is-visible");
-      });
-
-    }
-
-    /* ------------------------------------------
-       STICKY NAVIGATION ANIMATION
-       ------------------------------------------ */
-
-    const topbar = document.querySelector(".topbar");
-
-    function updateTopbar() {
-      topbar.classList.toggle(
-        "scrolled",
-        window.scrollY > 16
-      );
-    }
-
-    updateTopbar();
-
-    window.addEventListener("scroll", updateTopbar, {
-      passive: true
-    });
-
-    /* ------------------------------------------
-       FLOATING BACKGROUND PARTICLES
-       ------------------------------------------ */
-
-    const prefersReducedMotion =
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const particleField =
-      document.getElementById("ambientParticles");
-
-    if (!prefersReducedMotion) {
-
-      const count = window.innerWidth < 700 ? 12 : 20;
-
-      for (let i = 0; i < count; i++) {
-
-        const particle = document.createElement("span");
-
-        particle.className = "ambient-particle";
-
-        particle.style.left =
-          Math.random() * 100 + "%";
-
-        particle.style.setProperty(
-          "--size",
-          (4 + Math.random() * 8) + "px"
-        );
-
-        particle.style.setProperty(
-          "--duration",
-          (10 + Math.random() * 11) + "s"
-        );
-
-        particle.style.setProperty(
-          "--delay",
-          (-Math.random() * 18) + "s"
-        );
-
-        particle.style.setProperty(
-          "--drift",
-          (-100 + Math.random() * 200) + "px"
-        );
-
-        particleField.appendChild(particle);
-      }
-    }
-
-    /* ------------------------------------------
-       DESKTOP CURSOR AURA
-       ------------------------------------------ */
-
-    if (
-      cursorAura &&
-      !prefersReducedMotion &&
-      window.matchMedia("(pointer: fine)").matches
-    ) {
-
-      let ax = window.innerWidth / 2;
-      let ay = window.innerHeight / 2;
-
-      let tx = ax;
-      let ty = ay;
-
-      window.addEventListener("pointermove", function(event) {
-
-        tx = event.clientX;
-        ty = event.clientY;
-
-        document.body.classList.add("has-pointer");
-
-      }, { passive: true });
-
-      function animateAura() {
-
-        ax += (tx - ax) * .12;
-        ay += (ty - ay) * .12;
-
-        cursorAura.style.left = ax + "px";
-        cursorAura.style.top = ay + "px";
-
-        requestAnimationFrame(animateAura);
-      }
-
-      animateAura();
-    }
-
-    /* ------------------------------------------
-       HERO 3D TILT EFFECT
-       ------------------------------------------ */
-
-    const heroCard =
-      document.querySelector(".image-card");
-
-    if (
-      heroCard &&
-      !prefersReducedMotion &&
-      window.matchMedia("(pointer: fine)").matches
-    ) {
-
-      heroCard.addEventListener("pointermove", function(event) {
-
-        const rect = heroCard.getBoundingClientRect();
-
-        const x =
-          (event.clientX - rect.left) / rect.width - .5;
-
-        const y =
-          (event.clientY - rect.top) / rect.height - .5;
-
-        heroCard.style.transform =
-          `perspective(900px)
-           rotateX(${-y * 4}deg)
-           rotateY(${x * 5}deg)
-           translateY(-3px)`;
-
-      });
-
-      heroCard.addEventListener("pointerleave", function() {
-        heroCard.style.transform = "";
-      });
-    }
-
-    /* ------------------------------------------
-       HERO PARALLAX SCROLL
-       ------------------------------------------ */
-
-    const heroVisual =
-      document.querySelector(".hero-visual");
-
-    if (heroVisual && !prefersReducedMotion) {
-
-      window.addEventListener("scroll", function() {
-
-        const y = Math.min(window.scrollY, 500);
-
-        heroVisual.style.translate =
-          `0 ${y * -.035}px`;
-
-      }, { passive: true });
-
-    }
-
-  </script>
+    particle.style.setProperty(
+      "--duration",
+      (10 + Math.random() * 11) + "s"
+    );
+
+    particle.style.setProperty(
+      "--delay",
+      (-Math.random() * 18) + "s"
+    );
+
+    particle.style.setProperty(
+      "--drift",
+      (-100 + Math.random() * 200) + "px"
+    );
+
+    particleField.appendChild(particle);
+  }
+}
+
+/* ========================================
+   CURSOR AURA
+======================================== */
+
+const cursorAura = $("cursorAura");
+
+if (
+  !reducedMotion &&
+  window.matchMedia("(pointer: fine)").matches
+) {
+  let ax = window.innerWidth / 2;
+  let ay = window.innerHeight / 2;
+  let tx = ax;
+  let ty = ay;
+
+  window.addEventListener("pointermove", event => {
+    tx = event.clientX;
+    ty = event.clientY;
+    document.body.classList.add("has-pointer");
+  }, {passive:true});
+
+  function animateAura() {
+    ax += (tx - ax) * .12;
+    ay += (ty - ay) * .12;
+
+    cursorAura.style.left = ax + "px";
+    cursorAura.style.top = ay + "px";
+
+    requestAnimationFrame(animateAura);
+  }
+
+  animateAura();
+}
+
+/* ========================================
+   HERO 3D TILT
+======================================== */
+
+const heroCard = document.querySelector(".image-card");
+
+if (
+  heroCard &&
+  !reducedMotion &&
+  window.matchMedia("(pointer: fine)").matches
+) {
+  heroCard.addEventListener("pointermove", event => {
+    const rect = heroCard.getBoundingClientRect();
+
+    const x = (event.clientX - rect.left) / rect.width - .5;
+    const y = (event.clientY - rect.top) / rect.height - .5;
+
+    heroCard.style.transform =
+      "perspective(900px) rotateX(" + (-y * 4) +
+      "deg) rotateY(" + (x * 5) +
+      "deg) translateY(-3px)";
+  });
+
+  heroCard.addEventListener("pointerleave", () => {
+    heroCard.style.transform = "";
+  });
+}
+
+/* ========================================
+   HERO PARALLAX
+======================================== */
+
+const heroVisual = document.querySelector(".hero-visual");
+
+if (heroVisual && !reducedMotion) {
+  window.addEventListener("scroll", () => {
+    const y = Math.min(window.scrollY,500);
+    heroVisual.style.translate = "0 " + (y * -.035) + "px";
+  }, {passive:true});
+}
+
+</script>
 
 </body>
 </html>
