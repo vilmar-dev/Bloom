@@ -4,17 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#fffaf6">
 <title>BLOOM HAVEN | Staycation</title>
+<meta name="theme-color" content="#fffaf6">
 
 <style>
-/* ========================================
-   BLOOM HAVEN - WEBSITE DESIGN
-======================================== */
-
 :root {
   --bg:#fffaf6;
-  --white:#ffffff;
   --primary:#9b5d3c;
   --dark:#6d3e29;
   --accent:#f6d7c9;
@@ -22,54 +17,54 @@
   --muted:#6d5d58;
   --line:#f0e1d9;
   --shadow:0 18px 40px rgba(89,52,39,.12);
-  --ease:cubic-bezier(.16,1,.3,1);
 }
 
 * {box-sizing:border-box}
-
-html {
-  scroll-behavior:smooth;
-  scroll-padding-top:90px;
-}
+html {scroll-behavior:smooth;scroll-padding-top:90px}
 
 body {
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(180deg,#fffaf6,#fff);
   color:var(--text);
+  background:linear-gradient(180deg,#fffaf6,#fff);
   overflow-x:hidden;
 }
 
 body.modal-open {overflow:hidden}
-
-a {text-decoration:none;color:inherit}
+a {color:inherit;text-decoration:none}
+img {width:100%;display:block}
 button,input,select,textarea {font:inherit}
 button {cursor:pointer}
-img {display:block;max-width:100%}
 
 .container {
   width:min(1160px,calc(100% - 36px));
   margin:auto;
 }
 
-section {padding:80px 0}
+section {padding:75px 0}
 
-/* ========================================
-   HEADER
-======================================== */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline:3px solid var(--accent);
+  outline-offset:3px;
+}
+
+/* NAVIGATION */
 
 .topbar {
   position:sticky;
   top:0;
   z-index:1000;
   background:rgba(255,250,246,.95);
-  border-bottom:1px solid var(--line);
   backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
   transition:.3s;
 }
 
 .topbar.scrolled {
-  background:rgba(255,250,246,.85);
   box-shadow:0 10px 35px rgba(76,52,43,.08);
 }
 
@@ -78,15 +73,15 @@ section {padding:80px 0}
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:25px;
   position:relative;
+  gap:22px;
 }
 
 .brand {
   display:flex;
   align-items:center;
-  gap:13px;
-  font-size:1.14rem;
+  gap:14px;
+  font-size:1.13rem;
   font-weight:900;
   letter-spacing:2px;
   white-space:nowrap;
@@ -95,16 +90,15 @@ section {padding:80px 0}
 .brand-mark {
   width:18px;
   height:18px;
-  flex-shrink:0;
-  border-radius:50%;
   background:linear-gradient(135deg,var(--primary),#d7a98a);
+  border-radius:50%;
   box-shadow:0 0 0 7px rgba(155,93,60,.12);
 }
 
 .nav-links {
   display:flex;
-  gap:27px;
   align-items:center;
+  gap:28px;
   color:var(--muted);
   font-weight:600;
   font-size:.95rem;
@@ -123,28 +117,24 @@ section {padding:80px 0}
   font-weight:600;
 }
 
-.gallery-trigger::after {
-  content:" ▾";
-  margin-left:5px;
-}
+.gallery-trigger::after {content:" ▾"}
 
 .gallery-menu {
   display:none;
   position:absolute;
   top:100%;
   left:-15px;
-  width:230px;
-  padding:10px;
+  width:220px;
+  background:white;
   border:1px solid var(--line);
-  border-radius:16px;
-  background:#fff;
+  border-radius:15px;
+  padding:10px;
   box-shadow:var(--shadow);
-  z-index:20;
 }
 
 .gallery-dropdown.open .gallery-menu {
   display:block;
-  animation:fadeDown .25s ease;
+  animation:fadeDown .25s;
 }
 
 .gallery-menu a {
@@ -155,19 +145,23 @@ section {padding:80px 0}
 
 .gallery-menu a:hover {background:#fff4ee}
 
+/* BUTTONS */
+
 .btn,.nav-cta {
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  padding:14px 24px;
+  gap:9px;
+  border:0;
   border-radius:50px;
+  padding:14px 24px;
   font-weight:700;
-  transition:transform .3s,background .3s,box-shadow .3s;
+  transition:.3s;
 }
 
 .btn-primary,.nav-cta {
   background:var(--primary);
-  color:#fff;
+  color:white;
   box-shadow:var(--shadow);
 }
 
@@ -186,9 +180,17 @@ section {padding:80px 0}
   transform:translateY(-3px);
 }
 
-/* ========================================
-   MOBILE NAVIGATION
-======================================== */
+.messenger-btn {
+  background:#0866ff;
+  color:white;
+}
+
+.messenger-btn:hover {
+  background:#0052ce;
+  transform:translateY(-2px);
+}
+
+/* MOBILE MENU */
 
 .hamburger-btn {
   display:none;
@@ -206,8 +208,8 @@ section {padding:80px 0}
 .hamburger-btn span {
   width:23px;
   height:2px;
-  background:var(--dark);
   border-radius:5px;
+  background:var(--dark);
   transition:.3s;
 }
 
@@ -223,17 +225,15 @@ section {padding:80px 0}
 
 .mobile-menu {display:none}
 
-/* ========================================
-   HERO
-======================================== */
+/* HERO */
 
-.hero {padding:95px 0 75px}
+.hero {padding:90px 0 75px}
 
 .hero-inner {
   display:grid;
   grid-template-columns:1.12fr .88fr;
-  align-items:center;
   gap:55px;
+  align-items:center;
 }
 
 .eyebrow {
@@ -243,8 +243,8 @@ section {padding:80px 0}
   border:1px solid var(--line);
   border-radius:50px;
   color:var(--dark);
-  font-size:.75rem;
   font-weight:800;
+  font-size:.75rem;
   letter-spacing:1.3px;
   text-transform:uppercase;
 }
@@ -257,23 +257,23 @@ h1 {
 }
 
 .lead {
+  color:var(--muted);
   font-size:1.06rem;
   line-height:1.85;
-  color:var(--muted);
-  max-width:580px;
+  max-width:570px;
 }
 
 .hero-actions {
   display:flex;
-  gap:14px;
   flex-wrap:wrap;
+  gap:14px;
   margin:30px 0;
 }
 
 .stats {
   display:flex;
-  gap:30px;
   flex-wrap:wrap;
+  gap:30px;
   margin-top:32px;
 }
 
@@ -288,8 +288,6 @@ h1 {
   font-size:.86rem;
 }
 
-.hero-visual {position:relative}
-
 .image-card {
   padding:15px;
   border-radius:28px;
@@ -297,23 +295,17 @@ h1 {
   border:1px solid var(--line);
   box-shadow:var(--shadow);
   overflow:hidden;
-  transition:transform .2s,box-shadow .3s;
+  transition:transform .2s;
 }
 
 .image-card img {
-  width:100%;
   height:auto;
   max-height:680px;
   object-fit:contain;
   border-radius:21px;
-  transition:transform .7s var(--ease);
 }
 
-.image-card:hover img {transform:scale(1.025)}
-
-/* ========================================
-   SECTION HEADINGS
-======================================== */
+/* SECTION HEADINGS */
 
 .section-header {
   max-width:720px;
@@ -343,9 +335,7 @@ h1 {
   background:linear-gradient(90deg,var(--primary),var(--accent));
 }
 
-/* ========================================
-   ABOUT
-======================================== */
+/* ABOUT */
 
 .about-section {background:#fff7f2}
 
@@ -364,8 +354,8 @@ h1 {
 }
 
 .about-card h3 {
-  margin-top:0;
   font-size:1.45rem;
+  margin-top:0;
 }
 
 .about-card p {
@@ -382,28 +372,24 @@ h1 {
 
 .feature-list li {
   display:flex;
-  gap:12px;
   align-items:center;
+  gap:12px;
   font-weight:600;
 }
 
 .feature-list li::before {
   content:"✓";
-  width:25px;
-  height:25px;
   display:grid;
   place-items:center;
   flex-shrink:0;
+  width:25px;
+  height:25px;
+  border-radius:50%;
   background:var(--accent);
   color:var(--dark);
-  border-radius:50%;
 }
 
-/* ========================================
-   GALLERIES
-======================================== */
-
-.gallery-section:nth-of-type(even) {background:#fffaf6}
+/* GALLERY */
 
 .gallery-grid {
   display:grid;
@@ -413,11 +399,11 @@ h1 {
 
 .gallery-item {
   background:white;
+  overflow:hidden;
   border:1px solid var(--line);
   border-radius:23px;
-  overflow:hidden;
   box-shadow:0 12px 28px rgba(43,31,24,.06);
-  transition:transform .4s var(--ease),box-shadow .4s;
+  transition:transform .4s,box-shadow .4s;
 }
 
 .gallery-item:hover {
@@ -426,10 +412,9 @@ h1 {
 }
 
 .gallery-item img {
-  width:100%;
   height:300px;
   object-fit:cover;
-  transition:transform .7s var(--ease);
+  transition:transform .65s;
 }
 
 .gallery-item:hover img {transform:scale(1.06)}
@@ -454,9 +439,7 @@ h1 {
   text-align:center;
 }
 
-/* ========================================
-   PROMO
-======================================== */
+/* PROMO */
 
 .promo-wrap {
   display:grid;
@@ -464,9 +447,9 @@ h1 {
   gap:35px;
   align-items:center;
   padding:40px;
+  border:1px solid var(--line);
   border-radius:30px;
   background:linear-gradient(135deg,#f7e7dc,#f9f3ef);
-  border:1px solid var(--line);
 }
 
 .promo-wrap h3 {
@@ -494,9 +477,7 @@ h1 {
   margin:15px 0;
 }
 
-/* ========================================
-   FOOTER
-======================================== */
+/* FOOTER */
 
 footer {
   padding:45px 20px;
@@ -516,12 +497,9 @@ footer p {
   font-size:.9rem;
 }
 
-/* ========================================
-   BOOKING MODAL
-======================================== */
+/* BOOKING MODAL */
 
-.booking-modal,
-.success-popup {
+.booking-modal,.messenger-modal {
   position:fixed;
   inset:0;
   display:none;
@@ -533,26 +511,25 @@ footer p {
   z-index:10000;
 }
 
-.booking-modal.active,
-.success-popup.active {
+.booking-modal.active,.messenger-modal.active {
   display:flex;
-  animation:fadeIn .3s ease;
+  animation:fadeIn .3s;
 }
 
-.booking-card {
+.booking-card,.messenger-card {
   position:relative;
   width:min(490px,100%);
   max-height:92vh;
   overflow-y:auto;
-  background:white;
   padding:33px;
+  background:white;
   border:1px solid var(--line);
   border-radius:26px;
   box-shadow:0 25px 80px rgba(42,33,29,.3);
-  animation:modalPop .5s var(--ease);
+  animation:modalPop .5s;
 }
 
-.booking-close {
+.booking-close,.messenger-close {
   position:absolute;
   top:16px;
   right:17px;
@@ -565,12 +542,12 @@ footer p {
   font-size:1.5rem;
 }
 
-.booking-card h2 {
+.booking-card h2,.messenger-card h2 {
   margin:0 40px 9px 0;
-  font-size:2rem;
+  font-size:1.9rem;
 }
 
-.booking-card > p {
+.booking-card > p,.messenger-card > p {
   color:var(--muted);
   line-height:1.7;
   margin-bottom:23px;
@@ -595,7 +572,6 @@ footer p {
   background:#fffdfb;
   outline:none;
   color:var(--text);
-  transition:.2s;
 }
 
 .booking-field input:focus,
@@ -618,15 +594,9 @@ footer p {
   background:var(--primary);
   color:white;
   font-weight:800;
-  transition:.25s;
 }
 
 .booking-submit:hover {background:var(--dark)}
-
-.booking-submit:disabled {
-  opacity:.65;
-  cursor:wait;
-}
 
 .form-error {
   display:none;
@@ -637,130 +607,64 @@ footer p {
   border:1px solid #f3c3bc;
   border-radius:12px;
   line-height:1.5;
-  font-size:.9rem;
 }
 
 .form-error.visible {display:block}
 
-/* ========================================
-   SUCCESS POPUP
-======================================== */
+/* MESSENGER CONFIRMATION */
 
-.success-popup {z-index:10001}
+.messenger-modal {z-index:10001}
 
-.success-box {
-  position:relative;
-  width:min(420px,100%);
-  background:white;
-  padding:45px 30px 35px;
-  border:1px solid var(--accent);
-  border-radius:30px;
+.messenger-card {
   text-align:center;
-  overflow:hidden;
-  box-shadow:0 30px 90px rgba(42,33,29,.35);
-  animation:successBounce .8s cubic-bezier(.16,1.35,.3,1);
+  width:min(470px,100%);
 }
 
-.success-box::before {
-  content:"";
-  position:absolute;
-  width:170%;
-  height:70px;
-  left:-35%;
-  top:-90px;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.95),transparent);
-  transform:rotate(-12deg);
-  animation:shine 1.3s .35s ease forwards;
-  pointer-events:none;
-}
-
-.success-icon-wrap {
-  position:relative;
-  width:100px;
-  height:100px;
+.messenger-icon {
+  width:75px;
+  height:75px;
   margin:0 auto 20px;
   display:grid;
   place-items:center;
-}
-
-.success-ring {
-  position:absolute;
-  inset:0;
-  border:2px solid rgba(155,93,60,.25);
   border-radius:50%;
-  animation:ringPulse 1.8s infinite;
+  background:#e8f0ff;
+  color:#0866ff;
+  font-size:2rem;
+  font-weight:900;
+  animation:iconBounce .6s;
 }
 
-.success-icon {
-  width:76px;
-  height:76px;
+.message-preview {
+  width:100%;
+  min-height:210px;
+  padding:15px;
+  margin:5px 0 15px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fffaf6;
+  color:var(--text);
+  text-align:left;
+  line-height:1.6;
+  resize:vertical;
+  font-size:.9rem;
+}
+
+.messenger-actions {
   display:grid;
-  place-items:center;
-  position:relative;
-  z-index:2;
-  border-radius:50%;
-  background:linear-gradient(135deg,#fff6f1,#f6d7c9);
-  box-shadow:0 12px 30px rgba(155,93,60,.2);
-  animation:iconBounce .8s ease;
+  gap:12px;
 }
 
-.success-icon svg {
-  width:42px;
-  height:42px;
+.messenger-actions .btn {
+  width:100%;
 }
 
-.success-icon circle {
-  fill:none;
-  stroke:rgba(155,93,60,.25);
-  stroke-width:2;
-}
-
-.success-icon path {
-  fill:none;
-  stroke:var(--dark);
-  stroke-width:4;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  stroke-dasharray:45;
-  stroke-dashoffset:45;
-  animation:drawCheck .8s .55s forwards;
-}
-
-.success-box h3 {
-  color:var(--dark);
-  font-size:1.95rem;
-  margin:0 0 12px;
-}
-
-.success-box p {
+.copy-status {
+  font-size:.88rem;
   color:var(--muted);
-  line-height:1.7;
-  margin-bottom:25px;
+  line-height:1.5;
 }
 
-.success-ok {
-  border:0;
-  border-radius:50px;
-  padding:14px 30px;
-  font-weight:800;
-  color:white;
-  background:linear-gradient(135deg,var(--primary),var(--dark));
-  transition:.3s;
-}
-
-.success-ok:hover {transform:translateY(-3px)}
-
-.success-confetti {
-  position:absolute;
-  top:-30px;
-  border-radius:3px;
-  pointer-events:none;
-  animation:confettiFall var(--duration,3s) var(--delay,0s) ease-in forwards;
-}
-
-/* ========================================
-   ANIMATIONS
-======================================== */
+/* ANIMATIONS */
 
 .motion-loader {
   position:fixed;
@@ -813,7 +717,7 @@ footer p {
 .reveal {
   opacity:0;
   transform:translateY(40px);
-  transition:opacity .85s var(--ease),transform .85s var(--ease);
+  transition:opacity .85s,transform .85s;
 }
 
 .reveal.is-visible {
@@ -822,7 +726,7 @@ footer p {
 }
 
 .hero-copy > * {
-  animation:heroEntrance .9s var(--ease) both;
+  animation:heroEntrance .9s both;
 }
 
 .hero-copy > :nth-child(1) {animation-delay:.1s}
@@ -832,7 +736,7 @@ footer p {
 .hero-copy > :nth-child(5) {animation-delay:.5s}
 
 .hero-visual {
-  animation:heroEntrance 1.1s .3s var(--ease) both;
+  animation:heroEntrance 1.1s .3s both;
 }
 
 .ambient-particles {
@@ -851,19 +755,6 @@ footer p {
   border-radius:65% 35% 65% 35%;
   animation:particleDrift var(--duration,14s) var(--delay,0s) linear infinite;
 }
-
-.cursor-aura {
-  position:fixed;
-  width:180px;
-  height:180px;
-  z-index:9998;
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  background:radial-gradient(circle,rgba(246,215,201,.22),transparent 70%);
-  opacity:0;
-}
-
-body.has-pointer .cursor-aura {opacity:1}
 
 @keyframes fadeIn {
   from {opacity:0}
@@ -885,42 +776,10 @@ body.has-pointer .cursor-aura {opacity:1}
   to {opacity:1;transform:none}
 }
 
-@keyframes successBounce {
-  0% {opacity:0;transform:translateY(48px) scale(.7)}
-  65% {opacity:1;transform:translateY(-7px) scale(1.04)}
-  100% {transform:none}
-}
-
 @keyframes iconBounce {
-  0% {transform:scale(0) rotate(-25deg)}
-  70% {transform:scale(1.15)}
+  0% {transform:scale(0) rotate(-20deg)}
+  70% {transform:scale(1.12)}
   100% {transform:none}
-}
-
-@keyframes drawCheck {
-  to {stroke-dashoffset:0}
-}
-
-@keyframes ringPulse {
-  0% {opacity:0;transform:scale(.7)}
-  30% {opacity:1}
-  100% {opacity:0;transform:scale(1.5)}
-}
-
-@keyframes shine {
-  from {top:-90px;opacity:0}
-  25% {opacity:1}
-  to {top:115%;opacity:0}
-}
-
-@keyframes confettiFall {
-  0% {opacity:0;transform:translateY(-10px) rotate(0)}
-  10% {opacity:1}
-  100% {
-    opacity:0;
-    transform:translate(var(--drift,30px),110vh)
-      rotate(var(--spin,720deg));
-  }
 }
 
 @keyframes orbPulse {
@@ -943,9 +802,7 @@ body.has-pointer .cursor-aura {opacity:1}
   }
 }
 
-/* ========================================
-   MOBILE RESPONSIVE
-======================================== */
+/* RESPONSIVE */
 
 @media(max-width:900px) {
   .nav-links,.nav > .nav-cta {display:none}
@@ -959,19 +816,17 @@ body.has-pointer .cursor-aura {opacity:1}
     display:none;
     flex-direction:column;
     gap:5px;
-    background:#fff;
     padding:14px;
+    background:white;
     border:1px solid var(--line);
     border-radius:18px;
     box-shadow:var(--shadow);
   }
 
-  .mobile-menu.open {
-    display:flex;
-    animation:fadeDown .3s ease;
-  }
+  .mobile-menu.open {display:flex;animation:fadeDown .3s}
 
   .mobile-menu-link {
+    display:block;
     padding:13px 14px;
     border-radius:11px;
     font-weight:700;
@@ -993,7 +848,6 @@ body.has-pointer .cursor-aura {opacity:1}
   }
 
   .gallery-grid {grid-template-columns:repeat(2,1fr)}
-  .hero-inner {gap:45px}
 }
 
 @media(max-width:600px) {
@@ -1006,8 +860,7 @@ body.has-pointer .cursor-aura {opacity:1}
   .stats {gap:22px}
   .stat strong {font-size:1.3rem}
   .about-card,.promo-wrap {padding:24px}
-  .booking-card {padding:28px 21px}
-  .hero-actions .btn {padding:14px 20px}
+  .booking-card,.messenger-card {padding:28px 21px}
 }
 
 @media(prefers-reduced-motion:reduce) {
@@ -1017,19 +870,15 @@ body.has-pointer .cursor-aura {opacity:1}
     transition-duration:.01ms!important;
     scroll-behavior:auto!important;
   }
-
   .reveal {opacity:1;transform:none}
-
-  .motion-loader,.ambient-particles,.cursor-aura {
-    display:none;
-  }
+  .motion-loader,.ambient-particles {display:none}
 }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE LOADER -->
+<!-- LOADING SCREEN -->
 
 <div class="motion-loader" id="motionLoader" aria-hidden="true">
   <div class="loader-inner">
@@ -1038,12 +887,9 @@ body.has-pointer .cursor-aura {opacity:1}
   </div>
 </div>
 
-<div class="cursor-aura" id="cursorAura" aria-hidden="true"></div>
 <div class="ambient-particles" id="ambientParticles" aria-hidden="true"></div>
 
-<!-- ========================================
-     NAVIGATION
-======================================== -->
+<!-- HEADER -->
 
 <header class="topbar">
   <div class="container nav">
@@ -1071,33 +917,24 @@ body.has-pointer .cursor-aura {opacity:1}
       <a href="promo.html">Promo Offer</a>
     </nav>
 
-    <a href="#" class="nav-cta booking-btn">
-      Book Your Stay
-    </a>
+    <a href="#" class="nav-cta booking-btn">Book Your Stay</a>
 
-    <button
-      type="button"
-      class="hamburger-btn"
-      id="hamburgerBtn"
-      aria-label="Open navigation menu"
-      aria-expanded="false"
-      aria-controls="mobileMenu"
-    >
-      <span></span><span></span><span></span>
+    <button type="button" class="hamburger-btn"
+      id="hamburgerBtn" aria-label="Open navigation menu"
+      aria-expanded="false" aria-controls="mobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
-    <!-- MOBILE MENU -->
-
     <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
-      <a href="#about" class="mobile-menu-link">About</a>
-      <a href="fair.html" class="mobile-menu-link">Pink House</a>
-      <a href="hampton1.html" class="mobile-menu-link">Sylvia</a>
-      <a href="hampton2.html" class="mobile-menu-link">Anne</a>
-      <a href="promo.html" class="mobile-menu-link">Promo Offer</a>
-
-      <a href="#" class="mobile-menu-link mobile-booking booking-btn">
-        Book Your Stay
-      </a>
+      <a class="mobile-menu-link" href="#about">About</a>
+      <a class="mobile-menu-link" href="fair.html">Pink House</a>
+      <a class="mobile-menu-link" href="hampton1.html">Sylvia</a>
+      <a class="mobile-menu-link" href="hampton2.html">Anne</a>
+      <a class="mobile-menu-link" href="promo.html">Promo Offer</a>
+      <a class="mobile-menu-link mobile-booking booking-btn"
+        href="#">Book Your Stay</a>
     </nav>
 
   </div>
@@ -1105,14 +942,12 @@ body.has-pointer .cursor-aura {opacity:1}
 
 <main id="home">
 
-<!-- ========================================
-     HERO SECTION
-======================================== -->
+<!-- HERO -->
 
 <section class="hero">
   <div class="container hero-inner">
-
     <div class="hero-copy">
+
       <span class="eyebrow">Airbnb Staycation</span>
 
       <h1>Feel at home in a dreamy getaway.</h1>
@@ -1140,27 +975,24 @@ body.has-pointer .cursor-aura {opacity:1}
         </div>
         <div class="stat">
           <strong>Easy</strong>
-          <span>Send a booking request</span>
+          <span>Message us to book</span>
         </div>
       </div>
+
     </div>
 
     <div class="hero-visual">
       <div class="image-card">
-        <img src="colgate.png" alt="Bloom Haven Staycation">
+        <img src="colgate.png" alt="Bloom Haven staycation">
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ========================================
-     ABOUT
-======================================== -->
+<!-- ABOUT -->
 
 <section id="about" class="about-section">
   <div class="container">
-
     <div class="section-header reveal">
       <span class="eyebrow">About Bloom Haven</span>
       <h2>A little break from your busy days.</h2>
@@ -1171,7 +1003,6 @@ body.has-pointer .cursor-aura {opacity:1}
     </div>
 
     <div class="about-grid">
-
       <div class="about-card reveal">
         <h3>Stay, relax, and enjoy.</h3>
         <p>
@@ -1183,7 +1014,6 @@ body.has-pointer .cursor-aura {opacity:1}
 
       <div class="about-card reveal">
         <h3>What you'll love</h3>
-
         <ul class="feature-list">
           <li>Comfortable bedrooms</li>
           <li>Cozy living areas</li>
@@ -1192,18 +1022,14 @@ body.has-pointer .cursor-aura {opacity:1}
           <li>A place to relax with family and friends</li>
         </ul>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ========================================
-     SYLVIA - HAMPTON UNIT 1
-======================================== -->
+<!-- SYLVIA / ORIGINAL HAMPTON UNIT 1 -->
 
 <section id="sylvia" class="gallery-section">
   <div class="container">
-
     <div class="section-header reveal">
       <span class="eyebrow">Sylvia</span>
       <h2>Bloom Haven Sylvia</h2>
@@ -1214,7 +1040,6 @@ body.has-pointer .cursor-aura {opacity:1}
     </div>
 
     <div class="gallery-grid">
-
       <article class="gallery-item reveal">
         <img src="hsala.jpg" alt="Sylvia living room" loading="lazy">
         <div class="gallery-caption">
@@ -1230,10 +1055,7 @@ body.has-pointer .cursor-aura {opacity:1}
         <img src="hamptonbed.jpg" alt="Sylvia bedroom" loading="lazy">
         <div class="gallery-caption">
           <strong>Bedroom</strong>
-          <span>
-            A cozy bed waiting for you
-            after a long day.
-          </span>
+          <span>A cozy bed waiting for you after a long day.</span>
         </div>
       </article>
 
@@ -1241,31 +1063,22 @@ body.has-pointer .cursor-aura {opacity:1}
         <img src="hkitchen.jpg" alt="Sylvia kitchen" loading="lazy">
         <div class="gallery-caption">
           <strong>Kitchen</strong>
-          <span>
-            Prepare your meals and enjoy
-            good food together.
-          </span>
+          <span>Prepare your meals and enjoy good food together.</span>
         </div>
       </article>
-
     </div>
 
     <div class="unit-actions reveal">
-      <button class="btn btn-primary book-unit" data-unit="Sylvia">
-        Book Sylvia
-      </button>
+      <button type="button" class="btn btn-primary book-unit"
+        data-unit="Sylvia">Book Sylvia</button>
     </div>
-
   </div>
 </section>
 
-<!-- ========================================
-     ANNE - HAMPTON UNIT 2
-======================================== -->
+<!-- ANNE / ORIGINAL HAMPTON UNIT 2 -->
 
 <section id="anne" class="gallery-section">
   <div class="container">
-
     <div class="section-header reveal">
       <span class="eyebrow">Anne</span>
       <h2>Bloom Haven Anne</h2>
@@ -1276,7 +1089,6 @@ body.has-pointer .cursor-aura {opacity:1}
     </div>
 
     <div class="gallery-grid">
-
       <article class="gallery-item reveal">
         <img src="hams2kitchen.jpg" alt="Anne kitchen" loading="lazy">
         <div class="gallery-caption">
@@ -1293,8 +1105,8 @@ body.has-pointer .cursor-aura {opacity:1}
         <div class="gallery-caption">
           <strong>Living Room</strong>
           <span>
-            A nice place to chill,
-            chat, and spend time together.
+            A nice place to chill, chat,
+            and spend time together.
           </span>
         </div>
       </article>
@@ -1303,31 +1115,22 @@ body.has-pointer .cursor-aura {opacity:1}
         <img src="ham2bes11.png" alt="Anne bedroom" loading="lazy">
         <div class="gallery-caption">
           <strong>Bedroom</strong>
-          <span>
-            Get comfortable and
-            have a good night's rest.
-          </span>
+          <span>Get comfortable and have a good night's rest.</span>
         </div>
       </article>
-
     </div>
 
     <div class="unit-actions reveal">
-      <button class="btn btn-primary book-unit" data-unit="Anne">
-        Book Anne
-      </button>
+      <button type="button" class="btn btn-primary book-unit"
+        data-unit="Anne">Book Anne</button>
     </div>
-
   </div>
 </section>
 
-<!-- ========================================
-     PINK HOUSE - FAIRGROUNDS
-======================================== -->
+<!-- PINK HOUSE / ORIGINAL FAIRGROUNDS -->
 
 <section id="pink-house" class="gallery-section">
   <div class="container">
-
     <div class="section-header reveal">
       <span class="eyebrow">Pink House</span>
       <h2>Bloom Haven Pink House</h2>
@@ -1338,9 +1141,8 @@ body.has-pointer .cursor-aura {opacity:1}
     </div>
 
     <div class="gallery-grid">
-
       <article class="gallery-item reveal">
-        <img src="bloombilliard.jpg" alt="Pink House billiards" loading="lazy">
+        <img src="bloombilliard.jpg" alt="Billiards area" loading="lazy">
         <div class="gallery-caption">
           <strong>Billiards Area</strong>
           <span>
@@ -1351,7 +1153,7 @@ body.has-pointer .cursor-aura {opacity:1}
       </article>
 
       <article class="gallery-item reveal">
-        <img src="blompool.jpg" alt="Pink House mini pool and gym" loading="lazy">
+        <img src="blompool.jpg" alt="Mini pool and gym" loading="lazy">
         <div class="gallery-caption">
           <strong>Mini Pool &amp; Gym Equipment</strong>
           <span>
@@ -1371,41 +1173,27 @@ body.has-pointer .cursor-aura {opacity:1}
           </span>
         </div>
       </article>
-
     </div>
-
-    <!-- Additional original image names:
-         bloomdining.jpg
-         blombed2.jpg
-    -->
 
     <div class="unit-actions reveal">
-      <button class="btn btn-primary book-unit" data-unit="Pink House">
-        Book Pink House
-      </button>
+      <button type="button" class="btn btn-primary book-unit"
+        data-unit="Pink House">Book Pink House</button>
     </div>
-
   </div>
 </section>
 
-<!-- ========================================
-     PROMO
-======================================== -->
+<!-- PROMO -->
 
-<section id="promo" class="promo-section">
+<section id="promo">
   <div class="container">
-
     <div class="promo-wrap reveal">
-
       <div>
         <span class="eyebrow">Special Offers</span>
         <h3>Planning your next stay?</h3>
         <p>
           Check out our latest promos.
-          You might find a great deal for
-          your next getaway.
+          You might find a great deal for your next getaway.
         </p>
-
         <a href="promo.html" class="btn btn-primary">
           View Our Promos
         </a>
@@ -1418,80 +1206,51 @@ body.has-pointer .cursor-aura {opacity:1}
           Choose your favorite unit
           and send us a booking request.
         </p>
-
         <a href="#" class="btn btn-secondary booking-btn">
           Book Your Stay
         </a>
       </div>
-
     </div>
-
   </div>
 </section>
 
-<!-- ========================================
-     BOOKING FORM
-======================================== -->
+<!-- BOOKING FORM -->
 
-<div
-  class="booking-modal"
-  id="bookingModal"
-  role="dialog"
-  aria-modal="true"
-  aria-hidden="true"
-  aria-labelledby="bookingTitle"
->
+<div class="booking-modal" id="bookingModal"
+  role="dialog" aria-modal="true" aria-hidden="true"
+  aria-labelledby="bookingTitle">
+
   <div class="booking-card">
-
-    <button
-      type="button"
-      class="booking-close"
-      id="bookingClose"
-      aria-label="Close booking form"
-    >&times;</button>
+    <button type="button" class="booking-close"
+      id="bookingClose" aria-label="Close booking">&times;</button>
 
     <h2 id="bookingTitle">Book Your Stay</h2>
 
     <p>
-      Just fill in the details below.
-      We'll get back to you to confirm your booking.
+      Fill in your details and we'll help you
+      send your booking request through Messenger.
     </p>
 
     <form id="bookingForm">
 
-      <!-- CUSTOMER NAME -->
-
       <div class="booking-field">
         <label for="bookingName">Full Name</label>
-        <input
-          type="text"
-          id="bookingName"
+        <input type="text" id="bookingName"
           placeholder="Your full name"
-          autocomplete="name"
-          maxlength="100"
-          required
-        >
+          maxlength="100" autocomplete="name" required>
       </div>
-
-      <!-- CONTACT NUMBER -->
 
       <div class="booking-field">
         <label for="bookingContact">Contact Number</label>
-        <input
-          type="tel"
-          id="bookingContact"
+        <input type="tel" id="bookingContact"
           placeholder="09XXXXXXXXX"
-          autocomplete="tel"
-          maxlength="20"
-          required
-        >
+          maxlength="20" autocomplete="tel" required>
       </div>
 
-      <!-- UNIT SELECTION -->
-
       <div class="booking-field">
-        <label for="bookingUnit">Which unit would you like to book?</label>
-
+        <label for="bookingUnit">
+          Which unit would you like to book?
+        </label>
         <select id="bookingUnit" required>
           <option value="" disabled selected>Select a unit</option>
           <option value="Pink House">Pink House</option>
@@ -1500,166 +1259,132 @@ body.has-pointer .cursor-aura {opacity:1}
         </select>
       </div>
 
-      <!-- BOOKING DATE -->
-
       <div class="booking-field">
         <label for="bookingDate">Preferred Check-in Date</label>
         <input type="date" id="bookingDate" required>
       </div>
 
-      <!-- NUMBER OF GUESTS -->
-
       <div class="booking-field">
         <label for="bookingPax">Number of Guests</label>
-        <input
-          type="number"
-          id="bookingPax"
-          min="1"
-          max="100"
-          placeholder="How many guests?"
-          required
-        >
+        <input type="number" id="bookingPax"
+          min="1" max="100"
+          placeholder="How many guests?" required>
       </div>
-
-      <!-- SPECIAL REQUESTS -->
 
       <div class="booking-field">
-        <label for="bookingNotes">Message / Special Requests (Optional)</label>
-        <textarea
-          id="bookingNotes"
-          placeholder="Anything else you'd like us to know?"
+        <label for="bookingNotes">
+          Message / Special Requests (Optional)
+        </label>
+        <textarea id="bookingNotes"
           maxlength="1500"
-        ></textarea>
+          placeholder="Anything else you'd like us to know?"></textarea>
       </div>
 
-      <!-- ERROR MESSAGE -->
+      <div class="form-error" id="bookingError"
+        role="alert"></div>
 
-      <div
-        class="form-error"
-        id="bookingError"
-        role="alert"
-        aria-live="polite"
-      ></div>
-
-      <button type="submit" class="booking-submit" id="bookingSubmit">
-        Send Booking Request
+      <button type="submit" class="booking-submit">
+        Continue to Messenger →
       </button>
 
     </form>
-
   </div>
 </div>
 
-<!-- ========================================
-     SUCCESS POPUP
-======================================== -->
+<!-- MESSENGER CONFIRMATION POPUP -->
 
-<div
-  class="success-popup"
-  id="successPopup"
-  role="alertdialog"
-  aria-modal="true"
-  aria-hidden="true"
-  aria-labelledby="successTitle"
->
-  <div class="success-box">
+<div class="messenger-modal" id="messengerModal"
+  role="dialog" aria-modal="true" aria-hidden="true"
+  aria-labelledby="messengerTitle">
 
-    <div class="success-icon-wrap" aria-hidden="true">
-      <span class="success-ring"></span>
+  <div class="messenger-card">
+    <button type="button" class="messenger-close"
+      id="messengerClose" aria-label="Close">&times;</button>
 
-      <div class="success-icon">
-        <svg viewBox="0 0 48 48">
-          <circle cx="24" cy="24" r="20"></circle>
-          <path d="M14.5 24.5 21 31l13-14"></path>
-        </svg>
-      </div>
-    </div>
+    <div class="messenger-icon" aria-hidden="true">✓</div>
 
-    <h3 id="successTitle">Request Sent!</h3>
+    <h2 id="messengerTitle">Almost Done!</h2>
 
     <p>
-      Thank you for choosing Bloom Haven!
-      We've received your booking request.
-      We'll contact you soon to confirm availability.
+      Your booking message is ready.
+      Copy it, open Messenger, paste the message,
+      and tap Send.
     </p>
 
-    <button type="button" class="success-ok" id="successOk">
-      Awesome!
-    </button>
+    <textarea id="messagePreview"
+      class="message-preview" readonly
+      aria-label="Your booking message"></textarea>
 
+    <div class="messenger-actions">
+
+      <button type="button" class="btn btn-primary"
+        id="copyMessageBtn">
+        Copy Booking Message
+      </button>
+
+      <a href="https://m.me/vilmarjr.ammasi"
+        id="openMessengerBtn"
+        class="btn messenger-btn"
+        target="_blank" rel="noopener noreferrer">
+        Open Messenger →
+      </a>
+
+      <span class="copy-status" id="copyStatus"
+        role="status" aria-live="polite">
+        Your message has not been sent yet.
+      </span>
+
+    </div>
   </div>
 </div>
 
 </main>
 
-<!-- ========================================
-     FOOTER
-======================================== -->
+<!-- FOOTER -->
 
 <footer>
   <strong>BLOOM HAVEN</strong>
   <p>A cozy place to stay, relax, and enjoy.</p>
   <p>
     &copy; <span id="currentYear"></span>
-    Bloom Haven. All Rights Reserved.
+    Bloom Haven. All Rightss Reserved.
   </p>
 </footer>
-
-<!-- ========================================
-     JAVASCRIPT
-======================================== -->
 
 <script>
 "use strict";
 
-/* ========================================
-   CONFIGURATION
-======================================== */
+/* =====================================
+   MESSENGER LINK
+===================================== */
 
-// IMPORTANT:
-// Keep the email you want booking requests sent to.
-const BOOKING_EMAIL = "ammasivilmar2@gmail.com";
-
-// Using FormSubmit's official AJAX endpoint.
-const FORM_ENDPOINT =
-  "https://formsubmit.co/ajax/" + BOOKING_EMAIL;
-
-/* ========================================
-   ELEMENT REFERENCES
-======================================== */
+const MESSENGER_URL = "https://m.me/vilmarjr.ammasi";
 
 const $ = id => document.getElementById(id);
 
-const galleryDropdown = document.querySelector(".gallery-dropdown");
-const galleryTrigger = document.querySelector(".gallery-trigger");
+const galleryDropdown =
+  document.querySelector(".gallery-dropdown");
+
+const galleryTrigger =
+  document.querySelector(".gallery-trigger");
 
 const hamburgerBtn = $("hamburgerBtn");
 const mobileMenu = $("mobileMenu");
 
 const bookingModal = $("bookingModal");
 const bookingForm = $("bookingForm");
-const bookingClose = $("bookingClose");
-
-const bookingName = $("bookingName");
-const bookingContact = $("bookingContact");
-const bookingUnit = $("bookingUnit");
 const bookingDate = $("bookingDate");
-const bookingPax = $("bookingPax");
-const bookingNotes = $("bookingNotes");
+const bookingUnit = $("bookingUnit");
 
-const bookingSubmit = $("bookingSubmit");
-const bookingError = $("bookingError");
-
-const successPopup = $("successPopup");
-const successOk = $("successOk");
+const messengerModal = $("messengerModal");
+const messagePreview = $("messagePreview");
+const copyStatus = $("copyStatus");
 
 $("currentYear").textContent = new Date().getFullYear();
 
-/* ========================================
-   DESKTOP GALLERY MENU
-======================================== */
+/* GALLERY DROPDOWN */
 
-function closeGalleryDropdown() {
+function closeGallery() {
   galleryDropdown.classList.remove("open");
   galleryTrigger.setAttribute("aria-expanded", "false");
 }
@@ -1668,24 +1393,22 @@ galleryTrigger.addEventListener("click", event => {
   event.stopPropagation();
 
   const open = galleryDropdown.classList.toggle("open");
+
   galleryTrigger.setAttribute("aria-expanded", String(open));
 });
 
 document.addEventListener("click", event => {
   if (!galleryDropdown.contains(event.target)) {
-    closeGalleryDropdown();
+    closeGallery();
   }
 });
 
-/* ========================================
-   MOBILE MENU
-======================================== */
+/* MOBILE MENU */
 
-function closeMobileMenu() {
+function closeMobile() {
   mobileMenu.classList.remove("open");
   hamburgerBtn.classList.remove("open");
   hamburgerBtn.setAttribute("aria-expanded", "false");
-  hamburgerBtn.setAttribute("aria-label", "Open navigation menu");
 }
 
 hamburgerBtn.addEventListener("click", event => {
@@ -1695,393 +1418,271 @@ hamburgerBtn.addEventListener("click", event => {
 
   hamburgerBtn.classList.toggle("open", open);
   hamburgerBtn.setAttribute("aria-expanded", String(open));
-  hamburgerBtn.setAttribute(
-    "aria-label",
-    open ? "Close navigation menu" : "Open navigation menu"
-  );
 });
 
 document.querySelectorAll(".mobile-menu-link").forEach(link => {
-  link.addEventListener("click", closeMobileMenu);
+  link.addEventListener("click", closeMobile);
 });
 
 document.addEventListener("click", event => {
   if (
-    mobileMenu.classList.contains("open") &&
     !mobileMenu.contains(event.target) &&
     !hamburgerBtn.contains(event.target)
   ) {
-    closeMobileMenu();
+    closeMobile();
   }
 });
 
-/* ========================================
-   GET TODAY'S LOCAL DATE
-======================================== */
+/* DATE */
 
-function getLocalToday() {
+function getToday() {
   const now = new Date();
 
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
+  return [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, "0"),
+    String(now.getDate()).padStart(2, "0")
+  ].join("-");
 }
 
-bookingDate.min = getLocalToday();
+bookingDate.min = getToday();
 
-/* ========================================
-   BOOKING POPUP
-======================================== */
+/* OPEN BOOKING FORM */
 
-function openBookingModal(event, selectedUnit = "") {
+function openBooking(event, unit = "") {
   if (event) event.preventDefault();
 
-  closeMobileMenu();
-  closeGalleryDropdown();
+  closeMobile();
+  closeGallery();
 
-  hideBookingError();
+  bookingDate.min = getToday();
 
-  bookingDate.min = getLocalToday();
+  if (unit) bookingUnit.value = unit;
 
-  if (selectedUnit) {
-    bookingUnit.value = selectedUnit;
-  }
+  $("bookingError").classList.remove("visible");
 
   bookingModal.classList.add("active");
   bookingModal.setAttribute("aria-hidden", "false");
+
   document.body.classList.add("modal-open");
 
-  bookingName.focus();
+  $("bookingName").focus();
 }
 
-function closeBookingModal() {
+function closeBooking() {
   bookingModal.classList.remove("active");
   bookingModal.setAttribute("aria-hidden", "true");
 
-  if (!successPopup.classList.contains("active")) {
+  if (!messengerModal.classList.contains("active")) {
     document.body.classList.remove("modal-open");
   }
 }
 
 document.querySelectorAll(".booking-btn").forEach(button => {
   button.addEventListener("click", event => {
-    openBookingModal(event);
+    openBooking(event);
   });
 });
 
-// Booking directly from each unit's gallery.
-// The correct unit will be selected automatically.
 document.querySelectorAll(".book-unit").forEach(button => {
   button.addEventListener("click", event => {
-    openBookingModal(event, button.dataset.unit);
+    openBooking(event, button.dataset.unit);
   });
 });
 
-bookingClose.addEventListener("click", closeBookingModal);
+$("bookingClose").addEventListener("click", closeBooking);
 
 bookingModal.addEventListener("click", event => {
-  if (event.target === bookingModal) {
-    closeBookingModal();
-  }
+  if (event.target === bookingModal) closeBooking();
 });
 
-/* ========================================
-   ERROR MESSAGE
-======================================== */
+/* FORMAT THE BOOKING MESSAGE */
 
-function showBookingError(message) {
-  bookingError.textContent = message;
-  bookingError.classList.add("visible");
-}
-
-function hideBookingError() {
-  bookingError.textContent = "";
-  bookingError.classList.remove("visible");
-}
-
-/* ========================================
-   BOOKING SUCCESS POPUP
-======================================== */
-
-function showBookingSuccess() {
-  successPopup.classList.remove("active");
-  void successPopup.offsetWidth;
-
-  successPopup.classList.add("active");
-  successPopup.setAttribute("aria-hidden", "false");
-
-  document.body.classList.add("modal-open");
-
-  launchConfetti();
-  successOk.focus();
-}
-
-function hideBookingSuccess() {
-  successPopup.classList.remove("active");
-  successPopup.setAttribute("aria-hidden", "true");
-
-  document.body.classList.remove("modal-open");
-
-  successPopup.querySelectorAll(".success-confetti")
-    .forEach(piece => piece.remove());
-}
-
-successOk.addEventListener("click", hideBookingSuccess);
-
-successPopup.addEventListener("click", event => {
-  if (event.target === successPopup) {
-    hideBookingSuccess();
-  }
-});
-
-/* ========================================
-   ESCAPE KEY
-======================================== */
-
-document.addEventListener("keydown", event => {
-  if (event.key !== "Escape") return;
-
-  if (successPopup.classList.contains("active")) {
-    hideBookingSuccess();
-  } else if (bookingModal.classList.contains("active")) {
-    closeBookingModal();
-  } else {
-    closeMobileMenu();
-    closeGalleryDropdown();
-  }
-});
-
-/* ========================================
-   CONFETTI ANIMATION
-======================================== */
-
-function launchConfetti() {
-  const colors = [
-    "#9b5d3c", "#6d3e29", "#f6d7c9",
-    "#d7a98a", "#fff3ee", "#ffffff"
-  ];
-
-  for (let i = 0; i < 70; i++) {
-    const piece = document.createElement("span");
-
-    piece.className = "success-confetti";
-    piece.style.left = Math.random() * 100 + "%";
-    piece.style.background =
-      colors[Math.floor(Math.random() * colors.length)];
-
-    piece.style.width = (6 + Math.random() * 6) + "px";
-    piece.style.height = (9 + Math.random() * 12) + "px";
-
-    piece.style.setProperty(
-      "--duration",
-      (2.2 + Math.random() * 1.8) + "s"
-    );
-
-    piece.style.setProperty(
-      "--delay",
-      Math.random() * .45 + "s"
-    );
-
-    piece.style.setProperty(
-      "--drift",
-      ((Math.random() - .5) * 220) + "px"
-    );
-
-    piece.style.setProperty(
-      "--spin",
-      ((Math.random() > .5 ? 1 : -1) *
-        (520 + Math.random() * 900)) + "deg"
-    );
-
-    successPopup.appendChild(piece);
-
-    setTimeout(() => piece.remove(), 4500);
-  }
-}
-
-/* ========================================
-   EMAIL BOOKING MESSAGE
-
-   IMPORTANT CHANGE:
-   Instead of sending each customer detail
-   as a separate email field, we combine
-   the information into ONE readable message.
-
-   The receiving email will contain the
-   customer's complete booking request.
-
-   The basic template is used rather than
-   the FormSubmit table template.
-======================================== */
-
-function createBookingMessage(data) {
+function formatBookingMessage(data) {
   return [
-    "NEW BLOOM HAVEN BOOKING REQUEST",
+    "BLOOM HAVEN - BOOKING REQUEST",
     "",
-    "Hi, I'd like to book a stay at Bloom Haven.",
+    "Hi! I would like to book a stay at Bloom Haven.",
     "",
     "Name: " + data.name,
-    "Contact Number: " + data.contact,
-    "Preferred Unit: " + data.unit,
-    "Booking Date: " + data.date,
+    "Contact: " + data.contact,
+    "Unit: " + data.unit,
+    "Check-in Date: " + data.date,
     "Number of Guests: " + data.pax,
     "",
     "Message / Special Requests:",
-    data.notes || "No special requests.",
+    data.notes || "None",
     "",
-    "Please contact me to confirm availability.",
+    "Please let me know if the unit is available.",
     "Thank you!"
   ].join("\n");
 }
 
-/* ========================================
-   FIXED FORM SUBMISSION
+/* FORMAT THE DATE */
 
-   FormSubmit requires first-time email
-   activation for the receiving address.
+function formatDate(dateString) {
+  const [year, month, day] = dateString.split("-").map(Number);
 
-   This code:
-   - Validates guest details
-   - Creates a readable email message
-   - Sends through the AJAX endpoint
-   - Checks the server response
-   - Shows success only after acceptance
-   - Keeps the form when submission fails
-======================================== */
+  const date = new Date(year, month - 1, day);
+
+  return date.toLocaleDateString("en-PH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+}
+
+/* COPY MESSAGE */
+
+async function copyBookingMessage() {
+  const message = messagePreview.value;
+
+  try {
+    if (!navigator.clipboard ||
+        !navigator.clipboard.writeText) {
+      throw new Error("Clipboard unavailable");
+    }
+
+    await navigator.clipboard.writeText(message);
+
+    copyStatus.textContent =
+      "Message copied! Open Messenger, paste, and send.";
+
+    $("copyMessageBtn").textContent = "✓ Message Copied";
+
+    return true;
+
+  } catch (error) {
+    // Fallback: select the message for manual copying.
+    messagePreview.focus();
+    messagePreview.select();
+
+    copyStatus.textContent =
+      "Please copy the selected message manually, then open Messenger.";
+
+    return false;
+  }
+}
+
+/* BOOKING FORM SUBMISSION */
 
 bookingForm.addEventListener("submit", async event => {
   event.preventDefault();
-  hideBookingError();
 
   const data = {
-    name: bookingName.value.trim(),
-    contact: bookingContact.value.trim(),
+    name: $("bookingName").value.trim(),
+    contact: $("bookingContact").value.trim(),
     unit: bookingUnit.value,
     date: bookingDate.value,
-    pax: bookingPax.value,
-    notes: bookingNotes.value.trim()
+    pax: Number($("bookingPax").value),
+    notes: $("bookingNotes").value.trim()
   };
 
-  // Basic validation.
-  const phonePattern = /^[0-9+\-\s()]{7,20}$/;
+  const errorBox = $("bookingError");
+
+  function error(message) {
+    errorBox.textContent = message;
+    errorBox.classList.add("visible");
+  }
+
+  errorBox.classList.remove("visible");
 
   if (!data.name) {
-    showBookingError("Please enter your full name.");
-    bookingName.focus();
+    error("Please enter your name.");
     return;
   }
 
-  if (!phonePattern.test(data.contact)) {
-    showBookingError("Please enter a valid contact number.");
-    bookingContact.focus();
+  if (!/^[0-9+\-\s()]{7,20}$/.test(data.contact)) {
+    error("Please enter a valid contact number.");
     return;
   }
 
   if (!["Pink House", "Sylvia", "Anne"].includes(data.unit)) {
-    showBookingError("Please choose which unit you'd like to book.");
-    bookingUnit.focus();
+    error("Please choose a unit.");
     return;
   }
 
-  if (!data.date || data.date < getLocalToday()) {
-    showBookingError("Please select a valid booking date.");
-    bookingDate.focus();
+  if (!data.date || data.date < getToday()) {
+    error("Please choose a valid check-in date.");
     return;
   }
 
-  if (!Number.isInteger(Number(data.pax)) ||
-      Number(data.pax) < 1 ||
-      Number(data.pax) > 100) {
-    showBookingError("Please enter a valid number of guests.");
-    bookingPax.focus();
+  if (!Number.isInteger(data.pax) ||
+      data.pax < 1 || data.pax > 100) {
+    error("Please enter a valid number of guests.");
     return;
   }
 
-  bookingSubmit.disabled = true;
-  bookingSubmit.textContent = "Sending Request...";
+  const message = formatBookingMessage({
+    ...data,
+    date: formatDate(data.date)
+  });
 
-  // Turn all booking details into one message.
-  const message = createBookingMessage(data);
+  messagePreview.value = message;
 
-  // FormSubmit Basic template with one message.
-  const formData = new FormData();
+  $("copyMessageBtn").textContent = "Copy Booking Message";
 
-  formData.append(
-    "_subject",
-    "New Bloom Haven Booking - " + data.unit
-  );
+  copyStatus.textContent =
+    "Your message has not been sent yet.";
 
-  formData.append("_template", "basic");
-  formData.append("_captcha", "false");
+  // Display the confirmation before opening Messenger.
+  closeBooking();
 
-  // Honeypot value stays empty.
-  formData.append("_honey", "");
+  messengerModal.classList.add("active");
+  messengerModal.setAttribute("aria-hidden", "false");
 
-  // Only one normal email content field.
-  formData.append("message", message);
+  document.body.classList.add("modal-open");
 
-  try {
-    const response = await fetch(FORM_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json"
-      },
-      body: formData
-    });
+  // Attempt to copy automatically.
+  // If clipboard access is blocked, the visitor
+  // can use the Copy Booking Message button.
+  await copyBookingMessage();
+});
 
-    const result = await response.json();
+/* COPY BUTTON */
 
-    console.log("Bloom Haven FormSubmit response:", result);
+$("copyMessageBtn").addEventListener("click", async () => {
+  await copyBookingMessage();
+});
 
-    const accepted =
-      result.success === true ||
-      result.success === "true";
+/* OPEN MESSENGER */
 
-    if (!response.ok || !accepted) {
-      throw new Error(
-        result.message ||
-        "The email service did not accept the request."
-      );
-    }
+$("openMessengerBtn").href = MESSENGER_URL;
 
-    // Only clear the form after successful acceptance.
-    bookingForm.reset();
+/* CLOSE MESSENGER POPUP */
 
-    bookingDate.min = getLocalToday();
+function closeMessengerPopup() {
+  messengerModal.classList.remove("active");
+  messengerModal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+}
 
-    closeBookingModal();
+$("messengerClose").addEventListener(
+  "click", closeMessengerPopup
+);
 
-    showBookingSuccess();
-
-  } catch (error) {
-    console.error("Bloom Haven booking error:", error);
-
-    const details = error.message || "";
-
-    // Give the visitor useful information.
-    if (/activat|confirm|verif/i.test(details)) {
-      showBookingError(
-        "Our booking email is still being set up. " +
-        "Please contact Bloom Haven directly for now."
-      );
-    } else {
-      showBookingError(
-        "Your booking request couldn't be sent. " +
-        "Please try again or contact us directly."
-      );
-    }
-
-  } finally {
-    bookingSubmit.disabled = false;
-    bookingSubmit.textContent = "Send Booking Request";
+messengerModal.addEventListener("click", event => {
+  if (event.target === messengerModal) {
+    closeMessengerPopup();
   }
 });
 
-/* ========================================
-   PAGE LOADER
-======================================== */
+/* ESCAPE KEY */
+
+document.addEventListener("keydown", event => {
+  if (event.key !== "Escape") return;
+
+  if (messengerModal.classList.contains("active")) {
+    closeMessengerPopup();
+  } else if (bookingModal.classList.contains("active")) {
+    closeBooking();
+  } else {
+    closeGallery();
+    closeMobile();
+  }
+});
+
+/* LOADING ANIMATION */
 
 function finishLoading() {
   setTimeout(() => {
@@ -2095,9 +1696,7 @@ if (document.readyState === "complete") {
   window.addEventListener("load", finishLoading, {once:true});
 }
 
-/* ========================================
-   SCROLL REVEAL
-======================================== */
+/* SCROLL ANIMATION */
 
 const revealTargets = document.querySelectorAll(".reveal");
 
@@ -2119,9 +1718,7 @@ if ("IntersectionObserver" in window) {
   revealTargets.forEach(el => el.classList.add("is-visible"));
 }
 
-/* ========================================
-   STICKY NAVIGATION
-======================================== */
+/* STICKY HEADER */
 
 const topbar = document.querySelector(".topbar");
 
@@ -2130,126 +1727,73 @@ function updateTopbar() {
 }
 
 updateTopbar();
-window.addEventListener("scroll", updateTopbar, {passive:true});
 
-/* ========================================
-   FLOATING PARTICLES
-======================================== */
+window.addEventListener("scroll", updateTopbar, {
+  passive:true
+});
+
+/* FLOATING PARTICLES */
 
 const reducedMotion =
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const particleField = $("ambientParticles");
-
 if (!reducedMotion) {
+  const field = $("ambientParticles");
   const count = window.innerWidth < 700 ? 12 : 20;
 
-  for (let i = 0; i < count; i++) {
+  for (let i=0; i<count; i++) {
     const particle = document.createElement("span");
-
     particle.className = "ambient-particle";
+
     particle.style.left = Math.random() * 100 + "%";
 
     particle.style.setProperty(
       "--size",
-      (4 + Math.random() * 8) + "px"
+      (4 + Math.random()*8) + "px"
     );
 
     particle.style.setProperty(
       "--duration",
-      (10 + Math.random() * 11) + "s"
+      (10 + Math.random()*11) + "s"
     );
 
     particle.style.setProperty(
       "--delay",
-      (-Math.random() * 18) + "s"
+      (-Math.random()*18) + "s"
     );
 
     particle.style.setProperty(
       "--drift",
-      (-100 + Math.random() * 200) + "px"
+      (-100 + Math.random()*200) + "px"
     );
 
-    particleField.appendChild(particle);
+    field.appendChild(particle);
   }
 }
 
-/* ========================================
-   CURSOR AURA
-======================================== */
+/* HERO IMAGE TILT */
 
-const cursorAura = $("cursorAura");
+if (!reducedMotion &&
+    window.matchMedia("(pointer: fine)").matches) {
 
-if (
-  !reducedMotion &&
-  window.matchMedia("(pointer: fine)").matches
-) {
-  let ax = window.innerWidth / 2;
-  let ay = window.innerHeight / 2;
-  let tx = ax;
-  let ty = ay;
+  const card = document.querySelector(".image-card");
 
-  window.addEventListener("pointermove", event => {
-    tx = event.clientX;
-    ty = event.clientY;
-    document.body.classList.add("has-pointer");
-  }, {passive:true});
+  card.addEventListener("pointermove", event => {
+    const rect = card.getBoundingClientRect();
 
-  function animateAura() {
-    ax += (tx - ax) * .12;
-    ay += (ty - ay) * .12;
+    const x = (event.clientX-rect.left)/rect.width - .5;
+    const y = (event.clientY-rect.top)/rect.height - .5;
 
-    cursorAura.style.left = ax + "px";
-    cursorAura.style.top = ay + "px";
-
-    requestAnimationFrame(animateAura);
-  }
-
-  animateAura();
-}
-
-/* ========================================
-   HERO 3D TILT
-======================================== */
-
-const heroCard = document.querySelector(".image-card");
-
-if (
-  heroCard &&
-  !reducedMotion &&
-  window.matchMedia("(pointer: fine)").matches
-) {
-  heroCard.addEventListener("pointermove", event => {
-    const rect = heroCard.getBoundingClientRect();
-
-    const x = (event.clientX - rect.left) / rect.width - .5;
-    const y = (event.clientY - rect.top) / rect.height - .5;
-
-    heroCard.style.transform =
-      "perspective(900px) rotateX(" + (-y * 4) +
-      "deg) rotateY(" + (x * 5) +
-      "deg) translateY(-3px)";
+    card.style.transform =
+      `perspective(900px) rotateX(${-y*4}deg)
+       rotateY(${x*5}deg) translateY(-3px)`;
   });
 
-  heroCard.addEventListener("pointerleave", () => {
-    heroCard.style.transform = "";
+  card.addEventListener("pointerleave", () => {
+    card.style.transform = "";
   });
-}
-
-/* ========================================
-   HERO PARALLAX
-======================================== */
-
-const heroVisual = document.querySelector(".hero-visual");
-
-if (heroVisual && !reducedMotion) {
-  window.addEventListener("scroll", () => {
-    const y = Math.min(window.scrollY,500);
-    heroVisual.style.translate = "0 " + (y * -.035) + "px";
-  }, {passive:true});
 }
 
 </script>
-
 </body>
 </html>
