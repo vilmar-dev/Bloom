@@ -1,1250 +1,1619 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Staycation Gallery | Bloom Haven</title>
-
-    <style>
-        :root {
-            --bg: #fffaf6;
-            --panel: #ffffff;
-            --primary: #9b5d3c;
-            --primary-dark: #6d3e29;
-            --accent: #f6d7c9;
-            --text: #2a211d;
-            --muted: #6d5d58;
-            --line: #f0e1d9;
-            --shadow: 0 18px 40px rgba(89, 52, 39, 0.12);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: linear-gradient(180deg, #fffaf6, #ffffff);
-            color: var(--text);
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        .container {
-            width: min(1200px, calc(100% - 40px));
-            margin: 0 auto;
-        }
-
-        /* =====================================================
-           FULL BLOOM HAVEN NAVIGATION
-        ===================================================== */
-
-        .topbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-
-            background: rgba(255, 250, 246, 0.92);
-            backdrop-filter: blur(10px);
-
-            border-bottom: 1px solid rgba(155, 93, 60, 0.1);
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 76px;
-            gap: 20px;
-        }
-
-        /* LOGO */
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-
-            white-space: nowrap;
-        }
-
-        .brand-mark {
-            width: 16px;
-            height: 16px;
-
-            border-radius: 50%;
-
-            background: linear-gradient(
-                135deg,
-                var(--primary),
-                #d7a98a
-            );
-
-            box-shadow:
-                0 0 0 6px rgba(155, 93, 60, 0.12);
-
-            flex-shrink: 0;
-        }
-
-        /* DESKTOP NAVIGATION */
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-
-            font-size: 0.96rem;
-            color: var(--muted);
-        }
-
-        .nav-links a {
-            position: relative;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a::after {
-            content: "";
-
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-
-            width: 100%;
-            height: 2px;
-
-            background: var(--primary);
-
-            transform: scaleX(0);
-            transform-origin: left;
-
-            transition: transform 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-dark);
-        }
-
-        .nav-links a:hover::after {
-            transform: scaleX(1);
-        }
-
-        /* GALLERY DROPDOWN */
-
-        .gallery-dropdown {
-            position: relative;
-        }
-
-        .gallery-trigger {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-
-            cursor: pointer;
-
-            background: transparent;
-            border: none;
-            padding: 0;
-
-            color: var(--muted);
-
-            font: inherit;
-            font-size: 0.96rem;
-        }
-
-        .gallery-trigger::after {
-            content: "▾";
-            font-size: 0.8rem;
-        }
-
-        .gallery-trigger:hover {
-            color: var(--primary-dark);
-        }
-
-        .gallery-menu {
-            position: absolute;
-
-            top: calc(100% + 16px);
-            left: 0;
-
-            min-width: 190px;
-
-            background: #ffffff;
-
-            border: 1px solid var(--line);
-            border-radius: 14px;
-
-            box-shadow:
-                0 18px 40px rgba(76, 52, 43, 0.12);
-
-            padding: 10px;
-
-            display: none;
-
-            z-index: 200;
-        }
-
-        .gallery-dropdown.open .gallery-menu {
-            display: block;
-        }
-
-        .gallery-menu a {
-            display: block;
-
-            padding: 10px 12px;
-
-            border-radius: 10px;
-
-            color: var(--text);
-            font-weight: 600;
-
-            transition:
-                background 0.2s ease,
-                color 0.2s ease;
-        }
-
-        .gallery-menu a:hover {
-            background: #fff4ee;
-            color: var(--primary-dark);
-        }
-
-        .gallery-menu a::after {
-            display: none;
-        }
-
-        /* BOOK YOUR STAY BUTTON */
-
-        .nav-cta {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 12px 18px;
-
-            border-radius: 999px;
-
-            background: var(--primary);
-            color: #ffffff;
-
-            font-weight: 700;
-
-            box-shadow: var(--shadow);
-
-            transition:
-                background 0.25s ease,
-                transform 0.25s ease;
-        }
-
-        .nav-cta:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        /* =====================================================
-           MOBILE HAMBURGER
-        ===================================================== */
-
-        .hamburger-btn {
-            display: none;
-
-            width: 46px;
-            height: 46px;
-
-            padding: 10px;
-
-            border: 1px solid var(--line);
-            border-radius: 12px;
-
-            background: #ffffff;
-
-            cursor: pointer;
-
-            align-items: center;
-            justify-content: center;
-
-            flex-direction: column;
-
-            gap: 5px;
-        }
-
-        .hamburger-btn span {
-            display: block;
-
-            width: 23px;
-            height: 2px;
-
-            border-radius: 999px;
-
-            background: var(--primary-dark);
-
-            transition:
-                transform 0.25s ease,
-                opacity 0.25s ease;
-        }
-
-        .hamburger-btn.open span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-
-        .hamburger-btn.open span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger-btn.open span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
-
-        /* MOBILE MENU */
-
-        .mobile-menu {
-            display: none;
-        }
-
-        /* =====================================================
-           HERO
-        ===================================================== */
-
-        .hero {
-            padding: 90px 0 50px;
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-block;
-
-            padding: 8px 16px;
-
-            background: #fff3ee;
-            border: 1px solid var(--line);
-
-            border-radius: 50px;
-
-            color: var(--primary-dark);
-            font-weight: bold;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-
-            margin: 20px 0;
-
-            letter-spacing: -3px;
-            line-height: 1.05;
-        }
-
-        .hero-description {
-            max-width: 650px;
-            margin: 0 auto;
-
-            color: var(--muted);
-            line-height: 1.7;
-            font-size: 17px;
-        }
-
-        /* =====================================================
-           GALLERY
-        ===================================================== */
-
-        .gallery {
-            padding: 50px 0 90px;
-        }
-
-        .gallery-grid {
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--panel);
-
-            border: 1px solid var(--line);
-            border-radius: 25px;
-
-            overflow: hidden;
-
-            box-shadow: var(--shadow);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-
-            box-shadow:
-                0 25px 50px rgba(89, 52, 39, 0.18);
-        }
-
-        /* IMAGE */
-
-        .image-container {
-            width: 100%;
-            height: 330px;
-
-            background: linear-gradient(
-                135deg,
-                #f7e3d6,
-                #f4efe8
-            );
-
-            overflow: hidden;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-
-            display: block;
-
-            object-fit: cover;
-
-            transition: transform 0.4s ease;
-        }
-
-        .card:hover .image-container img {
-            transform: scale(1.05);
-        }
-
-        /* CAPTION */
-
-        .caption {
-            padding: 20px;
-        }
-
-        .caption h3 {
-            margin-bottom: 8px;
-
-            color: var(--text);
-            font-size: 21px;
-        }
-
-        .caption p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        /* =====================================================
-           FOOTER
-        ===================================================== */
-
-        footer {
-            text-align: center;
-
-            padding: 30px;
-
-            color: var(--muted);
-
-            border-top: 1px solid var(--line);
-        }
-
-        /* =====================================================
-           RESPONSIVE
-        ===================================================== */
-
-        @media (max-width: 860px) {
-
-            .nav {
-                position: relative;
-
-                flex-wrap: nowrap;
-
-                justify-content: space-between;
-
-                min-height: 70px;
-
-                padding: 10px 0;
-            }
-
-            .nav-links,
-            .nav > .nav-cta {
-                display: none;
-            }
-
-            .hamburger-btn {
-                display: inline-flex;
-            }
-
-            .mobile-menu {
-                position: absolute;
-
-                top: calc(100% + 8px);
-
-                left: 0;
-                right: 0;
-
-                display: none;
-
-                flex-direction: column;
-
-                gap: 6px;
-
-                padding: 12px;
-
-                background: rgba(
-                    255,
-                    255,
-                    255,
-                    0.98
-                );
-
-                border: 1px solid var(--line);
-
-                border-radius: 18px;
-
-                box-shadow:
-                    0 18px 40px rgba(
-                        76,
-                        52,
-                        43,
-                        0.12
-                    );
-
-                z-index: 200;
-            }
-
-            .mobile-menu.open {
-                display: flex;
-            }
-
-            .mobile-menu-link {
-                display: block;
-
-                padding: 13px 14px;
-
-                border-radius: 12px;
-
-                color: var(--text);
-
-                font-weight: 700;
-
-                transition:
-                    background 0.2s ease,
-                    color 0.2s ease;
-            }
-
-            .mobile-menu-link:hover,
-            .mobile-menu-link:focus {
-                background: #fff4ee;
-                color: var(--primary-dark);
-            }
-
-            .mobile-booking {
-                margin-top: 4px;
-
-                text-align: center;
-
-                background: var(--primary);
-                color: #ffffff;
-            }
-
-            .mobile-booking:hover,
-            .mobile-booking:focus {
-                background: var(--primary-dark);
-                color: #ffffff;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .image-container {
-                height: 350px;
-            }
-        }
-
-        @media (max-width: 500px) {
-
-            .container {
-                width: min(
-                    100% - 24px,
-                    1200px
-                );
-            }
-
-            .brand {
-                font-size: 14px;
-                letter-spacing: 0.06em;
-            }
-
-            .brand-mark {
-                width: 14px;
-                height: 14px;
-            }
-
-            .hero {
-                padding: 65px 0 35px;
-            }
-
-            .gallery {
-                padding: 30px 0 60px;
-            }
-
-            .image-container {
-                height: 280px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fffaf6">
+
+<title>Sylvia | Bloom Haven Staycation</title>
+
+<style>
+/* =========================================
+   BLOOM HAVEN - SYLVIA / HAMPTON UNIT 1
+========================================= */
+
+:root {
+  --bg:#fffaf6;
+  --white:#ffffff;
+  --primary:#9b5d3c;
+  --dark:#6d3e29;
+  --accent:#f6d7c9;
+  --text:#2a211d;
+  --muted:#6d5d58;
+  --line:#f0e1d9;
+  --shadow:0 18px 40px rgba(89,52,39,.12);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+  scroll-padding-top:90px;
+}
+
+body {
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(180deg,#fffaf6,#fff);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+body.modal-open {
+  overflow:hidden;
+}
+
+a {
+  color:inherit;
+  text-decoration:none;
+}
+
+button,input,select,textarea {
+  font:inherit;
+}
+
+button {
+  cursor:pointer;
+}
+
+img {
+  display:block;
+  max-width:100%;
+}
+
+.container {
+  width:min(1160px,calc(100% - 36px));
+  margin:auto;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline:3px solid var(--accent);
+  outline-offset:3px;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.topbar {
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,250,246,.95);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  transition:box-shadow .3s ease;
+}
+
+.topbar.scrolled {
+  box-shadow:0 10px 32px rgba(76,52,43,.08);
+}
+
+.nav {
+  position:relative;
+  min-height:78px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:var(--dark);
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:1.5px;
+  white-space:nowrap;
+}
+
+.brand-mark {
+  width:17px;
+  height:17px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),#d7a98a);
+  box-shadow:0 0 0 6px rgba(155,93,60,.12);
+}
+
+.nav-links {
+  display:flex;
+  align-items:center;
+  gap:28px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--muted);
+}
+
+.nav-links a:hover {
+  color:var(--primary);
+}
+
+/* GALLERY DROPDOWN */
+
+.gallery-dropdown {
+  position:relative;
+}
+
+.gallery-trigger {
+  padding:15px 0;
+  background:transparent;
+  border:0;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.gallery-trigger::after {
+  content:" ▾";
+}
+
+.gallery-trigger:hover {
+  color:var(--primary);
+}
+
+.gallery-menu {
+  position:absolute;
+  top:100%;
+  left:-14px;
+  z-index:20;
+  display:none;
+  width:220px;
+  padding:10px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+}
+
+.gallery-dropdown.open .gallery-menu {
+  display:block;
+  animation:dropDown .25s ease;
+}
+
+.gallery-menu a {
+  display:block;
+  padding:12px;
+  border-radius:10px;
+}
+
+.gallery-menu a:hover {
+  background:#fff4ee;
+}
+
+/* NAVIGATION BUTTON */
+
+.nav-cta,
+.btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 24px;
+  border:0;
+  border-radius:50px;
+  background:var(--primary);
+  color:white;
+  font-size:14px;
+  font-weight:700;
+  transition:background .3s,transform .3s,box-shadow .3s;
+}
+
+.nav-cta {
+  white-space:nowrap;
+  box-shadow:var(--shadow);
+}
+
+.nav-cta:hover,
+.btn:hover {
+  background:var(--dark);
+  transform:translateY(-3px);
+  box-shadow:0 15px 30px rgba(109,62,41,.2);
+}
+
+.btn-outline {
+  background:white;
+  color:var(--dark);
+  border:1px solid var(--line);
+}
+
+.btn-outline:hover {
+  background:#fff2ea;
+  color:var(--dark);
+}
+
+/* =========================================
+   MOBILE NAVIGATION
+========================================= */
+
+.hamburger-btn {
+  display:none;
+  width:46px;
+  height:46px;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:white;
+}
+
+.hamburger-btn span {
+  width:23px;
+  height:2px;
+  border-radius:4px;
+  background:var(--dark);
+  transition:.3s;
+}
+
+.hamburger-btn.open span:first-child {
+  transform:translateY(7px) rotate(45deg);
+}
+
+.hamburger-btn.open span:nth-child(2) {
+  opacity:0;
+}
+
+.hamburger-btn.open span:last-child {
+  transform:translateY(-7px) rotate(-45deg);
+}
+
+.mobile-menu {
+  display:none;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+  position:relative;
+  padding:85px 0 60px;
+  overflow:hidden;
+  text-align:center;
+}
+
+.hero::before {
+  content:"";
+  position:absolute;
+  top:-180px;
+  right:-140px;
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(246,215,201,.7),transparent 70%);
+  pointer-events:none;
+}
+
+.hero-inner {
+  position:relative;
+  max-width:790px;
+  margin:auto;
+  animation:heroEntrance .9s var(--ease) both;
+}
+
+.eyebrow {
+  display:inline-block;
+  padding:9px 17px;
+  border:1px solid var(--line);
+  border-radius:50px;
+  background:#fff3ee;
+  color:var(--dark);
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+}
+
+.hero h1 {
+  margin:22px 0;
+  font-size:clamp(43px,6vw,70px);
+  letter-spacing:-3px;
+  line-height:1.08;
+}
+
+.hero h1 span {
+  color:var(--primary);
+}
+
+.hero-description {
+  max-width:660px;
+  margin:auto;
+  color:var(--muted);
+  font-size:17px;
+  line-height:1.8;
+}
+
+.hero-actions {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:13px;
+  margin-top:28px;
+}
+
+/* =========================================
+   GALLERY
+========================================= */
+
+.gallery-section {
+  padding:40px 0 90px;
+}
+
+.gallery-heading {
+  max-width:690px;
+  margin:0 auto 38px;
+  text-align:center;
+}
+
+.gallery-heading h2 {
+  font-size:clamp(29px,4vw,43px);
+  letter-spacing:-1px;
+  margin-bottom:12px;
+}
+
+.gallery-heading p {
+  color:var(--muted);
+  line-height:1.8;
+  font-size:15px;
+}
+
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:25px;
+}
+
+.gallery-card {
+  overflow:hidden;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:25px;
+  box-shadow:0 12px 32px rgba(89,52,39,.07);
+  transition:transform .45s var(--ease),box-shadow .45s;
+}
+
+.gallery-card:hover {
+  transform:translateY(-9px);
+  box-shadow:0 24px 48px rgba(89,52,39,.16);
+}
+
+.image-container {
+  position:relative;
+  width:100%;
+  height:290px;
+  overflow:hidden;
+  background:linear-gradient(135deg,#f7e3d6,#f4efe8);
+}
+
+.image-container img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .75s var(--ease);
+}
+
+.gallery-card:hover .image-container img {
+  transform:scale(1.08);
+}
+
+.caption {
+  padding:23px;
+}
+
+.caption h3 {
+  margin-bottom:9px;
+  font-size:20px;
+  color:var(--dark);
+}
+
+.caption p {
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+
+/* =========================================
+   BOOKING SECTION
+========================================= */
+
+.booking-section {
+  padding:5px 0 85px;
+}
+
+.booking-banner {
+  position:relative;
+  overflow:hidden;
+  padding:65px 35px;
+  background:var(--dark);
+  border-radius:30px;
+  text-align:center;
+  color:white;
+}
+
+.booking-banner::after {
+  content:"";
+  position:absolute;
+  top:-110px;
+  right:-100px;
+  width:280px;
+  height:280px;
+  border:45px solid rgba(255,255,255,.06);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.booking-banner h2 {
+  position:relative;
+  z-index:1;
+  font-size:clamp(28px,4vw,42px);
+  margin-bottom:15px;
+}
+
+.booking-banner p {
+  position:relative;
+  z-index:1;
+  max-width:620px;
+  margin:auto;
+  color:#f3ddd2;
+  font-size:16px;
+  line-height:1.8;
+}
+
+.booking-banner .btn {
+  position:relative;
+  z-index:1;
+  margin-top:27px;
+  background:white;
+  color:var(--dark);
+}
+
+.booking-banner .btn:hover {
+  background:#fff1e9;
+}
+
+/* =========================================
+   BOOKING MODAL
+========================================= */
+
+.booking-modal {
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:rgba(42,33,29,.72);
+  backdrop-filter:blur(8px);
+}
+
+.booking-modal.active {
+  display:flex;
+  animation:fadeIn .3s ease;
+}
+
+.booking-card {
+  position:relative;
+  width:min(490px,100%);
+  max-height:92vh;
+  overflow-y:auto;
+  padding:32px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:26px;
+  box-shadow:0 25px 80px rgba(42,33,29,.3);
+  animation:modalPop .5s var(--ease);
+}
+
+.booking-close {
+  position:absolute;
+  top:16px;
+  right:17px;
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:#fff3ee;
+  color:var(--dark);
+  font-size:25px;
+}
+
+.booking-close:hover {
+  background:var(--accent);
+}
+
+.booking-card h2 {
+  margin:0 40px 10px 0;
+  font-size:30px;
+  color:var(--dark);
+}
+
+.booking-card > p {
+  margin-bottom:22px;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+.booking-field {
+  margin-bottom:16px;
+}
+
+.booking-field label {
+  display:block;
+  margin-bottom:8px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.booking-field input,
+.booking-field select,
+.booking-field textarea {
+  display:block;
+  width:100%;
+  padding:13px 14px;
+  background:#fffdfb;
+  border:1px solid #e9d8ce;
+  border-radius:12px;
+  outline:none;
+  color:var(--text);
+  transition:.2s;
+}
+
+.booking-field input:focus,
+.booking-field select:focus,
+.booking-field textarea:focus {
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(155,93,60,.1);
+}
+
+.booking-field textarea {
+  min-height:90px;
+  resize:vertical;
+}
+
+.booking-submit {
+  width:100%;
+  padding:15px;
+  border:0;
+  border-radius:50px;
+  background:var(--primary);
+  color:white;
+  font-weight:800;
+  transition:.25s;
+}
+
+.booking-submit:hover {
+  background:var(--dark);
+}
+
+.form-error {
+  display:none;
+  margin-bottom:16px;
+  padding:12px;
+  background:#fff0ee;
+  color:#8a2c2c;
+  border:1px solid #f3c3bc;
+  border-radius:12px;
+  font-size:13px;
+}
+
+.form-error.visible {
+  display:block;
+}
+
+.booking-notice {
+  margin-top:15px;
+  padding:13px;
+  background:#fff5ef;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+}
+
+.booking-notice strong {
+  color:var(--dark);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+  padding:33px 15px;
+  text-align:center;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+.reveal {
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .85s var(--ease),transform .85s var(--ease);
+}
+
+.reveal.is-visible {
+  opacity:1;
+  transform:none;
+}
+
+.reveal-delay-1 {
+  transition-delay:.12s;
+}
+
+.reveal-delay-2 {
+  transition-delay:.24s;
+}
+
+@keyframes heroEntrance {
+  from {
+    opacity:0;
+    transform:translateY(35px);
+  }
+  to {
+    opacity:1;
+    transform:none;
+  }
+}
+
+@keyframes fadeIn {
+  from {opacity:0}
+  to {opacity:1}
+}
+
+@keyframes dropDown {
+  from {
+    opacity:0;
+    transform:translateY(-10px);
+  }
+  to {
+    opacity:1;
+    transform:none;
+  }
+}
+
+@keyframes modalPop {
+  from {
+    opacity:0;
+    transform:translateY(25px) scale(.95);
+  }
+  to {
+    opacity:1;
+    transform:none;
+  }
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:900px) {
+  .gallery-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:860px) {
+  .nav-links,
+  .nav > .nav-cta {
+    display:none;
+  }
+
+  .hamburger-btn {
+    display:flex;
+  }
+
+  .mobile-menu {
+    position:absolute;
+    top:calc(100% + 8px);
+    left:0;
+    right:0;
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    padding:14px;
+    background:white;
+    border:1px solid var(--line);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+  }
+
+  .mobile-menu.open {
+    display:flex;
+    animation:dropDown .3s ease;
+  }
+
+  .mobile-menu-link {
+    display:block;
+    padding:13px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:700;
+  }
+
+  .mobile-menu-link:hover {
+    background:#fff4ee;
+  }
+
+  .mobile-booking {
+    background:var(--primary);
+    color:white;
+    text-align:center;
+  }
+}
+
+@media(max-width:600px) {
+  .nav {
+    min-height:70px;
+  }
+
+  .brand {
+    font-size:15px;
+  }
+
+  .hero {
+    padding:60px 0 40px;
+  }
+
+  .hero h1 {
+    font-size:clamp(38px,11vw,52px);
+    letter-spacing:-1.5px;
+  }
+
+  .hero-description {
+    font-size:15px;
+  }
+
+  .gallery-section {
+    padding:35px 0 65px;
+  }
+
+  .gallery-grid {
+    grid-template-columns:1fr;
+    gap:20px;
+  }
+
+  .image-container {
+    height:280px;
+  }
+
+  .booking-banner {
+    padding:48px 23px;
+    border-radius:24px;
+  }
+
+  .booking-banner .btn {
+    width:100%;
+    max-width:270px;
+  }
+
+  .booking-card {
+    padding:27px 20px;
+  }
+
+  .booking-card h2 {
+    font-size:27px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+
+  .reveal {
+    opacity:1;
+    transform:none;
+  }
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- =====================================================
-         FULL BLOOM HAVEN NAVIGATION
-    ====================================================== -->
+<!-- =========================================
+     NAVIGATION
+========================================= -->
 
-    <header class="topbar">
+<header class="topbar">
+  <div class="container nav">
 
-        <div class="container nav">
+    <a href="index.html" class="brand" aria-label="Bloom Haven home">
+      <span class="brand-mark"></span>
+      BLOOM HAVEN
+    </a>
 
-            <!-- LOGO -->
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
 
-            <a
-                href="#home"
-                class="brand"
-                aria-label="Bloom Haven home"
-            >
+      <div class="gallery-dropdown">
+        <button
+          type="button"
+          class="gallery-trigger"
+          aria-expanded="false"
+        >
+          Gallery
+        </button>
 
-                <span class="brand-mark"></span>
+        <div class="gallery-menu">
+          <a href="fair.html">Pink House</a>
+          <a href="hampton1.html">Sylvia</a>
+          <a href="hampton2.html">Anne</a>
+        </div>
+      </div>
 
-                BLOOM HAVEN
+      <a href="promo.html">Promo Offer</a>
+    </nav>
 
-            </a>
+    <a href="#" class="nav-cta booking-btn">
+      Book Your Stay
+    </a>
 
+    <button
+      type="button"
+      class="hamburger-btn"
+      id="hamburgerBtn"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="mobileMenu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-            <!-- DESKTOP NAVIGATION -->
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a href="index.html" class="mobile-menu-link">Home</a>
+      <a href="fair.html" class="mobile-menu-link">Pink House</a>
+      <a href="hampton1.html" class="mobile-menu-link">Sylvia</a>
+      <a href="hampton2.html" class="mobile-menu-link">Anne</a>
+      <a href="promo.html" class="mobile-menu-link">Promo Offer</a>
+      <a href="#" class="mobile-menu-link mobile-booking booking-btn">
+        Book Your Stay
+      </a>
+    </nav>
 
-            <nav
-                class="nav-links"
-                aria-label="Main navigation"
-            >
+  </div>
+</header>
 
-                <a href="#about">
-                    About
-                </a>
+<main>
 
+<!-- =========================================
+     HERO
+========================================= -->
 
-                <!-- GALLERY DROPDOWN -->
+<section class="hero" id="home">
+  <div class="container hero-inner">
 
-                <div class="gallery-dropdown">
+    <span class="eyebrow">
+      Sylvia • Hampton Unit 1
+    </span>
 
-                    <button
-                        type="button"
-                        class="gallery-trigger"
-                        aria-expanded="false"
-                        aria-label="Open Gallery menu"
-                    >
-                        Gallery
-                    </button>
+    <h1>
+      Make yourself at <span>home.</span>
+    </h1>
 
+    <p class="hero-description">
+      Staying in for the weekend or just taking a quick break?
+      Sylvia is a cozy place where you can rest, cook a meal,
+      and spend time with family or friends.
+      Take a look around and see if it's the right place for you.
+    </p>
 
-                    <div
-                        class="gallery-menu"
-                        aria-label="Gallery menu"
-                    >
+    <div class="hero-actions">
+      <a href="#" class="btn booking-btn">
+        Book Sylvia
+      </a>
 
-                        <a href="hampton1.html">
-                            Hampton Unit 1
-                        </a>
+      <a href="#gallery-unit-1" class="btn btn-outline">
+        View Photos
+      </a>
+    </div>
 
-                        <a href="hampton2.html">
-                            Hampton Unit 2
-                        </a>
+  </div>
+</section>
 
-                        <a href="fair.html">
-                            FairGrounds
-                        </a>
+<!-- =========================================
+     SYLVIA GALLERY
+========================================= -->
 
-                    </div>
+<section class="gallery-section" id="gallery-unit-1">
+  <div class="container">
 
-                </div>
+    <div class="gallery-heading reveal">
+      <h2>A look inside Sylvia</h2>
+      <p>
+        Here are some photos of the unit, so you can get
+        a better idea of the space before booking.
+      </p>
+    </div>
 
+    <div class="gallery-grid">
 
-                <!-- PROMO -->
+      <!-- BEDROOM -->
 
-                <a href="promo.html">
-                    Promo Offer
-                </a>
-
-            </nav>
-
-
-            <!-- BOOKING BUTTON -->
-
-            <a
-                href="#"
-                class="nav-cta booking-btn"
-            >
-                Book Your Stay
-            </a>
-
-
-            <!-- MOBILE HAMBURGER -->
-
-            <button
-                type="button"
-                class="hamburger-btn"
-                id="hamburgerBtn"
-                aria-label="Open navigation menu"
-                aria-expanded="false"
-                aria-controls="mobileMenu"
-            >
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </button>
-
-
-            <!-- MOBILE MENU -->
-
-            <div
-                class="mobile-menu"
-                id="mobileMenu"
-            >
-
-                <a
-                    href="#about"
-                    class="mobile-menu-link"
-                >
-                    About
-                </a>
-
-                <a
-                    href="hampton1.html"
-                    class="mobile-menu-link"
-                >
-                    Gallery
-                </a>
-
-                <a
-                    href="promo.html"
-                    class="mobile-menu-link"
-                >
-                    Promo Offer
-                </a>
-
-                <a
-                    href="#"
-                    class="mobile-menu-link mobile-booking booking-btn"
-                >
-                    Book Your Stay
-                </a>
-
-            </div>
-
+      <article class="gallery-card reveal">
+        <div class="image-container">
+          <img
+            src="hamptonbedd.jpg"
+            alt="Sylvia bedroom"
+            loading="lazy"
+          >
         </div>
 
-    </header>
+        <div class="caption">
+          <h3>Bedroom</h3>
+          <p>
+            A comfy spot to rest and recharge
+            after a long day.
+          </p>
+        </div>
+      </article>
 
+      <!-- KITCHEN -->
 
-    <!-- =====================================================
-         HERO
-    ====================================================== -->
+      <article class="gallery-card reveal reveal-delay-1">
+        <div class="image-container">
+          <img
+            src="hamtonkitchen.jpg"
+            alt="Sylvia kitchen"
+            loading="lazy"
+          >
+        </div>
 
-    <main id="home">
+        <div class="caption">
+          <h3>Kitchen</h3>
+          <p>
+            Make yourself a meal or prepare
+            a quick snack whenever you like.
+          </p>
+        </div>
+      </article>
 
-        <section class="hero">
+      <!-- LIVING ROOM -->
 
-            <div class="container">
+      <article class="gallery-card reveal reveal-delay-2">
+        <div class="image-container">
+          <img
+            src="hamptonsala.jpg"
+            alt="Sylvia living room"
+            loading="lazy"
+          >
+        </div>
 
-                <span class="badge">
-                    Hampton Unit 1
-                </span>
+        <div class="caption">
+          <h3>Living Room</h3>
+          <p>
+            Sit back, watch something,
+            or catch up with everyone.
+          </p>
+        </div>
+      </article>
 
-                <h1>
-                    Discover Your Perfect Escape
-                </h1>
+      <!-- BEDROOM CORNER -->
 
-                <p class="hero-description">
-                    Explore our relaxing rooms, amenities,
-                    and memorable staycation moments.
-                </p>
+      <article class="gallery-card reveal">
+        <div class="image-container">
+          <img
+            src="hamptonbedchair.jpg"
+            alt="Sylvia bedroom and seating area"
+            loading="lazy"
+          >
+        </div>
 
-            </div>
+        <div class="caption">
+          <h3>Bedroom Corner</h3>
+          <p>
+            Another view of the room,
+            with a little space to sit and relax.
+          </p>
+        </div>
+      </article>
 
-        </section>
+      <!-- DINING AREA -->
 
+      <article class="gallery-card reveal reveal-delay-1">
+        <div class="image-container">
+          <img
+            src="hamptondining.jpg"
+            alt="Sylvia dining area"
+            loading="lazy"
+          >
+        </div>
 
-        <!-- =================================================
-             GALLERY
-        ================================================== -->
+        <div class="caption">
+          <h3>Dining Area</h3>
+          <p>
+            Share a meal, have a chat,
+            and enjoy time together.
+          </p>
+        </div>
+      </article>
 
-        <section
-            class="gallery"
-            id="gallery-unit-1"
+      <!-- ENTRY / DINING VIEW -->
+
+      <article class="gallery-card reveal reveal-delay-2">
+        <div class="image-container">
+          <img
+            src="hamptondoor.jpg"
+            alt="Sylvia dining area and doorway"
+            loading="lazy"
+          >
+        </div>
+
+        <div class="caption">
+          <h3>Another View of the Unit</h3>
+          <p>
+            A closer look at the dining area
+            and the space near the doorway.
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================
+     BOOKING BANNER
+========================================= -->
+
+<section class="booking-section">
+  <div class="container">
+
+    <div class="booking-banner reveal">
+      <h2>Thinking of staying at Sylvia?</h2>
+
+      <p>
+        Choose your date and send us a booking request.
+        We'll let you know if the unit is available.
+      </p>
+
+      <a href="#" class="btn booking-btn">
+        Check Availability
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================================
+     BOOKING MODAL
+========================================= -->
+
+<div
+  class="booking-modal"
+  id="bookingModal"
+  role="dialog"
+  aria-modal="true"
+  aria-hidden="true"
+  aria-labelledby="bookingTitle"
+>
+
+  <div class="booking-card">
+
+    <button
+      type="button"
+      class="booking-close"
+      id="bookingClose"
+      aria-label="Close booking form"
+    >
+      &times;
+    </button>
+
+    <h2 id="bookingTitle">Book Your Stay</h2>
+
+    <p>
+      Tell us when you'd like to visit.
+      We'll get back to you with availability.
+    </p>
+
+    <form id="bookingForm">
+
+      <!-- NAME -->
+
+      <div class="booking-field">
+        <label for="bookingName">Full Name</label>
+
+        <input
+          type="text"
+          id="bookingName"
+          name="name"
+          placeholder="Your full name"
+          maxlength="100"
+          autocomplete="name"
+          required
         >
+      </div>
+
+      <!-- CONTACT -->
+
+      <div class="booking-field">
+        <label for="bookingContact">Contact Number</label>
+
+        <input
+          type="tel"
+          id="bookingContact"
+          name="contact"
+          placeholder="09XXXXXXXXX"
+          maxlength="20"
+          autocomplete="tel"
+          required
+        >
+      </div>
+
+      <!-- UNIT -->
+
+      <div class="booking-field">
+        <label for="bookingUnit">Preferred Unit</label>
+
+        <select id="bookingUnit" name="unit" required>
+          <option value="Sylvia" selected>Sylvia</option>
+          <option value="Anne">Anne</option>
+          <option value="Pink House">Pink House</option>
+        </select>
+      </div>
+
+      <!-- DATE -->
+
+      <div class="booking-field">
+        <label for="bookingDate">Preferred Check-in Date</label>
+
+        <input
+          type="date"
+          id="bookingDate"
+          name="date"
+          required
+        >
+      </div>
+
+      <!-- GUESTS -->
+
+      <div class="booking-field">
+        <label for="bookingPax">Number of Guests</label>
+
+        <input
+          type="number"
+          id="bookingPax"
+          name="pax"
+          min="1"
+          max="100"
+          placeholder="How many guests?"
+          required
+        >
+      </div>
+
+      <!-- NOTES -->
+
+      <div class="booking-field">
+        <label for="bookingNotes">
+          Message / Special Requests (Optional)
+        </label>
+
+        <textarea
+          id="bookingNotes"
+          name="notes"
+          maxlength="1500"
+          placeholder="Anything else you'd like us to know?"
+        ></textarea>
+      </div>
+
+      <div
+        id="bookingError"
+        class="form-error"
+        role="alert"
+        aria-live="polite"
+      ></div>
+
+      <button type="submit" class="booking-submit">
+        Continue to Email
+      </button>
+
+      <div class="booking-notice">
+        <strong>One last step:</strong>
+        Your email app will open with your booking
+        details ready. Please press Send to complete
+        your request.
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  &copy; <span id="currentYear"></span>
+  Bloom Haven. All Rights Reserved.
+</footer>
 
-            <div class="container">
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
 
-                <div class="gallery-grid">
+<script>
+"use strict";
 
+/* =========================================
+   BOOKING SETTINGS
+========================================= */
 
-                    <!-- IMAGE 1 -->
+const BLOOM_HAVEN_EMAIL = "ammasivilmar2@gmail.com";
+const DEFAULT_UNIT = "Sylvia";
 
-                    <div class="card">
+const $ = id => document.getElementById(id);
 
-                        <div class="image-container">
+const galleryDropdown =
+  document.querySelector(".gallery-dropdown");
 
-                            <img
-                                src="hamptonbedd.jpg"
-                                alt="Comfortable Room"
-                            >
+const galleryTrigger =
+  document.querySelector(".gallery-trigger");
 
-                        </div>
+const hamburgerBtn = $("hamburgerBtn");
+const mobileMenu = $("mobileMenu");
 
-                        <div class="caption">
+const bookingModal = $("bookingModal");
+const bookingForm = $("bookingForm");
+const bookingUnit = $("bookingUnit");
+const bookingDate = $("bookingDate");
+const bookingError = $("bookingError");
 
-                            <h3>
-                                Comfortable Room
-                            </h3>
+$("currentYear").textContent = new Date().getFullYear();
 
-                            <p>
-                                Comfortable space designed
-                                for relaxation.
-                            </p>
+/* =========================================
+   GALLERY DROPDOWN
+========================================= */
 
-                        </div>
+function closeGallery() {
+  galleryDropdown.classList.remove("open");
+  galleryTrigger.setAttribute("aria-expanded","false");
+}
 
-                    </div>
+galleryTrigger.addEventListener("click",function(event) {
+  event.stopPropagation();
 
+  const open = galleryDropdown.classList.toggle("open");
 
-                    <!-- IMAGE 2 -->
+  galleryTrigger.setAttribute("aria-expanded",String(open));
+});
 
-                    <div class="card">
+document.addEventListener("click",function(event) {
+  if (!galleryDropdown.contains(event.target)) {
+    closeGallery();
+  }
+});
 
-                        <div class="image-container">
+/* =========================================
+   MOBILE MENU
+========================================= */
 
-                            <img
-                                src="hamtonkitchen.jpg"
-                                alt="Fully Equipped Kitchen"
-                            >
+function closeMobile() {
+  mobileMenu.classList.remove("open");
+  hamburgerBtn.classList.remove("open");
 
-                        </div>
+  hamburgerBtn.setAttribute("aria-expanded","false");
+  hamburgerBtn.setAttribute(
+    "aria-label",
+    "Open navigation menu"
+  );
+}
 
-                        <div class="caption">
+hamburgerBtn.addEventListener("click",function(event) {
+  event.stopPropagation();
 
-                            <h3>
-                                Fully Equipped Kitchen
-                            </h3>
+  const open = mobileMenu.classList.toggle("open");
 
-                            <p>
-                                Everything you need for
-                                a comfortable stay.
-                            </p>
+  hamburgerBtn.classList.toggle("open",open);
+  hamburgerBtn.setAttribute("aria-expanded",String(open));
 
-                        </div>
+  hamburgerBtn.setAttribute(
+    "aria-label",
+    open ? "Close navigation menu" : "Open navigation menu"
+  );
+});
 
-                    </div>
+document.querySelectorAll(".mobile-menu-link").forEach(function(link) {
+  link.addEventListener("click",closeMobile);
+});
 
+document.addEventListener("click",function(event) {
+  if (
+    !mobileMenu.contains(event.target) &&
+    !hamburgerBtn.contains(event.target)
+  ) {
+    closeMobile();
+  }
+});
 
-                    <!-- IMAGE 3 -->
+/* =========================================
+   DATE HELPERS
+========================================= */
 
-                    <div class="card">
+function getLocalToday() {
+  const now = new Date();
 
-                        <div class="image-container">
+  const year = now.getFullYear();
+  const month = String(now.getMonth()+1).padStart(2,"0");
+  const day = String(now.getDate()).padStart(2,"0");
 
-                            <img
-                                src="hamptonsala.jpg"
-                                alt="Cozy Living Room"
-                            >
+  return `${year}-${month}-${day}`;
+}
 
-                        </div>
+function formatBookingDate(dateString) {
+  const [year,month,day] =
+    dateString.split("-").map(Number);
 
-                        <div class="caption">
+  const date = new Date(year,month-1,day);
 
-                            <h3>
-                                Cozy Living Room
-                            </h3>
+  return date.toLocaleDateString("en-PH",{
+    year:"numeric",
+    month:"long",
+    day:"numeric"
+  });
+}
 
-                            <p>
-                                A welcoming space to relax,
-                                unwind, and spend quality
-                                time together.
-                            </p>
+bookingDate.min = getLocalToday();
 
-                        </div>
+/* =========================================
+   FORM ERRORS
+========================================= */
 
-                    </div>
+function showBookingError(message) {
+  bookingError.textContent = message;
+  bookingError.classList.add("visible");
+}
 
+function hideBookingError() {
+  bookingError.textContent = "";
+  bookingError.classList.remove("visible");
+}
 
-                    <!-- IMAGE 4 -->
-
-                    <div class="card">
-
-                        <div class="image-container">
-
-                            <img
-                                src="hamptonbedchair.jpg"
-                                alt="Bedside and Lounge Corner"
-                            >
-
-                        </div>
-
-                        <div class="caption">
-
-                            <h3>
-                                Bedside & Lounge Corner
-                            </h3>
-
-                            <p>
-                                A cozy spot to relax, unwind,
-                                and enjoy a quiet moment.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- IMAGE 5 -->
-
-                    <div class="card">
-
-                        <div class="image-container">
-
-                            <img
-                                src="hamptondining.jpg"
-                                alt="Dining Area"
-                            >
-
-                        </div>
-
-                        <div class="caption">
-
-                            <h3>
-                                Dining Area
-                            </h3>
-
-                            <p>
-                                A lovely space to enjoy delicious
-                                meals and meaningful moments together.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- IMAGE 6 -->
-
-                    <div class="card">
-
-                        <div class="image-container">
-
-                            <img
-                                src="hamptondoor.jpg"
-                                alt="Dining and Exit View"
-                            >
-
-                        </div>
-
-                        <div class="caption">
-
-                            <h3>
-                                Dining & Exit View
-                            </h3>
-
-                            <p>
-                                Enjoy your meals in comfort with
-                                a convenient view toward the exit.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-            <div class="card">
-
-                        <div class="image-container">
-
-                            <img
-                                src="hamptondoor.jpg"
-                                alt="Dining and Exit View"
-                            >
-
-                        </div>
-
-                        <div class="caption">
-
-                            <h3>
-                                Dining & Exit View
-                            </h3>
-
-                            <p>
-                                Enjoy your meals in comfort with
-                                a convenient view toward the exit.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-
-
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer>
-
-        © 2026 Bloom Haven Hampton Unit.
-        All rights reserved.
-
-    </footer>
-
-
-    <!-- =====================================================
-         NAVIGATION JAVASCRIPT
-    ====================================================== -->
-
-    <script>
-
-        /* =================================================
-           GALLERY DROPDOWN
-        ================================================= */
-
-        const galleryDropdown =
-            document.querySelector(
-                ".gallery-dropdown"
-            );
-
-        const galleryTrigger =
-            document.querySelector(
-                ".gallery-trigger"
-            );
-
-
-        if (
-            galleryDropdown &&
-            galleryTrigger
-        ) {
-
-            galleryTrigger.addEventListener(
-                "click",
-                function (event) {
-
-                    event.stopPropagation();
-
-                    const isOpen =
-                        galleryDropdown.classList.toggle(
-                            "open"
-                        );
-
-                    galleryTrigger.setAttribute(
-                        "aria-expanded",
-                        String(isOpen)
-                    );
-
-                }
-            );
-
-
-            document.addEventListener(
-                "click",
-                function (event) {
-
-                    if (
-                        !galleryDropdown.contains(
-                            event.target
-                        )
-                    ) {
-
-                        galleryDropdown.classList.remove(
-                            "open"
-                        );
-
-                        galleryTrigger.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                    }
-
-                }
-            );
-
+/* =========================================
+   BOOKING MODAL
+========================================= */
+
+function openBookingModal(event) {
+  if (event) event.preventDefault();
+
+  closeMobile();
+  closeGallery();
+  hideBookingError();
+
+  bookingDate.min = getLocalToday();
+
+  // Automatically choose Sylvia
+  bookingUnit.value = DEFAULT_UNIT;
+
+  bookingModal.classList.add("active");
+  bookingModal.setAttribute("aria-hidden","false");
+
+  document.body.classList.add("modal-open");
+
+  $("bookingName").focus();
+}
+
+function closeBookingModal() {
+  bookingModal.classList.remove("active");
+  bookingModal.setAttribute("aria-hidden","true");
+
+  document.body.classList.remove("modal-open");
+}
+
+document.querySelectorAll(".booking-btn").forEach(function(button) {
+  button.addEventListener("click",openBookingModal);
+});
+
+$("bookingClose").addEventListener("click",closeBookingModal);
+
+bookingModal.addEventListener("click",function(event) {
+  if (event.target === bookingModal) {
+    closeBookingModal();
+  }
+});
+
+document.addEventListener("keydown",function(event) {
+  if (event.key !== "Escape") return;
+
+  if (bookingModal.classList.contains("active")) {
+    closeBookingModal();
+  } else {
+    closeMobile();
+    closeGallery();
+  }
+});
+
+/* =========================================
+   EMAIL BOOKING
+
+   MOBILE: DEFAULT EMAIL APP
+   DESKTOP: GMAIL
+
+   SAME AS THE LANDING PAGE
+========================================= */
+
+bookingForm.addEventListener("submit",function(event) {
+  event.preventDefault();
+  hideBookingError();
+
+  const name = $("bookingName").value.trim();
+  const contact = $("bookingContact").value.trim();
+  const unit = bookingUnit.value;
+  const date = bookingDate.value;
+  const pax = Number($("bookingPax").value);
+  const notes = $("bookingNotes").value.trim();
+
+  // VALIDATE NAME
+  if (!name || name.length > 100) {
+    showBookingError("Please enter your full name.");
+    return;
+  }
+
+  // VALIDATE CONTACT
+  if (!/^[0-9+\-\s()]{7,20}$/.test(contact)) {
+    showBookingError("Please enter a valid contact number.");
+    return;
+  }
+
+  // VALIDATE UNIT
+  if (!["Pink House","Sylvia","Anne"].includes(unit)) {
+    showBookingError("Please select a unit.");
+    return;
+  }
+
+  // VALIDATE DATE
+  if (!date || date < getLocalToday()) {
+    showBookingError("Please select a valid booking date.");
+    return;
+  }
+
+  // VALIDATE NUMBER OF GUESTS
+  if (!Number.isInteger(pax) || pax < 1 || pax > 100) {
+    showBookingError("Please enter a valid number of guests.");
+    return;
+  }
+
+  // CREATE EMAIL SUBJECT
+  const subject = encodeURIComponent(
+    "New Bloom Haven Booking - " + unit
+  );
+
+  // CREATE EMAIL BODY
+  const message = [
+    "NEW BLOOM HAVEN BOOKING REQUEST",
+    "",
+    "Hi! I would like to book a stay at Bloom Haven.",
+    "",
+    "Name: " + name,
+    "Contact Number: " + contact,
+    "Preferred Unit: " + unit,
+    "Booking Date: " + formatBookingDate(date),
+    "Number of Guests: " + pax,
+    "",
+    "Message / Special Requests:",
+    notes || "No special requests.",
+    "",
+    "Please let me know if the unit is available.",
+    "",
+    "Thank you!"
+  ].join("\n");
+
+  const body = encodeURIComponent(message);
+
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(
+    navigator.userAgent
+  );
+
+  if (isMobile) {
+
+    // MOBILE: OPEN DEFAULT EMAIL APP
+    const mailtoLink =
+      "mailto:" + BLOOM_HAVEN_EMAIL +
+      "?subject=" + subject +
+      "&body=" + body;
+
+    window.location.href = mailtoLink;
+
+  } else {
+
+    // DESKTOP: OPEN GMAIL
+    const gmailLink =
+      "https://mail.google.com/mail/?view=cm&fs=1" +
+      "&to=" + encodeURIComponent(BLOOM_HAVEN_EMAIL) +
+      "&su=" + subject +
+      "&body=" + body;
+
+    const newTab = window.open(gmailLink,"_blank");
+
+    if (newTab) {
+      newTab.opener = null;
+    } else {
+      window.location.href = gmailLink;
+    }
+  }
+
+  // Do not display "Booking sent".
+  // The customer must press Send in the email app.
+});
+
+/* =========================================
+   SCROLL REVEAL ANIMATIONS
+========================================= */
+
+const reducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
+
+const reveals = document.querySelectorAll(".reveal");
+
+if (reducedMotion) {
+  reveals.forEach(element => {
+    element.classList.add("is-visible");
+  });
+} else if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    function(entries,observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
         }
+      });
+    },
+    {
+      threshold:.12,
+      rootMargin:"0px 0px -30px 0px"
+    }
+  );
 
+  reveals.forEach(element => {
+    revealObserver.observe(element);
+  });
+} else {
+  reveals.forEach(element => {
+    element.classList.add("is-visible");
+  });
+}
 
-        /* =================================================
-           MOBILE HAMBURGER MENU
-        ================================================= */
+/* =========================================
+   STICKY NAV ANIMATION
+========================================= */
 
-        const hamburgerBtn =
-            document.getElementById(
-                "hamburgerBtn"
-            );
+const topbar = document.querySelector(".topbar");
 
-        const mobileMenu =
-            document.getElementById(
-                "mobileMenu"
-            );
+function updateTopbar() {
+  topbar.classList.toggle("scrolled",window.scrollY > 15);
+}
 
-        const mobileMenuLinks =
-            document.querySelectorAll(
-                ".mobile-menu-link"
-            );
+updateTopbar();
 
+window.addEventListener("scroll",updateTopbar,{passive:true});
 
-        if (
-            hamburgerBtn &&
-            mobileMenu
-        ) {
-
-            hamburgerBtn.addEventListener(
-                "click",
-                function (event) {
-
-                    event.stopPropagation();
-
-                    const isOpen =
-                        mobileMenu.classList.toggle(
-                            "open"
-                        );
-
-                    hamburgerBtn.classList.toggle(
-                        "open",
-                        isOpen
-                    );
-
-                    hamburgerBtn.setAttribute(
-                        "aria-expanded",
-                        String(isOpen)
-                    );
-
-                    hamburgerBtn.setAttribute(
-                        "aria-label",
-                        isOpen
-                            ? "Close navigation menu"
-                            : "Open navigation menu"
-                    );
-
-                }
-            );
-
-
-            /* CLOSE MOBILE MENU
-               WHEN A LINK IS CLICKED
-            */
-
-            mobileMenuLinks.forEach(
-                function (link) {
-
-                    link.addEventListener(
-                        "click",
-                        function () {
-
-                            mobileMenu.classList.remove(
-                                "open"
-                            );
-
-                            hamburgerBtn.classList.remove(
-                                "open"
-                            );
-
-                            hamburgerBtn.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-
-                            hamburgerBtn.setAttribute(
-                                "aria-label",
-                                "Open navigation menu"
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-
-            /* CLOSE MOBILE MENU
-               WHEN CLICKING OUTSIDE
-            */
-
-            document.addEventListener(
-                "click",
-                function (event) {
-
-                    if (
-                        mobileMenu.classList.contains(
-                            "open"
-                        ) &&
-                        !mobileMenu.contains(
-                            event.target
-                        ) &&
-                        !hamburgerBtn.contains(
-                            event.target
-                        )
-                    ) {
-
-                        mobileMenu.classList.remove(
-                            "open"
-                        );
-
-                        hamburgerBtn.classList.remove(
-                            "open"
-                        );
-
-                        hamburgerBtn.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                        hamburgerBtn.setAttribute(
-                            "aria-label",
-                            "Open navigation menu"
-                        );
-
-                    }
-
-                }
-            );
-
-        }
-
-    </script>
+</script>
 
 </body>
-
 </html>
-
