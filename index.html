@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#fffaf6">
-
 <title>BLOOM HAVEN | Staycation</title>
 
 <style>
@@ -92,7 +91,6 @@ textarea:focus-visible {
   z-index:1000;
   background:rgba(255,250,246,.95);
   backdrop-filter:blur(14px);
-  -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
   transition:box-shadow .3s ease;
 }
@@ -142,7 +140,9 @@ textarea:focus-visible {
   color:var(--primary);
 }
 
-/* GALLERY DROPDOWN */
+/* =========================================
+   UPDATED GALLERY DROPDOWN
+========================================= */
 
 .gallery-dropdown {
   position:relative;
@@ -154,11 +154,19 @@ textarea:focus-visible {
   padding:12px 0;
   color:var(--muted);
   font-weight:600;
+  display:flex;
+  align-items:center;
+  gap:6px;
 }
 
 .gallery-trigger::after {
-  content:" ▾";
-  margin-left:5px;
+  content:"▾";
+  font-size:12px;
+  transition:transform .25s ease;
+}
+
+.gallery-dropdown.open .gallery-trigger::after {
+  transform:rotate(180deg);
 }
 
 .gallery-trigger:hover {
@@ -188,10 +196,13 @@ textarea:focus-visible {
   display:block;
   padding:13px;
   border-radius:10px;
+  font-size:14px;
+  transition:background .2s,color .2s;
 }
 
 .gallery-menu a:hover {
   background:#fff4ee;
+  color:var(--dark);
 }
 
 /* =========================================
@@ -456,42 +467,39 @@ h1 {
 }
 
 /* =========================================
-   NEW SECTION: BOOKING AVAILABILITY
+   MINIMALIST BOOKING CALENDAR
 ========================================= */
 
 .availability-section {
   background:linear-gradient(180deg,#fff,#fff8f3);
-  position:relative;
+  padding:65px 0;
 }
 
 .availability-section .section-header {
-  max-width:780px;
-  margin:0 auto 40px;
+  max-width:650px;
+  margin:0 auto 28px;
   text-align:center;
 }
 
 .availability-section .section-header::after {
-  margin:23px auto 0;
+  margin:20px auto 0;
 }
-
-/* THE MAIN CALENDAR CONTAINER */
 
 .calendar-carousel {
-  max-width:880px;
+  width:100%;
+  max-width:560px;
   margin:0 auto;
-  padding:24px;
+  padding:14px;
   background:white;
   border:1px solid var(--line);
-  border-radius:28px;
-  box-shadow:var(--shadow);
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(89,52,39,.07);
 }
-
-/* ONLY ONE CALENDAR IS VISIBLE */
 
 .calendar-stage {
   position:relative;
   overflow:hidden;
-  border-radius:19px;
+  border-radius:12px;
   background:#fffaf6;
   border:1px solid var(--line);
 }
@@ -502,19 +510,17 @@ h1 {
 
 .calendar-slide.active {
   display:block;
-  animation:calendarFade .45s ease;
+  animation:calendarFade .35s ease;
 }
-
-/* BLANK IMAGE PLACEHOLDERS */
 
 .calendar-placeholder {
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:15px;
-  min-height:480px;
-  padding:30px;
+  gap:12px;
+  min-height:260px;
+  padding:24px;
   text-align:center;
   background:linear-gradient(135deg,#fffaf6,#f7e7dc);
 }
@@ -522,32 +528,30 @@ h1 {
 .calendar-symbol {
   display:grid;
   place-items:center;
-  width:76px;
-  height:76px;
+  width:58px;
+  height:58px;
   background:white;
   border:1px solid var(--line);
-  border-radius:20px;
+  border-radius:15px;
   color:var(--primary);
-  font-size:39px;
-  box-shadow:0 8px 22px rgba(89,52,39,.06);
+  font-size:29px;
 }
 
 .calendar-placeholder strong {
-  font-size:1.3rem;
+  font-size:1rem;
   color:var(--dark);
 }
 
 .calendar-placeholder span:last-child {
   color:var(--muted);
-  font-size:14px;
-  line-height:1.7;
+  font-size:13px;
+  line-height:1.6;
 }
 
-/* CALENDAR IMAGE ONCE ADDED */
-
 .calendar-slide img {
+  display:block;
   width:100%;
-  max-height:680px;
+  max-height:390px;
   object-fit:contain;
   background:white;
 }
@@ -561,63 +565,61 @@ h1 {
   display:none;
 }
 
-/* CONTROLS UNDER IMAGE */
-
 .calendar-bottom {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:20px;
+  gap:15px;
   flex-wrap:wrap;
-  margin-top:22px;
+  margin-top:14px;
+  padding:0 3px;
 }
 
 .calendar-meta strong {
   display:block;
-  font-size:1.05rem;
+  font-size:.95rem;
   color:var(--dark);
-  margin-bottom:6px;
+  margin-bottom:4px;
 }
 
 .calendar-meta small {
   color:var(--muted);
-  font-size:13px;
+  font-size:12px;
 }
 
 .calendar-controls {
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:12px;
 }
 
 .calendar-arrow {
   display:grid;
   place-items:center;
-  width:45px;
-  height:45px;
+  width:36px;
+  height:36px;
   border:1px solid var(--line);
   background:white;
   color:var(--dark);
   border-radius:50%;
-  font-size:25px;
+  font-size:21px;
   transition:.25s ease;
 }
 
 .calendar-arrow:hover {
   background:var(--primary);
   color:white;
-  transform:translateY(-2px);
 }
 
 .calendar-dots {
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:7px;
 }
 
 .calendar-dot {
-  width:10px;
-  height:10px;
+  width:8px;
+  height:8px;
   border:0;
   border-radius:50px;
   background:#dcc7ba;
@@ -626,32 +628,29 @@ h1 {
 }
 
 .calendar-dot.active {
-  width:27px;
+  width:22px;
   background:var(--primary);
 }
 
-/* TEXT UNDER THE CALENDAR */
-
 .calendar-help {
-  max-width:640px;
-  margin:25px auto 0;
+  max-width:560px;
+  margin:22px auto 0;
   color:var(--muted);
-  font-size:14px;
-  line-height:1.8;
+  font-size:13px;
+  line-height:1.7;
   text-align:center;
 }
 
 .availability-action {
   text-align:center;
-  margin-top:28px;
+  margin-top:22px;
 }
 
 @keyframes calendarFade {
   from {
     opacity:.3;
-    transform:translateX(12px);
+    transform:translateX(10px);
   }
-
   to {
     opacity:1;
     transform:none;
@@ -756,7 +755,7 @@ h1 {
 }
 
 /* =========================================
-   BOOKING FORM MODAL
+   BOOKING MODAL
 ========================================= */
 
 .booking-modal {
@@ -983,11 +982,11 @@ footer p {
   animation:heroEntrance .9s var(--ease) both;
 }
 
-.hero-copy > :nth-child(1) {animation-delay:.1s}
-.hero-copy > :nth-child(2) {animation-delay:.2s}
-.hero-copy > :nth-child(3) {animation-delay:.3s}
-.hero-copy > :nth-child(4) {animation-delay:.4s}
-.hero-copy > :nth-child(5) {animation-delay:.5s}
+.hero-copy > :nth-child(1) { animation-delay:.1s; }
+.hero-copy > :nth-child(2) { animation-delay:.2s; }
+.hero-copy > :nth-child(3) { animation-delay:.3s; }
+.hero-copy > :nth-child(4) { animation-delay:.4s; }
+.hero-copy > :nth-child(5) { animation-delay:.5s; }
 
 .hero-visual {
   animation:heroEntrance 1.1s .3s var(--ease) both;
@@ -1011,39 +1010,39 @@ footer p {
 }
 
 @keyframes fadeIn {
-  from {opacity:0}
-  to {opacity:1}
+  from { opacity:0; }
+  to { opacity:1; }
 }
 
 @keyframes fadeDown {
-  from {opacity:0;transform:translateY(-10px)}
-  to {opacity:1;transform:none}
+  from { opacity:0; transform:translateY(-10px); }
+  to { opacity:1; transform:none; }
 }
 
 @keyframes modalPop {
-  from {opacity:0;transform:translateY(25px) scale(.95)}
-  to {opacity:1;transform:none}
+  from { opacity:0; transform:translateY(25px) scale(.95); }
+  to { opacity:1; transform:none; }
 }
 
 @keyframes heroEntrance {
-  from {opacity:0;transform:translateY(35px)}
-  to {opacity:1;transform:none}
+  from { opacity:0; transform:translateY(35px); }
+  to { opacity:1; transform:none; }
 }
 
 @keyframes orbPulse {
-  0%,100% {transform:scale(.9)}
-  50% {transform:scale(1.08)}
+  0%,100% { transform:scale(.9); }
+  50% { transform:scale(1.08); }
 }
 
 @keyframes loaderSweep {
-  from {transform:translateX(-130%)}
-  to {transform:translateX(330%)}
+  from { transform:translateX(-130%); }
+  to { transform:translateX(330%); }
 }
 
 @keyframes particleDrift {
-  0% {opacity:0;transform:translateY(110vh) rotate(0)}
-  15% {opacity:.8}
-  85% {opacity:.5}
+  0% { opacity:0; transform:translateY(110vh) rotate(0); }
+  15% { opacity:.8; }
+  85% { opacity:.5; }
   100% {
     opacity:0;
     transform:translate(var(--drift,70px),-15vh) rotate(420deg);
@@ -1051,7 +1050,7 @@ footer p {
 }
 
 /* =========================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ========================================= */
 
 @media(max-width:900px) {
@@ -1156,15 +1155,22 @@ footer p {
     padding:28px 21px;
   }
 
-  /* MOBILE CALENDAR */
+  .availability-section {
+    padding:50px 0;
+  }
 
   .calendar-carousel {
-    padding:12px;
-    border-radius:20px;
+    max-width:100%;
+    padding:10px;
+    border-radius:16px;
+  }
+
+  .calendar-slide img {
+    max-height:320px;
   }
 
   .calendar-placeholder {
-    min-height:320px;
+    min-height:220px;
   }
 
   .calendar-bottom {
@@ -1179,9 +1185,7 @@ footer p {
 
 @media(prefers-reduced-motion:reduce) {
 
-  *,
-  *::before,
-  *::after {
+  *,*::before,*::after {
     animation-duration:.01ms!important;
     animation-iteration-count:1!important;
     transition-duration:.01ms!important;
@@ -1204,7 +1208,9 @@ footer p {
 
 <body>
 
-<!-- LOADING SCREEN -->
+<!-- =========================================
+     PAGE LOADER
+========================================= -->
 
 <div class="motion-loader" id="motionLoader" aria-hidden="true">
   <div class="loader-inner">
@@ -1216,10 +1222,11 @@ footer p {
 <div class="ambient-particles" id="ambientParticles" aria-hidden="true"></div>
 
 <!-- =========================================
-     NAVIGATION
+     NAVIGATION - UPDATED
 ========================================= -->
 
 <header class="topbar">
+
   <div class="container nav">
 
     <a href="#home" class="brand">
@@ -1227,11 +1234,16 @@ footer p {
       BLOOM HAVEN
     </a>
 
+    <!-- DESKTOP NAVIGATION -->
+
     <nav class="nav-links" aria-label="Main navigation">
 
       <a href="#about">About</a>
 
+      <!-- UPDATED GALLERY DROPDOWN -->
+
       <div class="gallery-dropdown">
+
         <button
           type="button"
           class="gallery-trigger"
@@ -1242,13 +1254,29 @@ footer p {
         </button>
 
         <div class="gallery-menu" id="galleryMenu">
-          <a href="fair.html">Pink House</a>
-          <a href="hampton1.html">Sylvia</a>
-          <a href="hampton2.html">Anne</a>
+
+          <a href="fair.html">
+            Pink House
+          </a>
+
+          <!-- NEW: SYLVIA UNIT 1 -->
+          <a href="#hampton1.html">
+            Sylvia Unit 1
+          </a>
+
+          <!-- NEW: SYLVIA UNIT 2 -->
+          <a href="#sylvia-unit-2">
+            Sylvia Unit 2
+          </a>
+
+          <a href="hampton2.html">
+            Anne
+          </a>
+
         </div>
+
       </div>
 
-      <!-- NEW AVAILABILITY NAVIGATION LINK -->
       <a href="#availability">Availability</a>
 
       <a href="promo.html">Promo Offer</a>
@@ -1258,6 +1286,8 @@ footer p {
     <a href="#" class="nav-cta booking-btn">
       Book Your Stay
     </a>
+
+    <!-- HAMBURGER BUTTON -->
 
     <button
       type="button"
@@ -1272,17 +1302,36 @@ footer p {
       <span></span>
     </button>
 
+    <!-- MOBILE NAVIGATION - UPDATED -->
+
     <nav
       class="mobile-menu"
       id="mobileMenu"
       aria-label="Mobile navigation"
     >
-      <a href="#about" class="mobile-menu-link">About</a>
-      <a href="fair.html" class="mobile-menu-link">Pink House</a>
-      <a href="hampton1.html" class="mobile-menu-link">Sylvia</a>
-      <a href="hampton2.html" class="mobile-menu-link">Anne</a>
 
-      <!-- NEW MOBILE AVAILABILITY LINK -->
+      <a href="#about" class="mobile-menu-link">
+        About
+      </a>
+
+      <a href="fair.html" class="mobile-menu-link">
+        Pink House
+      </a>
+
+      <!-- NEW: SYLVIA UNIT 1 -->
+      <a href="#sylvia" class="mobile-menu-link">
+        Sylvia Unit 1
+      </a>
+
+      <!-- NEW: SYLVIA UNIT 2 -->
+      <a href="#sylvia-unit-2" class="mobile-menu-link">
+        Sylvia Unit 2
+      </a>
+
+      <a href="hampton2.html" class="mobile-menu-link">
+        Anne
+      </a>
+
       <a href="#availability" class="mobile-menu-link">
         Availability
       </a>
@@ -1294,9 +1343,11 @@ footer p {
       <a href="#" class="mobile-menu-link mobile-booking booking-btn">
         Book Your Stay
       </a>
+
     </nav>
 
   </div>
+
 </header>
 
 <main id="home">
@@ -1337,8 +1388,8 @@ footer p {
       <div class="stats">
 
         <div class="stat">
-          <strong>3 Units</strong>
-          <span>Places to choose from</span>
+          <strong>3 Places</strong>
+          <span>With two Sylvia units</span>
         </div>
 
         <div class="stat">
@@ -1359,7 +1410,10 @@ footer p {
 
       <div class="image-card">
 
-        <img src="colgate.png" alt="Bloom Haven staycation">
+        <img
+          src="colgate.png"
+          alt="Bloom Haven staycation"
+        >
 
       </div>
 
@@ -1370,7 +1424,7 @@ footer p {
 </section>
 
 <!-- =========================================
-     ABOUT BLOOM HAVEN
+     ABOUT
 ========================================= -->
 
 <section id="about" class="about-section">
@@ -1413,7 +1467,7 @@ footer p {
           <li>Comfortable bedrooms</li>
           <li>Cozy living areas</li>
           <li>Kitchen space for your meals</li>
-          <li>Three units to choose from</li>
+          <li>Sylvia Unit 1 and Sylvia Unit 2</li>
           <li>A place to relax with family and friends</li>
 
         </ul>
@@ -1427,12 +1481,7 @@ footer p {
 </section>
 
 <!-- =========================================
-     NEW SECTION: AVAILABLE DATES FOR BOOKING
-
-     This section displays ONE calendar at a time.
-
-     Add your calendar image filenames later
-     inside the three empty src="" attributes.
+     AVAILABLE DATES - SMALL CALENDAR
 ========================================= -->
 
 <section id="availability" class="availability-section">
@@ -1446,9 +1495,8 @@ footer p {
       <h2>Available Dates for Booking</h2>
 
       <p>
-        Planning your stay? Browse our three booking calendars
-        to see the dates you can inquire about.
-        Use the arrows to view the next calendar.
+        Browse our booking calendars to check your preferred dates.
+        Click the arrows to see the next unit's calendar.
       </p>
 
     </div>
@@ -1461,140 +1509,89 @@ footer p {
         aria-live="polite"
       >
 
-        <!-- =================================
-             CALENDAR 1
+        <!-- PINK HOUSE CALENDAR -->
 
-             ADD YOUR IMAGE HERE LATER:
-             src="calendar1.jpg"
-        ================================= -->
-
-        <div class="calendar-slide active" data-label="Calendar 1">
+        <div class="calendar-slide active" data-label="Pink House">
 
           <div class="calendar-placeholder">
-
-            <span class="calendar-symbol" aria-hidden="true">
-              ▦
-            </span>
-
-            <strong>Calendar 1</strong>
-
-            <span>
-              Your booking calendar image
-              will appear here.
-            </span>
-
+            <span class="calendar-symbol">▦</span>
+            <strong>Pink House Calendar</strong>
+            <span>Calendar image will appear here.</span>
           </div>
 
           <img
             src="pinkhousecalendar.png"
-            alt="Available booking dates - Calendar 1"
+            alt="Pink House booking availability calendar"
           >
 
         </div>
 
-        <!-- =================================
-             CALENDAR 2
-
-             ADD YOUR IMAGE HERE LATER:
-             src="calendar2.jpg"
-        ================================= -->
+        <!-- ANNE CALENDAR -->
 
         <div
           class="calendar-slide"
-          data-label="Calendar 2"
+          data-label="Anne"
           aria-hidden="true"
         >
 
           <div class="calendar-placeholder">
-
-            <span class="calendar-symbol" aria-hidden="true">
-              ▦
-            </span>
-
-            <strong>Calendar 2</strong>
-
-            <span>
-              Your booking calendar image
-              will appear here.
-            </span>
-
+            <span class="calendar-symbol">▦</span>
+            <strong>Anne Calendar</strong>
+            <span>Calendar image will appear here.</span>
           </div>
 
           <img
             src="annecalendar.png"
-            alt="Available booking dates - Calendar 2"
+            alt="Anne booking availability calendar"
           >
 
         </div>
 
-        <!-- =================================
-             CALENDAR 3
-
-             ADD YOUR IMAGE HERE LATER:
-             src="calendar3.jpg"
-        ================================= -->
+        <!-- SYLVIA UNIT 1 CALENDAR -->
 
         <div
           class="calendar-slide"
-          data-label="Calendar 3"
+          data-label="Sylvia Unit 1"
           aria-hidden="true"
         >
 
           <div class="calendar-placeholder">
-
-            <span class="calendar-symbol" aria-hidden="true">
-              ▦
-            </span>
-
-            <strong>Calendar 3</strong>
-
-            <span>
-              Your booking calendar image
-              will appear here.
-            </span>
-
+            <span class="calendar-symbol">▦</span>
+            <strong>Sylvia Unit 1 Calendar</strong>
+            <span>Calendar image will appear here.</span>
           </div>
 
           <img
             src="sylviaunit1calendar.png"
-            alt="Available booking dates - Calendar 3"
+            alt="Sylvia Unit 1 booking availability calendar"
           >
 
         </div>
 
       </div>
 
-      <!-- CALENDAR NAVIGATION CONTROLS -->
+      <!-- CALENDAR CONTROLS -->
 
       <div class="calendar-bottom">
 
         <div class="calendar-meta">
 
-          <strong id="calendarLabel">
-            Calendar 1
-          </strong>
+          <strong id="calendarLabel">Pink House</strong>
 
-          <small id="calendarCount">
-            1 of 3
-          </small>
+          <small id="calendarCount">1 of 3</small>
 
         </div>
 
         <div class="calendar-controls">
-
-          <!-- PREVIOUS -->
 
           <button
             type="button"
             class="calendar-arrow"
             id="calendarPrev"
             aria-label="Previous calendar"
-            title="Previous calendar"
           >
             &#8249;
           </button>
-
-          <!-- THREE INDICATOR DOTS -->
 
           <div class="calendar-dots">
 
@@ -1602,7 +1599,7 @@ footer p {
               type="button"
               class="calendar-dot active"
               data-calendar="0"
-              aria-label="Show calendar 1"
+              aria-label="Show Pink House calendar"
               aria-current="true"
             ></button>
 
@@ -1610,26 +1607,23 @@ footer p {
               type="button"
               class="calendar-dot"
               data-calendar="1"
-              aria-label="Show calendar 2"
+              aria-label="Show Anne calendar"
             ></button>
 
             <button
               type="button"
               class="calendar-dot"
               data-calendar="2"
-              aria-label="Show calendar 3"
+              aria-label="Show Sylvia Unit 1 calendar"
             ></button>
 
           </div>
-
-          <!-- NEXT -->
 
           <button
             type="button"
             class="calendar-arrow"
             id="calendarNext"
             aria-label="Next calendar"
-            title="Next calendar"
           >
             &#8250;
           </button>
@@ -1641,9 +1635,8 @@ footer p {
     </div>
 
     <p class="calendar-help reveal">
-      Calendar images are updated manually.
-      Please send us a booking request to confirm
-      whether your preferred date is still available.
+      Calendars are updated manually.
+      Please confirm your preferred date with us before booking.
     </p>
 
     <div class="availability-action reveal">
@@ -1659,7 +1652,7 @@ footer p {
 </section>
 
 <!-- =========================================
-     SYLVIA
+     SYLVIA UNIT 1
 ========================================= -->
 
 <section id="sylvia" class="gallery-section">
@@ -1668,9 +1661,9 @@ footer p {
 
     <div class="section-header reveal">
 
-      <span class="eyebrow">Sylvia</span>
+      <span class="eyebrow">Sylvia Unit 1</span>
 
-      <h2>Bloom Haven Sylvia Unit 2</h2>
+      <h2>Bloom Haven Sylvia Unit 1</h2>
 
       <p>
         A cozy place to rest, relax, and enjoy
@@ -1685,7 +1678,7 @@ footer p {
 
         <img
           src="hsala.jpg"
-          alt="Sylvia living room"
+          alt="Sylvia Unit 1 living room"
           loading="lazy"
         >
 
@@ -1706,7 +1699,7 @@ footer p {
 
         <img
           src="hamptonbed.jpg"
-          alt="Sylvia bedroom"
+          alt="Sylvia Unit 1 bedroom"
           loading="lazy"
         >
 
@@ -1726,7 +1719,7 @@ footer p {
 
         <img
           src="hkitchen.jpg"
-          alt="Sylvia kitchen"
+          alt="Sylvia Unit 1 kitchen"
           loading="lazy"
         >
 
@@ -1749,9 +1742,9 @@ footer p {
       <button
         type="button"
         class="btn btn-primary book-unit"
-        data-unit="Sylvia"
+        data-unit="Sylvia Unit 1"
       >
-        Book Sylvia
+        Book Sylvia Unit 1
       </button>
 
     </div>
@@ -1761,23 +1754,21 @@ footer p {
 </section>
 
 <!-- =========================================
-     SYLVIA - ADDITIONAL UNIT PHOTOS
-
-     Preserved from your original landing page.
+     SYLVIA UNIT 2
 ========================================= -->
 
-<section class="gallery-section">
+<section id="sylvia-unit-2" class="gallery-section">
 
   <div class="container">
 
     <div class="section-header reveal">
 
-      <span class="eyebrow">Sylvia</span>
+      <span class="eyebrow">Sylvia Unit 2</span>
 
       <h2>Bloom Haven Sylvia Unit 2</h2>
 
       <p>
-        More photos of the unit to help you
+        More photos of Sylvia Unit 2 to help you
         get a better look at the space.
       </p>
 
@@ -1789,7 +1780,7 @@ footer p {
 
         <img
           src="sylvia2sink.png"
-          alt="Sylvia sink and kitchen area"
+          alt="Sylvia Unit 2 sink and kitchen area"
           loading="lazy"
         >
 
@@ -1810,7 +1801,7 @@ footer p {
 
         <img
           src="sylvia2sala.png"
-          alt="Sylvia living room"
+          alt="Sylvia Unit 2 living room"
           loading="lazy"
         >
 
@@ -1831,7 +1822,7 @@ footer p {
 
         <img
           src="sylvia2bed1.png"
-          alt="Sylvia bedroom"
+          alt="Sylvia Unit 2 bedroom"
           loading="lazy"
         >
 
@@ -1855,7 +1846,7 @@ footer p {
       <button
         type="button"
         class="btn btn-primary book-unit"
-        data-unit="Sylvia"
+        data-unit="Sylvia Unit 2"
       >
         Book Sylvia Unit 2
       </button>
@@ -2120,6 +2111,8 @@ footer p {
 
 </section>
 
+</main>
+
 <!-- =========================================
      BOOKING MODAL
 ========================================= -->
@@ -2195,7 +2188,7 @@ footer p {
 
       </div>
 
-      <!-- UNIT -->
+      <!-- UNIT SELECTION -->
 
       <div class="booking-field">
 
@@ -2209,15 +2202,27 @@ footer p {
             Select a unit
           </option>
 
-          <option value="Pink House">Pink House</option>
-          <option value="Sylvia">Sylvia</option>
-          <option value="Anne">Anne</option>
+          <option value="Pink House">
+            Pink House
+          </option>
+
+          <option value="Sylvia Unit 1">
+            Sylvia Unit 1
+          </option>
+
+          <option value="Sylvia Unit 2">
+            Sylvia Unit 2
+          </option>
+
+          <option value="Anne">
+            Anne
+          </option>
 
         </select>
 
       </div>
 
-      <!-- DATE -->
+      <!-- BOOKING DATE -->
 
       <div class="booking-field">
 
@@ -2255,7 +2260,7 @@ footer p {
 
       </div>
 
-      <!-- SPECIAL REQUESTS -->
+      <!-- NOTES -->
 
       <div class="booking-field">
 
@@ -2298,8 +2303,6 @@ footer p {
 
 </div>
 
-</main>
-
 <!-- =========================================
      FOOTER
 ========================================= -->
@@ -2327,14 +2330,17 @@ footer p {
 "use strict";
 
 /* =========================================
-   BOOKING EMAIL
+   BOOKING SETTINGS
 ========================================= */
 
 const BLOOM_HAVEN_EMAIL = "ammasivilmar2@gmail.com";
 
-/* =========================================
-   ELEMENTS
-========================================= */
+const VALID_UNITS = [
+  "Pink House",
+  "Sylvia Unit 1",
+  "Sylvia Unit 2",
+  "Anne"
+];
 
 const $ = id => document.getElementById(id);
 
@@ -2383,6 +2389,8 @@ galleryTrigger.addEventListener("click",function(event) {
 
 });
 
+/* CLOSE GALLERY WHEN CLICKING OUTSIDE */
+
 document.addEventListener("click",function(event) {
 
   if (!galleryDropdown.contains(event.target)) {
@@ -2390,6 +2398,14 @@ document.addEventListener("click",function(event) {
     closeGalleryDropdown();
 
   }
+
+});
+
+/* CLOSE GALLERY WHEN SELECTING A SYLVIA UNIT */
+
+document.querySelectorAll(".gallery-menu a").forEach(function(link) {
+
+  link.addEventListener("click",closeGalleryDropdown);
 
 });
 
@@ -2403,7 +2419,10 @@ function closeMobileMenu() {
 
   hamburgerBtn.classList.remove("open");
 
-  hamburgerBtn.setAttribute("aria-expanded","false");
+  hamburgerBtn.setAttribute(
+    "aria-expanded",
+    "false"
+  );
 
   hamburgerBtn.setAttribute(
     "aria-label",
@@ -2452,7 +2471,7 @@ document.addEventListener("click",function(event) {
 });
 
 /* =========================================
-   NEW: THREE-CALENDAR IMAGE SLIDER
+   THREE-CALENDAR SLIDER
 ========================================= */
 
 const calendarSlides =
@@ -2466,12 +2485,7 @@ const calendarCount = $("calendarCount");
 
 let currentCalendar = 0;
 
-/*
-  Check which calendar images have filenames.
-
-  If src="" is empty, show the blank
-  placeholder instead of a broken image.
-*/
+/* IMAGE FALLBACK */
 
 calendarSlides.forEach(function(slide) {
 
@@ -2495,16 +2509,11 @@ calendarSlides.forEach(function(slide) {
 
 });
 
-/*
-  Display one calendar at a time.
-*/
+/* DISPLAY ONE CALENDAR */
 
 function showCalendar(index) {
 
   const total = calendarSlides.length;
-
-  // Wrap around from last to first,
-  // or from first to last.
 
   currentCalendar = (index + total) % total;
 
@@ -2547,9 +2556,7 @@ function showCalendar(index) {
 
 }
 
-/*
-  NEXT BUTTON
-*/
+/* NEXT */
 
 $("calendarNext").addEventListener("click",function() {
 
@@ -2557,9 +2564,7 @@ $("calendarNext").addEventListener("click",function() {
 
 });
 
-/*
-  PREVIOUS BUTTON
-*/
+/* PREVIOUS */
 
 $("calendarPrev").addEventListener("click",function() {
 
@@ -2567,30 +2572,22 @@ $("calendarPrev").addEventListener("click",function() {
 
 });
 
-/*
-  DOT NAVIGATION
-*/
+/* CALENDAR DOTS */
 
 calendarDots.forEach(function(dot) {
 
   dot.addEventListener("click",function() {
 
-    const index = Number(dot.dataset.calendar);
-
-    showCalendar(index);
+    showCalendar(Number(dot.dataset.calendar));
 
   });
 
 });
 
-/*
-  INITIAL CALENDAR
-*/
-
 showCalendar(0);
 
 /* =========================================
-   BOOKING DATE HELPERS
+   DATE HELPERS
 ========================================= */
 
 function getLocalToday() {
@@ -2616,8 +2613,7 @@ function formatBookingDate(dateString) {
   const [year,month,day] =
     dateString.split("-").map(Number);
 
-  const date =
-    new Date(year,month-1,day);
+  const date = new Date(year,month-1,day);
 
   return date.toLocaleDateString("en-PH",{
 
@@ -2652,9 +2648,7 @@ function showBookingError(message) {
 function openBookingModal(event,selectedUnit="") {
 
   if (event) {
-
     event.preventDefault();
-
   }
 
   closeMobileMenu();
@@ -2663,7 +2657,9 @@ function openBookingModal(event,selectedUnit="") {
 
   bookingDate.min = getLocalToday();
 
-  if (selectedUnit) {
+  /* SELECT THE EXACT UNIT */
+
+  if (selectedUnit && VALID_UNITS.includes(selectedUnit)) {
 
     bookingUnit.value = selectedUnit;
 
@@ -2711,7 +2707,7 @@ document.querySelectorAll(".booking-btn").forEach(function(button) {
 
 });
 
-/* UNIT BOOKING BUTTONS */
+/* UNIT-SPECIFIC BOOKING BUTTONS */
 
 document.querySelectorAll(".book-unit").forEach(function(button) {
 
@@ -2733,7 +2729,7 @@ $("bookingClose").addEventListener(
   closeBookingModal
 );
 
-/* CLICK OUTSIDE MODAL */
+/* CLICK OUTSIDE */
 
 bookingModal.addEventListener("click",function(event) {
 
@@ -2765,10 +2761,12 @@ document.addEventListener("keydown",function(event) {
 });
 
 /* =========================================
-   EMAIL BOOKING SUBMISSION
+   BOOKING EMAIL
 
-   MOBILE: DEFAULT EMAIL APP
-   DESKTOP: GMAIL IN A NEW TAB
+   SYLVIA UNIT 1 AND 2 ARE SEPARATE
+
+   MOBILE = DEFAULT EMAIL APP
+   DESKTOP = GMAIL
 ========================================= */
 
 bookingForm.addEventListener("submit",function(event) {
@@ -2777,61 +2775,43 @@ bookingForm.addEventListener("submit",function(event) {
 
   hideBookingError();
 
-  /* GET CUSTOMER DETAILS */
+  const name = $("bookingName").value.trim();
 
-  const name =
-    $("bookingName").value.trim();
+  const contact = $("bookingContact").value.trim();
 
-  const contact =
-    $("bookingContact").value.trim();
+  const unit = bookingUnit.value;
 
-  const unit =
-    bookingUnit.value;
+  const date = bookingDate.value;
 
-  const date =
-    bookingDate.value;
+  const guestText = $("bookingPax").value;
 
-  const guestText =
-    $("bookingPax").value;
+  const pax = Number(guestText);
 
-  const pax =
-    Number(guestText);
+  const notes = $("bookingNotes").value.trim();
 
-  const notes =
-    $("bookingNotes").value.trim();
-
-  /* VALIDATE FULL NAME */
+  /* VALIDATE NAME */
 
   if (!name || name.length > 100) {
 
-    showBookingError(
-      "Please enter your full name."
-    );
-
+    showBookingError("Please enter your full name.");
     return;
 
   }
 
-  /* VALIDATE PHONE NUMBER */
+  /* VALIDATE CONTACT */
 
   if (!/^[0-9+\-\s()]{7,20}$/.test(contact)) {
 
-    showBookingError(
-      "Please enter a valid contact number."
-    );
-
+    showBookingError("Please enter a valid contact number.");
     return;
 
   }
 
   /* VALIDATE UNIT */
 
-  if (!["Pink House","Sylvia","Anne"].includes(unit)) {
+  if (!VALID_UNITS.includes(unit)) {
 
-    showBookingError(
-      "Please select a unit."
-    );
-
+    showBookingError("Please select a unit.");
     return;
 
   }
@@ -2840,15 +2820,12 @@ bookingForm.addEventListener("submit",function(event) {
 
   if (!date || date < getLocalToday()) {
 
-    showBookingError(
-      "Please select a valid check-in date."
-    );
-
+    showBookingError("Please select a valid check-in date.");
     return;
 
   }
 
-  /* VALIDATE GUEST COUNT */
+  /* VALIDATE GUESTS */
 
   if (
     !guestText ||
@@ -2857,10 +2834,7 @@ bookingForm.addEventListener("submit",function(event) {
     pax > 100
   ) {
 
-    showBookingError(
-      "Please enter a valid number of guests."
-    );
-
+    showBookingError("Please enter a valid number of guests.");
     return;
 
   }
@@ -2869,21 +2843,18 @@ bookingForm.addEventListener("submit",function(event) {
 
   if (notes.length > 1500) {
 
-    showBookingError(
-      "Please shorten your special requests."
-    );
-
+    showBookingError("Please shorten your special requests.");
     return;
 
   }
 
-  /* CREATE EMAIL SUBJECT */
+  /* EMAIL SUBJECT */
 
   const subject = encodeURIComponent(
     "New Bloom Haven Booking - " + unit
   );
 
-  /* CREATE EMAIL BODY */
+  /* EMAIL BODY */
 
   const emailMessage = [
 
@@ -2911,19 +2882,15 @@ bookingForm.addEventListener("submit",function(event) {
 
   ].join("\n");
 
-  const body =
-    encodeURIComponent(emailMessage);
+  const body = encodeURIComponent(emailMessage);
 
-  /* DETECT MOBILE OR DESKTOP */
-
-  const isMobile =
-    /Android|iPhone|iPad|iPod/i.test(
-      navigator.userAgent
-    );
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(
+    navigator.userAgent
+  );
 
   if (isMobile) {
 
-    /* MOBILE: OPEN DEFAULT EMAIL APPLICATION */
+    /* MOBILE EMAIL APPLICATION */
 
     const mailtoLink =
       "mailto:" + BLOOM_HAVEN_EMAIL +
@@ -2934,7 +2901,7 @@ bookingForm.addEventListener("submit",function(event) {
 
   } else {
 
-    /* DESKTOP: OPEN GMAIL COMPOSE */
+    /* DESKTOP GMAIL */
 
     const gmailLink =
       "https://mail.google.com/mail/?view=cm&fs=1" +
@@ -2942,8 +2909,7 @@ bookingForm.addEventListener("submit",function(event) {
       "&su=" + subject +
       "&body=" + body;
 
-    const newTab =
-      window.open(gmailLink,"_blank");
+    const newTab = window.open(gmailLink,"_blank");
 
     if (newTab) {
 
@@ -2958,17 +2924,15 @@ bookingForm.addEventListener("submit",function(event) {
   }
 
   /*
-    Do not reset the form or display a
-    false booking confirmation.
+    The email is prepared, not automatically sent.
 
-    The visitor must press Send
-    in their email application.
+    Customers must press Send in their email app.
   */
 
 });
 
 /* =========================================
-   PAGE LOADING ANIMATION
+   LOADING ANIMATION
 ========================================= */
 
 function finishPageLoading() {
@@ -2996,7 +2960,7 @@ if (document.readyState === "complete") {
 }
 
 /* =========================================
-   SCROLL REVEAL ANIMATIONS
+   SCROLL ANIMATIONS
 ========================================= */
 
 const reducedMotion =
@@ -3007,10 +2971,7 @@ const reducedMotion =
 const revealTargets =
   document.querySelectorAll(".reveal");
 
-if (
-  !reducedMotion &&
-  "IntersectionObserver" in window
-) {
+if (!reducedMotion && "IntersectionObserver" in window) {
 
   const revealObserver = new IntersectionObserver(
 
@@ -3057,8 +3018,7 @@ if (
    STICKY HEADER
 ========================================= */
 
-const topbar =
-  document.querySelector(".topbar");
+const topbar = document.querySelector(".topbar");
 
 function updateTopbar() {
 
@@ -3085,19 +3045,15 @@ if (!reducedMotion) {
 
   const field = $("ambientParticles");
 
-  const count =
-    window.innerWidth < 700 ? 12 : 20;
+  const count = window.innerWidth < 700 ? 12 : 20;
 
   for (let i=0;i<count;i++) {
 
-    const particle =
-      document.createElement("span");
+    const particle = document.createElement("span");
 
-    particle.className =
-      "ambient-particle";
+    particle.className = "ambient-particle";
 
-    particle.style.left =
-      Math.random()*100 + "%";
+    particle.style.left = Math.random()*100 + "%";
 
     particle.style.setProperty(
       "--size",
@@ -3129,8 +3085,7 @@ if (!reducedMotion) {
    HERO IMAGE 3D TILT
 ========================================= */
 
-const heroCard =
-  document.querySelector(".image-card");
+const heroCard = document.querySelector(".image-card");
 
 if (
   heroCard &&
@@ -3138,40 +3093,30 @@ if (
   window.matchMedia("(pointer:fine)").matches
 ) {
 
-  heroCard.addEventListener(
-    "pointermove",
-    function(event) {
+  heroCard.addEventListener("pointermove",function(event) {
 
-      const rect =
-        heroCard.getBoundingClientRect();
+    const rect = heroCard.getBoundingClientRect();
 
-      const x =
-        (event.clientX-rect.left)/rect.width-.5;
+    const x = (event.clientX-rect.left)/rect.width-.5;
 
-      const y =
-        (event.clientY-rect.top)/rect.height-.5;
+    const y = (event.clientY-rect.top)/rect.height-.5;
 
-      heroCard.style.transform =
-        `perspective(900px)
-         rotateX(${-y*4}deg)
-         rotateY(${x*5}deg)
-         translateY(-3px)`;
+    heroCard.style.transform =
+      `perspective(900px)
+       rotateX(${-y*4}deg)
+       rotateY(${x*5}deg)
+       translateY(-3px)`;
 
-    }
-  );
+  });
 
-  heroCard.addEventListener(
-    "pointerleave",
-    function() {
+  heroCard.addEventListener("pointerleave",function() {
 
-      heroCard.style.transform = "";
+    heroCard.style.transform = "";
 
-    }
-  );
+  });
 
 }
 
 </script>
-
 </body>
 </html>
